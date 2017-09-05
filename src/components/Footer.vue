@@ -2,10 +2,9 @@
   <footer class="footer">
     <div class="container">
       <ul class="society-list">
-        <li><a href="#"><i class="iconfont">&#xe69f;</i></a></li>
+        <li><a href="https://github.com/kapeter"><i class="iconfont">&#xe69f;</i></a></li>
       </ul>
-      <p class="copyright">StarryMask V1.1.0</p>
-      <p class="copyright">&copy;{{ thisYear }} KAPETER.COM 浙ICP备14040866号-1</p>
+      <p class="copyright">&copy;{{ thisYear }} KAPETER.COM <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号-1</a></p>
     </div>
   </footer>
 </template>
@@ -41,7 +40,6 @@
   }
   .copyright{
     font-size: 12px;
-    text-transform: uppercase;
   }
   #cover{
     position: absolute;

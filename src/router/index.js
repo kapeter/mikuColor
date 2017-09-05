@@ -5,6 +5,9 @@ import Layout from '@/components/Layout.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
+  base: __dirname,
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/',
@@ -13,6 +16,10 @@ export default new Router({
         {
           path: '/',
           component: require('@/pages/Home.vue')
+        },
+        {
+          path: '*',
+          component: require('@/pages/error/404.vue')
         }
       ]
     }
