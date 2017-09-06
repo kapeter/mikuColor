@@ -29,6 +29,7 @@
   }
   .society-list{
     display: inline-block;
+    margin-bottom: 15px;
   }
   .society-list > li {
     margin:0 15px;
