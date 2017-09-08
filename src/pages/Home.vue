@@ -1,22 +1,33 @@
 <template>
   <div>
     <div class="box">
-      <div class="swiper">
-        <div class="swiper-slide">
+      <Carousel>
+        <CarouselItem v-for="item in bannerItems" :key="item.id">
           <img src="../assets/images/banner.jpg">
-        </div>
-      </div>
+          <div class="banner-cover">
+            <div class="banner-content">
+              <span class="category">{{ item.category }}</span>
+              <h2 class="title"><a href="#">{{ item.title }}</a></h2>
+              <span class="dateline">{{ item.dateline }}</span>
+            </div>
+          </div>
+        </CarouselItem>
+      </Carousel>
     </div>
 
     <!-- Recent Articles -->
     <div class="box">
+      <div class="box-header">
+        <h3>Latest articles</h3>
+      </div>
       <div class="box-content">
         <div class="row">
           <a class="col-4 article-link" href="#">
             <div class="article-pic">
               <img src="../assets/images/article-simple.jpg">
               <div class="pic-guide">
-                Secure your Day One Edition today as this bonus content will be available for a limited time only!
+                <span class="album-border"></span>
+                <a href="#" class="btn">阅读全文</a>
               </div>
             </div>
             <div class="article-info">
@@ -32,7 +43,8 @@
             <div class="article-pic">
               <img src="../assets/images/article-simple.jpg">
               <div class="pic-guide">
-                Secure your Day One Edition today as this bonus content will be available for a limited time only!
+                <span class="album-border"></span>
+                <a href="#" class="btn">阅读全文</a>
               </div>
             </div>
             <div class="article-info">
@@ -48,7 +60,8 @@
             <div class="article-pic">
               <img src="../assets/images/article-simple.jpg">
               <div class="pic-guide">
-                Secure your Day One Edition today as this bonus content will be available for a limited time only!
+                <span class="album-border"></span>
+                <a href="#" class="btn">阅读全文</a>
               </div>
             </div>
             <div class="article-info">
@@ -66,7 +79,8 @@
             <div class="article-pic">
               <img src="../assets/images/article-simple.jpg">
               <div class="pic-guide">
-                Secure your Day One Edition today as this bonus content will be available for a limited time only!
+                <span class="album-border"></span>
+                <a href="#" class="btn">阅读全文</a>
               </div>
             </div>
             <div class="article-info">
@@ -82,7 +96,8 @@
             <div class="article-pic">
               <img src="../assets/images/article-simple.jpg">
               <div class="pic-guide">
-                Secure your Day One Edition today as this bonus content will be available for a limited time only!
+                <span class="album-border"></span>
+                <a href="#" class="btn">阅读全文</a>
               </div>
             </div>
             <div class="article-info">
@@ -98,7 +113,8 @@
             <div class="article-pic">
               <img src="../assets/images/article-simple.jpg">
               <div class="pic-guide">
-                Secure your Day One Edition today as this bonus content will be available for a limited time only!
+                <span class="album-border"></span>
+                <a href="#" class="btn">阅读全文</a>
               </div>
             </div>
             <div class="article-info">
@@ -113,7 +129,7 @@
         </div>
       </div>
       <div class="box-footer">
-        <p><a href="#" class="more-btn">More Articles<i class="iconfont">&#xe651;</i></a></p>
+        <a href="#" class="btn more-btn">READ MORE</a>
       </div>
     </div>
     <!-- END Recent Articles -->
@@ -121,27 +137,87 @@
 </template>
 
 <script>
-  export default {}
+  import Carousel from '../components/Carousel'
+  import CarouselItem from '../components/CarouselItem'
+
+  export default {
+    components: {
+      Carousel,
+      CarouselItem
+    },
+    data () {
+      return {
+        bannerItems: [
+          {'id': 1, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'},
+          {'id': 2, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'},
+          {'id': 3, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'}
+        ]
+      }
+    }
+  }
 </script>
 
 <style>
   .box {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 60px;
   }
   .box-header{
     width: 100%;
     position: relative;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .box-header > h3{
+    display: inline-block;
+    font-size: 16px;
+    font-weight: normal;
+    color: #39c5bb;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
   }
   .box-footer{
-    margin-top: 30px;
     text-align: center;
+  }
+  .swiper-slide{
+    position: relative;
   }
   .swiper-slide img{
     max-width: 100%;
   }
+  .banner-cover{
+    position: absolute;
+    left: 160px;
+    top: 56%;
+    overflow:hidden;
+    width: 400px;
+  }
+  .banner-content{
+    width: 400px;
+    min-height: 175px;
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    box-sizing: border-box;
+    border-left: 4px solid #39c5bb;
+  }
+  .banner-content .category{
+    display: inline-block;
+    padding-bottom: 5px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #39c5bb;
+    color: #39c5bb;
+  }
+  .banner-content .title{
+    margin-bottom: 15px;
+    line-height: 1.4;
+  }
+  .banner-content .dateline{
+    color: #999;
+  }
   .more-btn{
-    font-size: 16px;
+    color: #999;
+    border:1px solid #C4C4C4;
+    padding: 8px 25px;
   }
   .article-link {
     display: block;
@@ -158,7 +234,7 @@
     position: absolute;
     left: 15px;
     bottom: 0;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .article-link:hover{
     color: #666;
@@ -186,6 +262,7 @@
   .article-info > h3 {
     font-size: 18px;
     margin-bottom: 15px;
+    font-weight: normal;
     display: block;
   }
   .article-content > li {
@@ -198,27 +275,67 @@
     right: -35px;
     top: 45px;
     transform: rotate(90deg);
-    transition: all .25s ease-out;
   }
   .pic-guide{
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
     left: 0;
-    padding:15px;
-    line-height: 1.5;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding:30px;
     z-index: 1;
-    content: "";
-    color: #fff;
-    background-color: rgba(57, 197, 187, 0.75);
+    background-color: #39c5bb;
     opacity: 0;
-    visibility: none;
-    -webkit-transition: all 0.25s ease-out;
+    transform: scale(1.5);
     transition: all 0.25s ease-out;
   }
+
   .article-pic:hover .pic-guide{
-    opacity: 1;
-    visibility: visible;
+    opacity: .75;
+    transform: scale(1);
+  }
+  .album-border{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: solid #fff 2px;
+    box-sizing: border-box;
+  }
+  .album-border:before{
+    content: '';
+    display: block;
+    width: calc(100% + 4px);
+    height: calc(100% - 60px);
+    position: absolute;
+    top: 30px;
+    left: -2px;
+    z-index: 5;
+    background-color: #39c5bb;
+  }
+  .album-border:after{
+    content: '';
+    display: block;
+    height: calc(100% + 4px);
+    width: calc(100% - 60px);
+    position: absolute;
+    top: -2px;
+    left: 30px;
+    z-index: 5;
+    background-color: #39c5bb;
+  }
+  .pic-guide .btn{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 10;
+    background: #fff;
+    color: #39c5bb;
+    border: 0;
+  }
+  .pic-guide .btn:hover:after{
+    width: 0;
   }
 </style>

@@ -28,11 +28,11 @@
 
 @font-face {
   font-family: 'iconfont';  /* project id 289888 */
-  src: url('//at.alicdn.com/t/font_9y4op23m0x9ftj4i.eot');
-  src: url('//at.alicdn.com/t/font_9y4op23m0x9ftj4i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_9y4op23m0x9ftj4i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_9y4op23m0x9ftj4i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_9y4op23m0x9ftj4i.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.eot');
+  src: url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family:"iconfont" !important;
@@ -69,7 +69,7 @@ p{
 }
 .container {
   position: relative;
-  width: 1024px;
+  width: 1200px;
   margin:0 auto;
   box-sizing: border-box;
   z-index: 10;
@@ -99,12 +99,12 @@ p{
   float: left;
 }
 .btn{
+  position: relative;
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.5;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -117,30 +117,24 @@ p{
   user-select: none;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+}
+.btn:after{
+  content: '';
+  width: 0;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #39c5bb;
+  z-index: -1;
+  transition: all 0.3s;
 }
 .btn:hover{
-  letter-spacing: 1px;
   color: #fff;
+  border:1px solid #39c5bb;
 }
-.btn-primary{
-  color: #fff;
-  background-color: #39c5bb;
-}
-.btn-primary:hover {
-  background-color: #33b0a7;
-}
-.btn-sm{
-  padding: 4px 8px;
-  font-size: 12px;
-}
-.btn-lg{
-  padding: 8px 16px;
-  font-size: 16px;
-  letter-spacing: 2px;
-}
-.btn-sm .iconfont{
-  font-size: 12px;
+.btn:hover:after{
+  width: 100%;
 }
 .text-center{
   text-align: center;

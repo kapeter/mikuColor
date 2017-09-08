@@ -9,6 +9,6 @@
 
 <style>
     .error-box{
-        margin: 30px auto;
+        margin: 60px auto;
     }
 </style>

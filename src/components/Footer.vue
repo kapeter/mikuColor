@@ -22,7 +22,7 @@
 <style>
   .footer{
     width: 100%;
-    padding: 30px 0;
+    padding-top: 30px;
     position: relative;
     text-align: center;
     color: #999;
@@ -42,9 +42,11 @@
   .copyright{
     font-size: 12px;
   }
-  #cover{
-    position: absolute;
-    left: 0;
-    bottom: 0;
+  .copyright a{
+    color: #999;
   }
+  .copyright a:hover{
+    color: #39c5bb;
+  }
+
 </style>

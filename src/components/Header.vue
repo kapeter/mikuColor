@@ -39,8 +39,8 @@
     height: 45px;
     margin-top: 30px;
     text-align: center;
-    border-top: 1px #eaeaea solid;
-    border-bottom: 1px #eaeaea solid;
+    border-top: 1px #c4c4c4 solid;
+    border-bottom: 1px #c4c4c4 solid;
   }
   .nav > ul {
     display: inline-block;

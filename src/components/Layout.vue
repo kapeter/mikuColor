@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-bg">
     <HeaderPart></HeaderPart>
     <main class="main">
       <div class="container" id="content">
