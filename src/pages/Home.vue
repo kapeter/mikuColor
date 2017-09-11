@@ -149,8 +149,8 @@
       return {
         bannerItems: [
           {'id': 1, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'},
-          {'id': 2, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'},
-          {'id': 3, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'}
+          {'id': 2, 'title': '[VueCms系列] MAC下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '后端开发'},
+          {'id': 3, 'title': '[VueCms系列] Linux下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'}
         ]
       }
     }
@@ -179,17 +179,18 @@
   .box-footer{
     text-align: center;
   }
-  .swiper-slide{
-    position: relative;
-  }
   .swiper-slide img{
     max-width: 100%;
   }
   .banner-cover{
     position: absolute;
     left: 160px;
-    top: 56%;
+    top: 54%;
     overflow:hidden;
+    width: 0px;
+    transition: all .4s ease-in-out .4s;
+  }
+  .swiper-slide-active .banner-cover{
     width: 400px;
   }
   .banner-content{
@@ -334,6 +335,7 @@
     background: #fff;
     color: #39c5bb;
     border: 0;
+    padding: 8px 15px;
   }
   .pic-guide .btn:hover:after{
     width: 0;
