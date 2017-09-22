@@ -22,14 +22,13 @@
 <style>
   .footer{
     width: 100%;
-    padding-top: 30px;
+    padding-top: 15px;
     position: relative;
     text-align: center;
     color: #999;
   }
   .society-list{
     display: inline-block;
-    margin-bottom: 15px;
   }
   .society-list > li {
     margin:0 15px;

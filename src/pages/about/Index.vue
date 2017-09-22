@@ -1,1 +1,5 @@
-Index.vue
+<template>
+  <div>
+    about
+  </div>
+</template>

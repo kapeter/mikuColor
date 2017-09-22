@@ -1,1 +1,5 @@
-conf.js
+const conf = {
+  baseURL: ''
+}
+
+export default conf

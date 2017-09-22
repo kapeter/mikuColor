@@ -160,12 +160,12 @@
 <style>
   .box {
     width: 100%;
-    margin-bottom: 60px;
+    margin-bottom: 75px;
   }
   .box-header{
     width: 100%;
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
     text-align: center;
   }
   .box-header > h3{
@@ -174,7 +174,7 @@
     font-weight: normal;
     color: #39c5bb;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.25em;
   }
   .box-footer{
     text-align: center;
@@ -185,7 +185,7 @@
   .banner-cover{
     position: absolute;
     left: 160px;
-    top: 54%;
+    top: 52%;
     overflow:hidden;
     width: 0px;
     transition: all .4s ease-in-out .4s;
@@ -204,13 +204,12 @@
   .banner-content .category{
     display: inline-block;
     padding-bottom: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border-bottom: 2px solid #39c5bb;
     color: #39c5bb;
   }
   .banner-content .title{
     margin-bottom: 15px;
-    line-height: 1.4;
   }
   .banner-content .dateline{
     color: #999;
