@@ -1,97 +1,109 @@
 <template>
-  <div class="row content-padding">
-    <div class="col-8">
-      <div class="list-header">
-        <h3 class="list-title">所有文章</h3>
-        <p class="list-sub-title">文章总数：22</p>
-      </div>
-      <div class="list-content">
-        <ul>
-          <li class="list-box row">
-            <div class="article-img col-4">
-              <a href="#">
-                <img src="../../assets/images/article-simple.jpg" alt="#">
-              </a>
-            </div>
-            <div class="article-text col-8">
-              <h3 class="article-title"><router-link to="/post/1">为美好的世界献上祝福</router-link></h3>
-              <p class="article-desc">Vestibulum luctus sapien malesuada eros varius, vel vestibulum lacus euismod. Fusce fermentum est ac diam imperdiet, in ornare tellus lobortis. Aliquam erat volutpat. Nulla tempus ultricies quam id accumsan. Maecenas sollicitudin elementum libero, scelerisque tempor</p>
-              <div class="article-info clearfix">
-                <div class="pull-left">
-                  <span>栏目：前端开发</span>
-                  <span>发布日期：2017-09-18</span>
-                </div>
-                <a href="#" class="btn pull-right">继续阅读</a>
-              </div>
-            </div>
-          </li>
-          <li class="list-box row">
-            <div class="article-img col-4">
-              <a href="#">
-                <img src="../../assets/images/article-simple.jpg" alt="#">
-              </a>
-            </div>
-            <div class="article-text col-8">
-              <h3 class="article-title"><a href="#">为美好的世界献上祝福</a></h3>
-              <p class="article-desc">Vestibulum luctus sapien malesuada eros varius, vel vestibulum lacus euismod. Fusce fermentum est ac diam imperdiet, in ornare tellus lobortis. Aliquam erat volutpat. Nulla tempus ultricies quam id accumsan. Maecenas sollicitudin elementum libero, scelerisque tempor</p>
-              <div class="article-info clearfix">
-                <div class="pull-left">
-                  <span>栏目：前端开发</span>
-                  <span>发布日期：2017-09-18</span>
-                </div>
-                <a href="#" class="btn pull-right">继续阅读</a>
-              </div>
-            </div>
-          </li>
-          <li class="list-box row">
-            <div class="article-img col-4">
-              <a href="#">
-                <img src="../../assets/images/article-simple.jpg" alt="#">
-              </a>
-            </div>
-            <div class="article-text col-8">
-              <h3 class="article-title"><a href="#">为美好的世界献上祝福</a></h3>
-              <p class="article-desc">Vestibulum luctus sapien malesuada eros varius, vel vestibulum lacus euismod. Fusce fermentum est ac diam imperdiet, in ornare tellus lobortis. Aliquam erat volutpat. Nulla tempus ultricies quam id accumsan. Maecenas sollicitudin elementum libero, scelerisque tempor</p>
-              <div class="article-info clearfix">
-                <div class="pull-left">
-                  <span>栏目：前端开发</span>
-                  <span>发布日期：2017-09-18</span>
-                </div>
-                <a href="#" class="btn pull-right">继续阅读</a>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
+  <div>
+    <div class="list-header">
+      <h3 class="list-title">{{ listTitle }}</h3>
+      <p class="list-sub-title">文章总数：{{ pagination.total }}</p>
     </div>
-    <div class="col-4 list-right">
-      <div class="panel">
-        <form class="search-box clearfix">
-          <input class="form-control col-9" type="text" name="keyword" placeholder="输入关键词……">
-          <a class="btn col-3" style="border-left:0"  href="javascript:;">搜  索</a>
-        </form>
-      </div>
-      <div class="panel">
-        <h3 class="panel-title">CATEGORIES</h3>
-        <ul class="panel-list">
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3 class="panel-title">ARCHIVES</h3>
-        <ul class="panel-list">
-          <li><a href="#">2017年9月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年8月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年7月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年6月</a><span class="pull-right">(12)</span></li>
-        </ul>
+    <div class="list-content">
+      <ul v-if="lists.length > 0">
+        <li class="list-box row" v-for="item in lists">
+          <div class="article-img col-4">
+            <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">
+              <img :src="item.cover_img" alt="#">
+            </router-link>
+          </div>
+          <div class="article-text col-8">
+            <h3 class="article-title">
+              <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</router-link>
+            </h3>
+            <p class="article-desc">{{ item.description }}</p>
+            <div class="article-info clearfix">
+              <div class="pull-left">
+                <span>栏目：{{  item.category != null ? item.category.name : '' }}</span>
+                <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
+              </div>
+              <router-link :to="apiUrl.list + '/' + item.id" class="btn pull-right">继续阅读</router-link>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="text-center" v-else>
+        <p>没找到文章，要不换个姿势再试试</p>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+
+  export default{
+    data () {
+      return {
+        apiUrl: {
+          list: 'post',
+          category: 'category'
+        },
+        lists: [],
+        params: {
+          per_page: 5,
+          category: 0,
+          keyword: ''
+        },
+        listTitle: '',
+        pagination: {}
+      }
+    },
+    watch: {
+      $route () {
+        this.loadListData()
+      }
+    },
+    mounted () {
+      setTimeout(() => {
+        this.loadListData()
+      }, 300)
+    },
+    methods: {
+      loadListData () {
+        let _self = this
+        _self.setParams()
+        _self.$http.get(_self.apiUrl.list, {
+          params: _self.params
+        })
+          .then(function (res) {
+            _self.lists = res.data.data
+            _self.pagination = res.data.meta.pagination
+          })
+      },
+      setParams () {
+        let catItem = null
+        if ('keyword' in this.$route.query && this.$route.query.keyword !== '') {
+          this.params.category = 0
+          this.params.keyword = this.$route.query.keyword
+          this.listTitle = '“' + this.params.keyword + '” 的搜索结果'
+          return
+        }
+        this.params.keyword = ''
+        if ('category' in this.$route.query) {
+          let catId = parseInt(this.$route.query.category)
+          for (let i = 0; i < this.$store.state.catLists.length; i++) {
+            if (catId === this.$store.state.catLists[i].id) {
+              catItem = this.$store.state.catLists[i]
+              break
+            }
+          }
+        }
+        if (catItem !== null) {
+          this.params.category = catItem.id
+          this.listTitle = catItem.name
+        } else {
+          this.params.category = 0
+          this.listTitle = '所有文章'
+        }
+      }
+    }
+  }
+</script>
 
 <style>
   .list-header{
@@ -131,6 +143,9 @@
   .list-box .article-title{
     font-size: 18px;
     font-weight: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .list-box .article-title span{
     float: right;

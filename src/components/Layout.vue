@@ -3,7 +3,9 @@
     <HeaderPart></HeaderPart>
     <main class="main">
       <div class="container" id="content">
-        <router-view></router-view>
+        <transition mode="out-in" enter-active-class="animated fadeInRight" leave-active-class="animated fadeOutLeft">
+          <router-view></router-view>
+        </transition>
       </div>
     </main>
     <FooterPart></FooterPart>
@@ -26,5 +28,6 @@
   .main{
     position: relative;
     width: 100%;
+    overflow: hidden;
   }
 </style>

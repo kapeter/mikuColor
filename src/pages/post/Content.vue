@@ -1,71 +1,34 @@
 <template>
-  <div class="row content-padding">
-    <div class="col-8">
-      <transition name="fade">
-        <div v-if="postLoaded">
-          <h1 class="content-title">{{ thisPost.title }}</h1>
-          <div class="content-info">
-            <span>栏目：前端开发</span>
-            <span>发布日期：{{ publishedTime }}</span>
-          </div>
-          <div class="content-desc">
-            {{ thisPost.description }}
-          </div>
-          <div class="content-body" v-html="postContent"></div>
-          <div class="content-footer">
-            <p>本博客所有文章均为作者原创，享有版权所有权，未经许可，严禁转载或修改。</p>
-          </div>
+  <div>
+    <transition name="fade">
+      <div v-if="postLoaded">
+        <h1 class="content-title">{{ thisPost.title }}</h1>
+        <div class="content-info">
+          <span>栏目：{{  thisPost.category != null ? thisPost.category.name : '' }}</span>
+          <span>发布日期：{{ publishedTime }}</span>
         </div>
-        <div v-else class="content-loading">
-          <img src="../../assets/images/loading.gif">
-          <p>文章正在努力加载中……</p>
+        <div class="content-desc">
+          {{ thisPost.description }}
         </div>
-      </transition>
-    </div>
-
-    <div class="col-4 list-right">
-      <div class="panel">
-        <form class="search-box clearfix">
-          <input class="form-control col-9" type="text" name="keyword" placeholder="输入关键词……">
-          <a class="btn col-3" style="border-left:0"  href="javascript:;">搜  索</a>
-        </form>
+        <div class="content-body" v-html="postContent"></div>
+        <div class="content-footer">
+          <p>本文章为作者原创，享有版权所有权，未经许可，严禁转载或修改。</p>
+        </div>
       </div>
-      <div class="panel">
-        <h3 class="panel-title">CHAPTERS</h3>
-        <ul class="panel-list">
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-        </ul>
+      <div v-else class="content-loading">
+        <img src="../../assets/images/loading.gif">
+        <p>文章正在努力加载中……</p>
       </div>
-      <div class="panel">
-        <h3 class="panel-title">CATEGORIES</h3>
-        <ul class="panel-list">
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">前端开发</a><span class="pull-right">(12)</span></li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3 class="panel-title">ARCHIVES</h3>
-        <ul class="panel-list">
-          <li><a href="#">2017年9月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年8月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年7月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年6月</a><span class="pull-right">(12)</span></li>
-        </ul>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
 <script>
+
   export default {
     data () {
       return {
-        apiUrl: '',
+        apiUrl: 'post',
         postId: 0,
         postLoaded: false,
         thisPost: {}
@@ -95,13 +58,23 @@
         this.postLoaded = !this.postLoaded
       }
     },
-    mounted () {
-      let _self = this
-      _self.postId = parseInt(_self.$route.params.id)
-      _self.$http.get('http://vue.test.com/api/post/55')
-        .then(function (res) {
-          _self.thisPost = res.data.data
-        })
+    created () {
+      this.loadPostData()
+    },
+    methods: {
+      loadPostData () {
+        let _self = this
+        _self.postId = parseInt(_self.$route.params.id)
+        _self.$http.get(_self.apiUrl + '/' + _self.postId)
+          .then(function (res) {
+            if ('code' in res.data && res.data.code === 10012) {
+              _self.$router.replace({ path: '/404' })
+            } else {
+              _self.thisPost = res.data.data
+            }
+          })
+      }
+
     }
   }
 </script>

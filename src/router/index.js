@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Parent from '../pages/Parent.vue'
 import Layout from '@/components/Layout.vue'
 
 Vue.use(Router)
@@ -9,10 +8,6 @@ export default new Router({
   mode: 'history',
   base: __dirname,
   routes: [
-    {
-      path: '/about',
-      component: require('@/pages/about/Index.vue')
-    },
     {
       path: '/',
       component: Layout,
@@ -23,7 +18,7 @@ export default new Router({
         },
         {
           path: '/post',
-          component: Parent,
+          component: require('@/pages/post/Parent.vue'),
           children: [
             {
               path: '/',
@@ -36,10 +31,17 @@ export default new Router({
           ]
         },
         {
+          path: '/about',
+          component: require('@/pages/about/Index.vue')
+        },
+        {
           path: '*',
           component: require('@/pages/error/404.vue')
         }
       ]
     }
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })

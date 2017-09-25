@@ -1,5 +1,5 @@
 const conf = {
-  baseURL: ''
+  baseUrl: 'http://vue.test.com/api/'
 }
 
 export default conf

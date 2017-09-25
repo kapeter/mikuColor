@@ -129,7 +129,7 @@
         </div>
       </div>
       <div class="box-footer">
-        <a href="#" class="btn more-btn">READ MORE</a>
+        <router-link to="/post" class="btn more-btn">READ MORE</router-link>
       </div>
     </div>
     <!-- END Recent Articles -->
