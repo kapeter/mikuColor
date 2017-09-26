@@ -4,25 +4,29 @@
       <h3 class="list-title">{{ listTitle }}</h3>
       <p class="list-sub-title">文章总数：{{ pagination.total }}</p>
     </div>
-    <div class="list-content">
+    <div class="list-content" v-if="listLoaded">
       <ul v-if="lists.length > 0">
         <li class="list-box row" v-for="item in lists">
-          <div class="article-img col-4">
-            <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">
-              <img :src="item.cover_img" alt="#">
-            </router-link>
+          <div class="col-4">
+            <div class="article-img">
+              <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">
+                <img :src="item.cover_img" :alt="item.title">
+              </router-link>
+            </div>
           </div>
-          <div class="article-text col-8">
-            <h3 class="article-title">
-              <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</router-link>
-            </h3>
-            <p class="article-desc">{{ item.description }}</p>
-            <div class="article-info clearfix">
-              <div class="pull-left">
-                <span>栏目：{{  item.category != null ? item.category.name : '' }}</span>
-                <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
+          <div class="col-8">
+            <div class="article-text">
+              <h3 class="article-title">
+                <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</router-link>
+              </h3>
+              <p class="article-desc">{{ item.description }}</p>
+              <div class="article-info clearfix">
+                <div class="pull-left">
+                  <span>栏目：{{  item.category != null ? item.category.name : '' }}</span>
+                  <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
+                </div>
+                <router-link :to="apiUrl.list + '/' + item.id" class="btn pull-right">继续阅读</router-link>
               </div>
-              <router-link :to="apiUrl.list + '/' + item.id" class="btn pull-right">继续阅读</router-link>
             </div>
           </div>
         </li>
@@ -30,6 +34,37 @@
       <div class="text-center" v-else>
         <p>没找到文章，要不换个姿势再试试</p>
       </div>
+      <div class="list-footer">
+        <ul class="pagination" v-show="lists.length > 0">
+          <li :class="{ disabled: pagination.current_page === 1  }">
+            <a href="javascript:;" title="首页" @click="changePage(1)">
+              <i class="iconfont">&#xe605;</i>
+            </a>
+          </li>
+          <li :class="{ disabled: pagination.current_page === 1  }">
+            <a href="javascript:;" title="上一页" @click="changePage(pagination.current_page - 1)">
+              <i class="iconfont">&#xe602;</i>
+            </a>
+          </li>
+          <li v-for="num in showPageNum(pages)" :class="{ active: num == pagination.current_page }">
+            <a href="javascript:;" @click="changePage(num)">{{ num }}</a>
+          </li>
+          <li :class="{ disabled: pagination.current_page === pagination.total_pages  }">
+            <a href="javascript:;" title="下一页" @click="changePage(pagination.current_page + 1)">
+              <i class="iconfont">&#xe603;</i>
+            </a>
+          </li>
+          <li :class="{ disabled: pagination.current_page === pagination.total_pages  }">
+            <a href="javascript:;" title="下一页" @click="changePage(pagination.total_pages)">
+              <i class="iconfont">&#xe604;</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div v-else class="loading">
+      <img src="../../assets/images/loading.gif">
+      <p>列表正在努力加载中……</p>
     </div>
   </div>
 </template>
@@ -47,10 +82,13 @@
         params: {
           per_page: 5,
           category: 0,
-          keyword: ''
+          keyword: '',
+          page: 1
         },
         listTitle: '',
-        pagination: {}
+        pagination: {},
+        pages: [],
+        listLoaded: false
       }
     },
     watch: {
@@ -66,13 +104,18 @@
     methods: {
       loadListData () {
         let _self = this
+        _self.listLoaded = false
         _self.setParams()
-        _self.$http.get(_self.apiUrl.list, {
-          params: _self.params
-        })
+        _self.$http.get(_self.apiUrl.list, { params: _self.params })
           .then(function (res) {
             _self.lists = res.data.data
             _self.pagination = res.data.meta.pagination
+            _self.pages = []
+            for (let i = 0; i < _self.pagination.total_pages; i++) {
+              let x = i + 1
+              _self.pages.splice(i, 1, x)
+            }
+            _self.listLoaded = true
           })
       },
       setParams () {
@@ -100,6 +143,26 @@
           this.params.category = 0
           this.listTitle = '所有文章'
         }
+      },
+      changePage (num) {
+        if (num < 1 || num > this.pagination.total_pages) {
+          return false
+        }
+        this.params.page = num
+        this.loadListData()
+      },
+      showPageNum (pages) {
+        let current = this.pagination.current_page
+        let total = this.pagination.total_pages
+        return pages.filter(function (page) {
+          if (current < 5) {
+            return page < 10
+          } else if (current > (total - 5)) {
+            return page > total - 9
+          } else {
+            return Math.abs(page - current) < 5
+          }
+        })
       }
     }
   }
@@ -136,6 +199,7 @@
   .list-box .article-img{
     height: 170px;
     overflow:hidden;
+    background: #ddd;
   }
   .list-box .article-img img{
     max-width: 100%;
@@ -172,5 +236,41 @@
   }
   .list-box .article-info .btn{
     font-size: 13px;
+  }
+  .list-footer{
+    margin-top: 60px;
+    text-align: center;
+  }
+  .pagination{
+    display: inline-block;
+  }
+  .pagination li{
+    float: left;
+    margin: 0 5px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .pagination li a{
+    display: inline-block;
+    padding: 6px;
+  }
+  .pagination li a:hover{
+    color: #39c5bb;
+  }
+  .pagination .iconfont{
+    font-weight: 400;
+  }
+  .pagination .active{
+    border-bottom: 2px solid #39c5bb;
+  }
+  .pagination .disabled a{
+    color: #c9c9c9;
+    cursor: not-allowed;
+  }
+  .pagination .disabled a:hover{
+    color: #c9c9c9;
+  }
+  .pagination .active a{
+    color: #39c5bb;
   }
 </style>

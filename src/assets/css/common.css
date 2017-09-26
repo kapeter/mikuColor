@@ -1,38 +1,38 @@
-/* roboto-normal - latin */
+/* poppins-normal - latin */
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 300;
-  src: url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-300.eot'); /* IE9 Compat Modes */
-  src: local('Roboto'), local('Roboto-Normal'),
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-300.woff2') format('woff2'), /* Super Modern Browsers */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-300.woff') format('woff'), /* Modern Browsers */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-300.svg#Roboto') format('svg'); /* Legacy iOS */
+  src: url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-300.eot'); /* IE9 Compat Modes */
+  src: local('Poppins'), local('Poppins-Normal'),
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-300.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-300.woff2') format('woff2'), /* Super Modern Browsers */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-300.woff') format('woff'), /* Modern Browsers */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-300.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-300.svg#Poppins') format('svg'); /* Legacy iOS */
 }
 
-/* roboto-normal - latin */
+/* poppins-normal - latin */
 @font-face {
-  font-family: 'Roboto';
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: regular;
-  src: url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-regular.eot'); /* IE9 Compat Modes */
-  src: local('Roboto'), local('Roboto-Normal'),
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('//lib.baomitu.com/fonts/roboto/roboto-v16-latin-regular.svg#Roboto') format('svg'); /* Legacy iOS */
+  src: url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-regular.eot'); /* IE9 Compat Modes */
+  src: local('Poppins'), local('Poppins-Normal'),
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('//lib.baomitu.com/fonts/poppins/poppins-v2-latin-regular.svg#Poppins') format('svg'); /* Legacy iOS */
 }
 
 @font-face {
   font-family: 'iconfont';  /* project id 289888 */
-  src: url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.eot');
-  src: url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.woff') format('woff'),
-  url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_289888_o3rzedgfs481714i.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_289888_mykuq0kcejdims4i.eot');
+  src: url('//at.alicdn.com/t/font_289888_mykuq0kcejdims4i.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_289888_mykuq0kcejdims4i.woff') format('woff'),
+  url('//at.alicdn.com/t/font_289888_mykuq0kcejdims4i.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_289888_mykuq0kcejdims4i.svg#iconfont') format('svg');
 }
 .iconfont {
   font-family:"iconfont" !important;
@@ -42,13 +42,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+::-webkit-scrollbar
+{
+    width: 6px;
+    background-color: rgba(0,0,0,0.15);
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #999;
+}
+
 * {
   margin:0;
   padding:0;
 }
 html,body {
 	width: 100%;
-  font: 14px/1.42857143 'Roboto','PingFang SC',"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+  font: 14px/1.42857143 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
   letter-spacing: 1px;
   color: #666;
 }
@@ -212,7 +224,10 @@ p{
   border-bottom: 1px solid #ddd;
   font-size: 13px;
 }
-
+.loading{
+  padding: 60px 0;
+  text-align: center;
+}
 .animated {
   -webkit-animation-duration: .4s;
   animation-duration: .4s;

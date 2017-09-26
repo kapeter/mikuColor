@@ -148,7 +148,7 @@
     background: #f4f4f4;
   }
   .content-body code{
-    font: 14px/1.5 'Roboto','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: 14px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
   }
   .content-footer{
     margin-top: 30px;
@@ -167,9 +167,5 @@
     width: 2px;
     height: 100%;
     background: #39c5bb;
-  }
-  .content-loading{
-    padding: 60px 0;
-    text-align: center;
   }
 </style>

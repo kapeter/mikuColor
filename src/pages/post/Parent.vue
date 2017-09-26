@@ -16,7 +16,8 @@
         <h3 class="panel-title">CATEGORIES</h3>
         <ul class="panel-list">
           <li v-for="item in $store.state.catLists">
-            <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}</a><span class="pull-right">({{ item.detail.count }})</span>
+            <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}</a>
+            <span class="pull-right">({{ item.detail.count }})</span>
           </li>
         </ul>
       </div>

@@ -22,110 +22,24 @@
       </div>
       <div class="box-content">
         <div class="row">
-          <a class="col-4 article-link" href="#">
+          <div class="col-4 article-link" v-for="item in postItems">
             <div class="article-pic">
-              <img src="../assets/images/article-simple.jpg">
-              <div class="pic-guide">
+              <img :src="item.cover_img" :alt="item.title">
+              <router-link class="pic-guide" :to="apiUrl.post + '/' + item.id">
                 <span class="album-border"></span>
-                <a href="#" class="btn">阅读全文</a>
-              </div>
+                <button class="btn">阅读全文</button>
+              </router-link>
             </div>
             <div class="article-info">
-              <h3><a href="#">为美好的世界献上祝福</a></h3>
+              <h3>
+                <router-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</router-link>
+              </h3>
               <ul class="article-content">
-                <li><span>栏目：</span>前端开发</li>
-                <li><span>标签：</span>JavaScript,Css</li>
+                <li><span>栏目：</span>{{  item.category != null ? item.category.name : '' }}</li>
+                <li><span>发布日期：</span>{{ item.published_at.date.slice(0, 10) }}</li>
               </ul>
-              <p class="article-time"><span>2017.04.06</span></p>
             </div>
-          </a>
-          <a class="col-4 article-link" href="#">
-            <div class="article-pic">
-              <img src="../assets/images/article-simple.jpg">
-              <div class="pic-guide">
-                <span class="album-border"></span>
-                <a href="#" class="btn">阅读全文</a>
-              </div>
-            </div>
-            <div class="article-info">
-              <h3><a href="#">为美好的世界献上祝福</a></h3>
-              <ul class="article-content">
-                <li><span>栏目：</span>前端开发</li>
-                <li><span>标签：</span>JavaScript,Css</li>
-              </ul>
-              <p class="article-time"><span>2017.04.06</span></p>
-            </div>
-          </a>
-          <a class="col-4 article-link" href="#">
-            <div class="article-pic">
-              <img src="../assets/images/article-simple.jpg">
-              <div class="pic-guide">
-                <span class="album-border"></span>
-                <a href="#" class="btn">阅读全文</a>
-              </div>
-            </div>
-            <div class="article-info">
-              <h3><a href="#">为美好的世界献上祝福</a></h3>
-              <ul class="article-content">
-                <li><span>栏目：</span>前端开发</li>
-                <li><span>标签：</span>JavaScript,Css</li>
-              </ul>
-              <p class="article-time"><span>2017.04.06</span></p>
-            </div>
-          </a>
-        </div>
-        <div class="row">
-          <a class="col-4 article-link" href="#">
-            <div class="article-pic">
-              <img src="../assets/images/article-simple.jpg">
-              <div class="pic-guide">
-                <span class="album-border"></span>
-                <a href="#" class="btn">阅读全文</a>
-              </div>
-            </div>
-            <div class="article-info">
-              <h3><a href="#">为美好的世界献上祝福</a></h3>
-              <ul class="article-content">
-                <li><span>栏目：</span>前端开发</li>
-                <li><span>标签：</span>JavaScript,Css</li>
-              </ul>
-              <p class="article-time"><span>2017.04.06</span></p>
-            </div>
-          </a>
-          <a class="col-4 article-link" href="#">
-            <div class="article-pic">
-              <img src="../assets/images/article-simple.jpg">
-              <div class="pic-guide">
-                <span class="album-border"></span>
-                <a href="#" class="btn">阅读全文</a>
-              </div>
-            </div>
-            <div class="article-info">
-              <h3><a href="#">为美好的世界献上祝福</a></h3>
-              <ul class="article-content">
-                <li><span>栏目：</span>前端开发</li>
-                <li><span>标签：</span>JavaScript,Css</li>
-              </ul>
-              <p class="article-time"><span>2017.04.06</span></p>
-            </div>
-          </a>
-          <a class="col-4 article-link" href="#">
-            <div class="article-pic">
-              <img src="../assets/images/article-simple.jpg">
-              <div class="pic-guide">
-                <span class="album-border"></span>
-                <a href="#" class="btn">阅读全文</a>
-              </div>
-            </div>
-            <div class="article-info">
-              <h3><a href="#">为美好的世界献上祝福</a></h3>
-              <ul class="article-content">
-                <li><span>栏目：</span>前端开发</li>
-                <li><span>标签：</span>JavaScript,Css</li>
-              </ul>
-              <p class="article-time"><span>2017.04.06</span></p>
-            </div>
-          </a>
+          </div>
         </div>
       </div>
       <div class="box-footer">
@@ -147,11 +61,32 @@
     },
     data () {
       return {
+        apiUrl: {
+          post: 'post'
+        },
+        postItems: [],
         bannerItems: [
           {'id': 1, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'},
           {'id': 2, 'title': '[VueCms系列] MAC下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '后端开发'},
           {'id': 3, 'title': '[VueCms系列] Linux下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'}
         ]
+      }
+    },
+    created () {
+      this.loadPostData()
+    },
+    methods: {
+      loadPostData () {
+        let _self = this
+        _self.$http.get(_self.apiUrl.post, {
+          params: {
+            per_page: 6,
+            sort: 'published_at|desc'
+          }
+        })
+          .then(function (res) {
+            _self.postItems = res.data.data
+          })
       }
     }
   }
@@ -178,6 +113,7 @@
   }
   .box-footer{
     text-align: center;
+    margin-top: 30px;
   }
   .swiper-slide img{
     max-width: 100%;
@@ -248,6 +184,7 @@
     height: 208px;
     overflow:hidden;
     position: relative;
+    background: #ddd;
   }
   .article-pic img {
     max-width: 100%;
@@ -255,7 +192,7 @@
   }
   .article-info{
     width: 100%;
-    padding: 15px 30px 15px 0px;
+    padding: 15px 0px;
     box-sizing: border-box;
     position: relative;
   }
@@ -264,17 +201,17 @@
     margin-bottom: 15px;
     font-weight: normal;
     display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .article-content > li {
     margin-bottom: 15px;
     word-wrap: break-word;
     word-break: break-all;
   }
-  .article-time {
-    position: absolute;
-    right: -35px;
-    top: 45px;
-    transform: rotate(90deg);
+  .article-content > li:last-child{
+    margin-bottom: 0;
   }
   .pic-guide{
     position: absolute;

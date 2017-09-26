@@ -4,7 +4,7 @@
       <ul class="society-list">
         <li><a href="https://github.com/kapeter"><i class="iconfont">&#xe69f;</i></a></li>
       </ul>
-      <p class="copyright">&copy;{{ thisYear }} KAPETER.COM <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号-1</a></p>
+      <p class="copyright">&copy;{{ thisYear }} KAPETER.COM <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号</a></p>
     </div>
   </footer>
 </template>

@@ -8,7 +8,7 @@
       <nav class="nav">
         <ul>
           <li><router-link to="/" exact>首页</router-link></li>
-          <li><router-link to="/post" exact>文章</router-link></li>
+          <li><router-link to="/post">文章</router-link></li>
           <li><router-link to="/about" exact>关于我</router-link></li>
         </ul>
       </nav>

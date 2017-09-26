@@ -8,10 +8,10 @@
       <slot></slot>
     </div>
     <div class="swiper-button-prev" @click="prev()">
-      <i class="iconfont">&#xe600;</i>
+      <i class="iconfont">&#xe602;</i>
     </div>
     <div class="swiper-button-next" @click="next()">
-      <i class="iconfont">&#xe601;</i>
+      <i class="iconfont">&#xe603;</i>
     </div>
     <ul class="swiper-pagination">
       <li class="swiper-pagination-bullet"
