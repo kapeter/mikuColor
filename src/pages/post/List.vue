@@ -10,7 +10,7 @@
           <div class="col-4">
             <div class="article-img">
               <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">
-                <img :src="item.cover_img" :alt="item.title">
+                <img v-if="item.cover_img != null" :src="item.cover_img" :alt="item.title">
               </router-link>
             </div>
           </div>
@@ -203,6 +203,7 @@
   }
   .list-box .article-img img{
     max-width: 100%;
+    min-height: 100%;
   }
   .list-box .article-title{
     font-size: 18px;

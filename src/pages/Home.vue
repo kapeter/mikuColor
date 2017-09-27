@@ -3,12 +3,14 @@
     <div class="box">
       <Carousel>
         <CarouselItem v-for="item in bannerItems" :key="item.id">
-          <img src="../assets/images/banner.jpg">
+          <img :src="item.cover_img">
           <div class="banner-cover">
             <div class="banner-content">
-              <span class="category">{{ item.category }}</span>
-              <h2 class="title"><a href="#">{{ item.title }}</a></h2>
-              <span class="dateline">{{ item.dateline }}</span>
+              <span class="category">{{ item.category.name }}</span>
+              <h2 class="title">
+                <router-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</router-link>
+              </h2>
+              <span class="dateline">{{ item.published_at.date.slice(0, 10) }}</span>
             </div>
           </div>
         </CarouselItem>
@@ -24,7 +26,7 @@
         <div class="row">
           <div class="col-4 article-link" v-for="item in postItems">
             <div class="article-pic">
-              <img :src="item.cover_img" :alt="item.title">
+              <img v-if="item.cover_img != null" :src="item.cover_img" :alt="item.title">
               <router-link class="pic-guide" :to="apiUrl.post + '/' + item.id">
                 <span class="album-border"></span>
                 <button class="btn">阅读全文</button>
@@ -65,27 +67,30 @@
           post: 'post'
         },
         postItems: [],
-        bannerItems: [
-          {'id': 1, 'title': '[VueCms系列] windows下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'},
-          {'id': 2, 'title': '[VueCms系列] MAC下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '后端开发'},
-          {'id': 3, 'title': '[VueCms系列] Linux下搭建开发环境——Laravel Homestead', 'dateline': '2017.09.05', 'category': '前端开发'}
-        ]
+        bannerItems: []
       }
     },
     created () {
+      this.loadBannerData()
       this.loadPostData()
     },
     methods: {
       loadPostData () {
         let _self = this
         _self.$http.get(_self.apiUrl.post, {
-          params: {
-            per_page: 6,
-            sort: 'published_at|desc'
-          }
+          params: {per_page: 6, sort: 'published_at|desc'}
         })
           .then(function (res) {
             _self.postItems = res.data.data
+          })
+      },
+      loadBannerData () {
+        let _self = this
+        _self.$http.get(_self.apiUrl.post, {
+          params: {per_page: 3, recommend: 0}
+        })
+          .then(function (res) {
+            _self.bannerItems = res.data.data
           })
       }
     }
@@ -115,8 +120,11 @@
     text-align: center;
     margin-top: 30px;
   }
+  .swiper-slide{
+    background: #ddd;
+  }
   .swiper-slide img{
-    max-width: 100%;
+    width: 100%;
   }
   .banner-cover{
     position: absolute;

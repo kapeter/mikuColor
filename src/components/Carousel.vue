@@ -58,8 +58,13 @@
       }
     },
     mounted () {
-      this.activeIndex = this.defaultIndex
-      this.startTimer()
+      this.updateItems()
+      this.$nextTick(() => {
+        if (this.defaultIndex < this.items.length && this.defaultIndex >= 0) {
+          this.activeIndex = this.defaultIndex
+        }
+        this.startTimer()
+      })
     },
     methods: {
       handleMouseEnter () {
@@ -112,6 +117,11 @@
     watch: {
       activeIndex (val, oldVal) {
         this.resetItemPosition(oldVal)
+      },
+      items (val) {
+        if (val.length > 0) {
+          this.setActiveItem(this.defaultIndex)
+        }
       }
     }
   }

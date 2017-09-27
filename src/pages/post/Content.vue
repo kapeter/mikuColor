@@ -7,15 +7,13 @@
           <span>栏目：{{  thisPost.category != null ? thisPost.category.name : '' }}</span>
           <span>发布日期：{{ publishedTime }}</span>
         </div>
-        <div class="content-desc">
-          {{ thisPost.description }}
+        <div class="content-body" v-html="postContent">
         </div>
-        <div class="content-body" v-html="postContent"></div>
         <div class="content-footer">
           <p>本文章为作者原创，享有版权所有权，未经许可，严禁转载或修改。</p>
         </div>
       </div>
-      <div v-else class="content-loading">
+      <div v-else class="loading">
         <img src="../../assets/images/loading.gif">
         <p>文章正在努力加载中……</p>
       </div>
@@ -50,7 +48,8 @@
           smartLists: true,
           smartypants: false
         })
-        return marked(this.thisPost.content)
+        const toc = '<div class="content-toc"><h3 class="panel-title">CHAPTERS</h3></div>'
+        return toc + marked(this.thisPost.content)
       }
     },
     watch: {
@@ -104,7 +103,7 @@
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+  .fade-enter, .fade-leave-to {
     opacity: 0
   }
   .content-body{
@@ -114,15 +113,19 @@
   .content-body p{
     margin-bottom: .85em;
   }
-  .content-body h1, .content-body h2, .content-body h3, .content-body h4, .content-body h5, .content-body h6 {
+  .content-body h1{
+    font-weight: 600;
+    margin-top: 0.85em;
+    margin-bottom: 0.85em;
+    font-size: 28px;
+  }
+  .content-body h2, .content-body h3, .content-body h4, .content-body h5, .content-body h6 {
     font-weight: 400;
     margin-bottom: 0.85em;
     margin-top: 0;
   }
-  .content-body h1{
-    font-weight: 600;
-    margin-top: 0.85em;
-    font-size: 28px;
+  .content-body > h1:first-of-type{
+    margin-top: 0;
   }
   .content-body ul, .content-body ol{
     margin-left: 30px;
@@ -167,5 +170,15 @@
     width: 2px;
     height: 100%;
     background: #39c5bb;
+  }
+  .content-toc{
+    width: 360px;
+    padding: 15px;
+    box-sizing: border-box;
+    border:1px dashed #39c5bb;
+    float: right;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    word-break: break-all;
   }
 </style>
