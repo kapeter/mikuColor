@@ -29,17 +29,15 @@
               <img v-if="item.cover_img != null" :src="item.cover_img" :alt="item.title">
               <router-link class="pic-guide" :to="apiUrl.post + '/' + item.id">
                 <span class="album-border"></span>
-                <button class="btn">阅读全文</button>
+                <button class="btn">READ MORE</button>
               </router-link>
             </div>
             <div class="article-info">
+              <p class="article-category">{{  item.category != null ? item.category.name : '' }}</p>
               <h3>
                 <router-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</router-link>
               </h3>
-              <ul class="article-content">
-                <li><span>栏目：</span>{{  item.category != null ? item.category.name : '' }}</li>
-                <li><span>发布日期：</span>{{ item.published_at.date.slice(0, 10) }}</li>
-              </ul>
+              <p class="article-dateline">{{ item.published_at.date.slice(0, 10) }}</p>
             </div>
           </div>
         </div>
@@ -203,23 +201,47 @@
     padding: 15px 0px;
     box-sizing: border-box;
     position: relative;
+    text-align: center;
   }
   .article-info > h3 {
     font-size: 18px;
     margin-bottom: 15px;
     font-weight: normal;
-    display: block;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    height: 54px;
     overflow: hidden;
   }
-  .article-content > li {
-    margin-bottom: 15px;
-    word-wrap: break-word;
-    word-break: break-all;
-  }
-  .article-content > li:last-child{
+  .article-info .article-dateline{
     margin-bottom: 0;
+    font-size: 13px;
+    color: #999;
+  }
+  .article-info > .article-category {
+    color: #39c5bb;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    font-size: 13px;
+  }
+  .article-info > .article-category:before{
+    content: "";
+    display: block;
+    height: 1px;
+    width: 25px;
+    position: absolute;
+    top: 42%;
+    right: 100%;
+    background-color: #39c5bb;
+  }
+  .article-info > .article-category:after{
+    content: "";
+    display: block;
+    height: 1px;
+    width: 25px;
+    position: absolute;
+    top: 42%;
+    left: 100%;
+    background-color: #39c5bb;
   }
   .pic-guide{
     position: absolute;

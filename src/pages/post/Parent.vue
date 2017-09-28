@@ -5,7 +5,7 @@
         <router-view></router-view>
       </transition>
     </div>
-    <div class="col-4 list-right">
+    <div class="col-4 list-right" id="list-navbar">
       <div class="panel">
         <form class="search-box clearfix">
           <input class="form-control col-9" type="text" name="keyword" placeholder="输入关键词……" v-model="keyword">
@@ -54,6 +54,14 @@
         let temp = this.keyword
         this.keyword = ''
         this.$router.push({ path: '/post', query: { keyword: temp } })
+      },
+      addToc (tocDom) {
+        document.getElementById('list-navbar').append(tocDom)
+      },
+      deleteToc () {
+        if (document.getElementById('content-toc')) {
+          document.getElementById('list-navbar').removeChild(document.getElementById('content-toc'))
+        }
       }
     }
   }
@@ -62,5 +70,36 @@
 <style>
   .list-right{
     padding-left: 60px;
+  }
+  .toc-list{
+    margin:15px 0 0;
+  }
+  .toc-list li{
+    list-style-type: none;
+    margin-bottom: 10px;
+  }
+  .toc-list li:last-child{
+    margin-bottom: 0;
+  }
+  .toc-list li a{
+    color: #666;
+  }
+  .toc-list li a:hover{
+    text-decoration: none;
+  }
+  .panel-list .toc-h2{
+    padding-left: 15px;
+  }
+  .panel-list.toc-h3{
+    padding-left: 30px;
+  }
+  .panel-list .toc-h4{
+    padding-left: 45px;
+  }
+  .panel-list .toc-h5{
+    padding-left: 60px;
+  }
+  .panel-list .toc-h6{
+    padding-left: 75px;
   }
 </style>

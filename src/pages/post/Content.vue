@@ -7,7 +7,8 @@
           <span>栏目：{{  thisPost.category != null ? thisPost.category.name : '' }}</span>
           <span>发布日期：{{ publishedTime }}</span>
         </div>
-        <div class="content-body" v-html="postContent">
+        <div class="content-body">
+          <div id="marked-content" v-html="postContent"></div>
         </div>
         <div class="content-footer">
           <p>本文章为作者原创，享有版权所有权，未经许可，严禁转载或修改。</p>
@@ -48,8 +49,7 @@
           smartLists: true,
           smartypants: false
         })
-        const toc = '<div class="content-toc"><h3 class="panel-title">CHAPTERS</h3></div>'
-        return toc + marked(this.thisPost.content)
+        return marked(this.thisPost.content)
       }
     },
     watch: {
@@ -59,6 +59,17 @@
     },
     created () {
       this.loadPostData()
+    },
+    updated () {
+      this.$nextTick(() => {
+        let markedDom = document.getElementById('marked-content')
+        if (markedDom) {
+          this.generateTOC(markedDom)
+        }
+      })
+    },
+    beforeDestroy () {
+      this.$parent.deleteToc()
     },
     methods: {
       loadPostData () {
@@ -72,8 +83,22 @@
               _self.thisPost = res.data.data
             }
           })
+      },
+      generateTOC (markedDom) {
+        let domArr = markedDom.querySelectorAll('h1, h2, h3, h4, h5, h6')
+        if (domArr.length > 0) {
+          let tocDom = document.createElement('div')
+          tocDom.className = 'panel'
+          tocDom.id = 'content-toc'
+          let tocHtml = '<h3 class="panel-title">CHAPTERS</h3><ul class="panel-list">'
+          for (let i = 0; i < domArr.length; i++) {
+            tocHtml += '<li class="toc-' + domArr[i].tagName.toLowerCase() + '"><a href="#' + domArr[i].id + '">' + domArr[i].innerText + '</a></li>'
+          }
+          tocHtml += '</ul>'
+          tocDom.innerHTML = tocHtml
+          this.$parent.addToc(tocDom)
+        }
       }
-
     }
   }
 </script>
@@ -124,12 +149,13 @@
     margin-bottom: 0.85em;
     margin-top: 0;
   }
-  .content-body > h1:first-of-type{
+  .content-body h1:first-of-type{
     margin-top: 0;
   }
   .content-body ul, .content-body ol{
     margin-left: 30px;
     margin-bottom: 0.85em;
+    word-break: break-word;
   }
   .content-body ul li, .content-body ol li{
     list-style-type: disc;
@@ -177,8 +203,9 @@
     box-sizing: border-box;
     border:1px dashed #39c5bb;
     float: right;
-    margin-left: 15px;
-    margin-bottom: 15px;
+    margin-left: 30px;
+    margin-bottom: 30px;
     word-break: break-all;
   }
+
 </style>
