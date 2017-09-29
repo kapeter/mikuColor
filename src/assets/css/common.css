@@ -229,6 +229,9 @@ p{
   padding: 60px 0;
   text-align: center;
 }
+.error-box{
+  margin: 60px auto;
+}
 .animated {
   -webkit-animation-duration: .4s;
   animation-duration: .4s;

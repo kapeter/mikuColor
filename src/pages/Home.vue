@@ -301,7 +301,8 @@
     background: #fff;
     color: #39c5bb;
     border: 0;
-    padding: 8px 15px;
+    padding: 10px 20px;
+    font-size: 12px;
   }
   .pic-guide .btn:hover:after{
     width: 0;

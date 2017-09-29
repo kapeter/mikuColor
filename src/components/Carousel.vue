@@ -136,6 +136,7 @@
     width: 100%;
     height: 100%;
     position: relative;
+    background: #ddd;
   }
   .swiper-button-prev,.swiper-button-next{
     position: absolute;
