@@ -19,6 +19,9 @@
         pageIsLoaded: false
       }
     },
+    created () {
+      this.$store.dispatch('config')
+    },
     mounted () {
       this.$nextTick(() => {
         this.pageIsLoaded = true
