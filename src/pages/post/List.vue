@@ -126,6 +126,7 @@
           this.listTitle = '“' + this.params.keyword + '” 的搜索结果'
           return
         }
+
         this.params.keyword = ''
         if ('category' in this.$route.query) {
           let catId = parseInt(this.$route.query.category)

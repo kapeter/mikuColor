@@ -24,20 +24,22 @@
       </div>
       <div class="box-content">
         <div class="row">
-          <div class="col-4 article-link" v-for="item in postItems">
-            <div class="article-pic">
-              <img v-if="item.cover_img != null" :src="item.cover_img" :alt="item.title">
-              <router-link class="pic-guide" :to="apiUrl.post + '/' + item.id">
-                <span class="album-border"></span>
-                <button class="btn">READ MORE</button>
-              </router-link>
-            </div>
-            <div class="article-info">
-              <p class="article-category">{{  item.category != null ? item.category.name : '' }}</p>
-              <h3>
-                <router-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</router-link>
-              </h3>
-              <p class="article-dateline">{{ item.published_at.date.slice(0, 10) }}</p>
+          <div class="col-4" v-for="item in postItems">
+            <div class="article-link">
+              <div class="article-pic">
+                <img v-if="item.cover_img != null" :src="item.cover_img" :alt="item.title">
+                <router-link class="pic-guide" :to="apiUrl.post + '/' + item.id">
+                  <span class="album-border"></span>
+                  <button class="btn">READ MORE</button>
+                </router-link>
+              </div>
+              <div class="article-info">
+                <p class="article-category">{{  item.category != null ? item.category.name : '' }}</p>
+                <h3>
+                  <router-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</router-link>
+                </h3>
+                <p class="article-dateline">{{ item.published_at.date.slice(0, 10) }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -163,9 +165,10 @@
   }
   .article-link {
     display: block;
-    padding: 0px 15px;
+    padding: 15px;
     margin-bottom: 30px;
     position: relative;
+    transition: all 0.3s ease-in-out;
   }
   .article-link:after{
     content: '';
@@ -174,16 +177,15 @@
     height: 2px;
     background-color: #39c5bb;
     position: absolute;
-    left: 15px;
+    left: 0;
     bottom: 0;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.35s ease-in-out;
   }
   .article-link:hover{
-    color: #666;
-    letter-spacing: 1px;
+    box-shadow: 0 4px 20px 1px rgba(57,197,187,.5);
   }
   .article-link:hover:after{
-    width: calc(100% - 30px);
+    width: 100%;
   }
   .article-pic{
     width: 100%;
