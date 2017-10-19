@@ -88,4 +88,11 @@
   .top-active{
     bottom: 15px;
   }
+  @media screen and (max-width: 1200px) {
+    .header, .footer, .main{
+      width: 1200px;
+      padding-right: 15px !important;
+      padding-left: 15px !important;
+    }
+  }
 </style>
