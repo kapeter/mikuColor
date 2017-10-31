@@ -165,7 +165,6 @@
   }
   .article-link {
     display: block;
-    padding: 15px;
     margin-bottom: 30px;
     position: relative;
     transition: all 0.3s ease-in-out;
@@ -182,7 +181,8 @@
     transition: all 0.35s ease-in-out;
   }
   .article-link:hover{
-    box-shadow: 0 4px 20px 1px rgba(57,197,187,.5);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    transform: translate3d(0, -2px, 0);
   }
   .article-link:hover:after{
     width: 100%;
@@ -200,7 +200,7 @@
   }
   .article-info{
     width: 100%;
-    padding: 15px 0px;
+    padding: 15px;
     box-sizing: border-box;
     position: relative;
     text-align: center;

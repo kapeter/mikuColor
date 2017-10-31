@@ -205,6 +205,10 @@
   .list-box .article-img img{
     max-width: 100%;
     min-height: 100%;
+    transition: all 0.25s ease-out;
+  }
+  .list-box .article-img:hover img{
+    transform: scale(1.1);
   }
   .list-box .article-title{
     font-size: 18px;
