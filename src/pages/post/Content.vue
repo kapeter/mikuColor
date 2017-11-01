@@ -177,7 +177,7 @@
     background: #f4f4f4;
   }
   .content-body code{
-    font: 14px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
   }
   .content-footer{
     margin-top: 30px;

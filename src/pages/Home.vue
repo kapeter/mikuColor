@@ -3,7 +3,7 @@
     <div class="box">
       <Carousel>
         <CarouselItem v-for="item in bannerItems" :key="item.id">
-          <img :src="item.cover_img">
+          <img v-if="item.cover_img != 'null'"  :src="item.cover_img">
           <div class="banner-cover">
             <div class="banner-content">
               <span class="category">{{ item.category.name }}</span>
@@ -27,7 +27,7 @@
           <div class="col-4" v-for="item in postItems">
             <div class="article-link">
               <div class="article-pic">
-                <img v-if="item.cover_img != null" :src="item.cover_img" :alt="item.title">
+                <img v-if="item.cover_img != 'null'" :src="item.cover_img" :alt="item.title">
                 <router-link class="pic-guide" :to="apiUrl.post + '/' + item.id">
                   <span class="album-border"></span>
                   <button class="btn">READ MORE</button>
@@ -182,14 +182,13 @@
   }
   .article-link:hover{
     box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-    transform: translate3d(0, -2px, 0);
   }
   .article-link:hover:after{
     width: 100%;
   }
   .article-pic{
     width: 100%;
-    height: 208px;
+    height: 214px;
     overflow:hidden;
     position: relative;
     background: #ddd;

@@ -1,5 +1,5 @@
 const conf = {
-  baseUrl: 'http://vue.test.com/api/'
+  baseUrl: 'http://adm.kapeter.com/api/'
 }
 
 export default conf

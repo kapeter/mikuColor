@@ -7,14 +7,14 @@
     <div class="list-content" v-if="listLoaded">
       <ul v-if="lists.length > 0">
         <li class="list-box row" v-for="item in lists">
-          <div class="col-4">
+          <div class="col-4" v-show="item.cover_img != 'null'">
             <div class="article-img">
               <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">
-                <img v-if="item.cover_img != null" :src="item.cover_img" :alt="item.title">
+                <img :src="item.cover_img" :alt="item.title">
               </router-link>
             </div>
           </div>
-          <div class="col-8">
+          <div class="col-8" :class="{ 'col-8' : item.cover_img != 'null' }">
             <div class="article-text">
               <h3 class="article-title">
                 <router-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</router-link>
@@ -25,7 +25,6 @@
                   <span>栏目：{{  item.category != null ? item.category.name : '' }}</span>
                   <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
                 </div>
-                <router-link :to="apiUrl.list + '/' + item.id" class="btn pull-right">继续阅读</router-link>
               </div>
             </div>
           </div>
@@ -198,7 +197,7 @@
     margin-bottom: 30px;
   }
   .list-box .article-img{
-    height: 170px;
+    height: 138px;
     overflow:hidden;
     background: #ddd;
   }
@@ -223,10 +222,9 @@
     color: #999;
   }
   .list-box .article-desc{
-    padding: 15px 0;
+    margin: 15px 0;
     color: #999;
-    margin-bottom: 0;
-    height: 81px;
+    height: 68px;
     overflow:hidden;
     text-align: justify;
     font-size: 13px;
@@ -237,7 +235,6 @@
     padding: 0;
   }
   .list-box .article-info span{
-    line-height: 34px;
     margin-right: 15px;
   }
   .list-box .article-info .btn{
