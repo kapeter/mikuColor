@@ -13,7 +13,7 @@
         </form>
       </div>
       <div class="panel">
-        <h3 class="panel-title">CATEGORIES</h3>
+        <h3 class="panel-title">分类栏目</h3>
         <ul class="panel-list">
           <li v-for="item in $store.state.catLists">
             <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}</a>
@@ -22,7 +22,7 @@
         </ul>
       </div>
       <div class="panel">
-        <h3 class="panel-title">ARCHIVES</h3>
+        <h3 class="panel-title">文章归档</h3>
         <ul class="panel-list">
           <li><a href="#">2017年9月</a><span class="pull-right">(12)</span></li>
           <li><a href="#">2017年8月</a><span class="pull-right">(12)</span></li>

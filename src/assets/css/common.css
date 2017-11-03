@@ -210,15 +210,18 @@ p{
 }
 .panel{
   width:100%;
-  margin-bottom: 60px;
+  margin-bottom: 45px;
 }
 .panel-title{
   font-weight: normal;
   color: #39c5bb;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.25em;
   text-align: center;
   margin-bottom: 15px;
+  padding: 6px 0;
+  background-color: #39c5bb;
+  color: #fff;
 }
 .panel-list li{
   padding: 15px 0;

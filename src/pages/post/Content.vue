@@ -90,7 +90,7 @@
           let tocDom = document.createElement('div')
           tocDom.className = 'panel'
           tocDom.id = 'content-toc'
-          let tocHtml = '<h3 class="panel-title">CHAPTERS</h3><ul class="panel-list">'
+          let tocHtml = '<h3 class="panel-title">章节目录</h3><ul class="panel-list">'
           for (let i = 0; i < domArr.length; i++) {
             tocHtml += '<li class="toc-' + domArr[i].tagName.toLowerCase() + '"><a href="#' + domArr[i].id + '">' + domArr[i].innerText + '</a></li>'
           }

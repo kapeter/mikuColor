@@ -1,5 +1,5 @@
 const conf = {
-  baseUrl: 'http://adm.kapeter.com/api/'
+  baseUrl: 'http://api.kapeter.com/'
 }
 
 export default conf

@@ -35,7 +35,7 @@
     props: {
       height: {
         type: String,
-        default: '575px'
+        default: '550px'
       },
       defaultIndex: {
         type: Number,

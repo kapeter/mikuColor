@@ -20,7 +20,7 @@
     <!-- Recent Articles -->
     <div class="box">
       <div class="box-header">
-        <h3>Latest articles</h3>
+        <h3>近期文章<br><span>Lastest Articles</span></h3>
       </div>
       <div class="box-content">
         <div class="row">
@@ -110,11 +110,15 @@
   }
   .box-header > h3{
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: normal;
     color: #39c5bb;
-    text-transform: uppercase;
     letter-spacing: 0.25em;
+  }
+  .box-header > h3 > span{
+    font-size: 12px;
+    color: #999;
+    text-transform: uppercase;
   }
   .box-footer{
     text-align: center;
