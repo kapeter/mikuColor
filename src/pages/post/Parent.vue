@@ -8,7 +8,7 @@
     <div class="col-4 list-right" id="list-navbar">
       <div class="panel">
         <form class="search-box clearfix">
-          <input class="form-control col-9" type="text" name="keyword" placeholder="输入关键词……" v-model="keyword">
+          <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
           <a class="btn col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
         </form>
       </div>
@@ -38,7 +38,7 @@
   export default {
     data () {
       return {
-        keyword: ''
+        filter: ''
       }
     },
     created () {
@@ -51,9 +51,9 @@
         this.$router.push({ path: '/post', query: { category: id } })
       },
       searchPost () {
-        let temp = this.keyword
-        this.keyword = ''
-        this.$router.push({ path: '/post', query: { keyword: temp } })
+        let _temp = this.filter
+        this.filter = ''
+        this.$router.push({ path: '/post', query: { filter: _temp } })
       },
       addToc (tocDom) {
         document.getElementById('list-navbar').append(tocDom)

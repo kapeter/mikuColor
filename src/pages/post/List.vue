@@ -81,7 +81,7 @@
         params: {
           per_page: 5,
           category: 0,
-          keyword: '',
+          filter: '',
           page: 1
         },
         listTitle: '',
@@ -119,14 +119,14 @@
       },
       setParams () {
         let catItem = null
-        if ('keyword' in this.$route.query && this.$route.query.keyword !== '') {
+        if ('filter' in this.$route.query && this.$route.query.filter !== '') {
           this.params.category = 0
-          this.params.keyword = this.$route.query.keyword
-          this.listTitle = '“' + this.params.keyword + '” 的搜索结果'
+          this.params.filter = this.$route.query.filter
+          this.listTitle = '“' + this.params.filter + '” 的搜索结果'
           return
         }
 
-        this.params.keyword = ''
+        this.params.filter = ''
         if ('category' in this.$route.query) {
           let catId = parseInt(this.$route.query.category)
           for (let i = 0; i < this.$store.state.catLists.length; i++) {
@@ -138,6 +138,7 @@
         }
         if (catItem !== null) {
           this.params.category = catItem.id
+          this.params.page = 1
           this.listTitle = catItem.name
         } else {
           this.params.category = 0

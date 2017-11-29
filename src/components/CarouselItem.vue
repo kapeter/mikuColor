@@ -7,7 +7,6 @@
       webkitTransform: 'translateX('+ translate +')',
       transform: 'translateX('+ translate +'px)'
     }"
-
   >
     <slot></slot>
   </div>
