@@ -1,6 +1,6 @@
-# y
+# mikuColor
 
-> Nuxt.js project
+> A blog theme built with Nuxt.js
 
 ## Build Setup
 
@@ -19,4 +19,4 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+

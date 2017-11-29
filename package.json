@@ -1,7 +1,7 @@
 {
-  "name": "y",
-  "version": "1.0.0",
-  "description": "Nuxt.js project",
+  "name": "mikuColor",
+  "version": "0.2",
+  "description": "a Blog theme built with Nuxt.js",
   "author": "kapeter <hfxsky@hotmail.com>",
   "private": true,
   "scripts": {
