@@ -55,11 +55,11 @@ module.exports = {
     '~assets/css/index.css'
   ],
 
-  // 页面过渡效果
-  transition: {
-    name: 'page',
-    mode: 'out-in',
-    enterActiveClass: 'animated fadeInRight',
-    leaveActiveClass: 'animated fadeOutLeft'
-  }
+  // // 页面过渡效果
+  // transition: {
+  //   name: 'page',
+  //   mode: 'out-in',
+  //   enterActiveClass: 'animated fadeInRight',
+  //   leaveActiveClass: 'animated fadeOutLeft'
+  // }
 }

@@ -9,7 +9,7 @@
       <div id="marked-content" v-html="postContent"></div>
     </div>
     <div class="content-footer">
-      <p>本文章为作者原创，享有版权所有权，未经许可，严禁转载或修改。</p>
+      <p>目前网站尚未开放评论功能，如需联系，请发邮件至: hfxsky@hotmail.com</p>
     </div>
   </div>
 </template>
@@ -18,11 +18,11 @@
   import axios from '~/plugins/axios'
 
   export default {
-    transition: {
-      mode: 'out-in',
-      enterActiveClass: 'animated fadeInUp',
-      leaveActiveClass: 'animated fadeOutDown'
-    },
+    // transition: {
+    //   mode: 'out-in',
+    //   enterActiveClass: 'animated fadeInUp',
+    //   leaveActiveClass: 'animated fadeOutDown'
+    // },
     head () {
       return {
         title: this.thisPost.title + ' / Kapeter',

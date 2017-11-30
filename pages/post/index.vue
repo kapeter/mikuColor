@@ -22,13 +22,13 @@
               <p class="article-desc">{{ item.description }}</p>
               <div class="article-info clearfix">
                 <div class="pull-left">
+                  <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
                   <span v-if="item.category != null">
                     栏目：
                     <a href="javascript:;" @click="changeCategory(item.category.id)">
                       {{ item.category.name }}
                     </a>
                   </span>
-                  <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
                 </div>
               </div>
             </div>
@@ -77,11 +77,11 @@
   import axios from '~/plugins/axios'
 
   export default{
-    transition: {
-      mode: 'out-in',
-      enterActiveClass: 'animated fadeInUp',
-      leaveActiveClass: 'animated fadeOutDown'
-    },
+    // transition: {
+    //   mode: 'out-in',
+    //   enterActiveClass: 'animated fadeInUp',
+    //   leaveActiveClass: 'animated fadeOutDown'
+    // },
     head () {
       return {
         title: this.listTitle + ' / Kapeter',
@@ -163,8 +163,6 @@
       },
       setParams () {
         let catItem = null
-        this.params.filter = ''
-        this.params.category = 0
         if ('filter' in this.$route.query && this.$route.query.filter !== '') {
           this.params.category = 0
           this.params.filter = this.$route.query.filter
@@ -181,14 +179,21 @@
               break
             }
           }
+          if (catItem !== null) {
+            if (this.params.category !== catItem.id) {
+              this.params.page = 1
+            }
+            this.params.category = catItem.id
+            this.listTitle = catItem.name
+          } else {
+            this.params.category = 0
+            this.listTitle = '所有文章'
+          }
+          return
         }
-        if (catItem !== null) {
-          this.params.category = catItem.id
-          this.listTitle = catItem.name
-        } else {
-          this.params.category = 0
-          this.listTitle = '所有文章'
-        }
+
+        this.params.category = 0
+        this.params.filter = ''
       },
       setPageList () {
         this.pages = []
