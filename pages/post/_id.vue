@@ -193,6 +193,10 @@
   .content-body code{
     font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
   }
+  .content-body img{
+    max-width: 100%;
+    margin-bottom: .85em;
+  }
   .content-footer{
     margin-top: 30px;
   }
