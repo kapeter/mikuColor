@@ -123,6 +123,7 @@
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 30px;
+    letter-spacing: 1px;
   }
   .content-info{
     color: #999;

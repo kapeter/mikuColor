@@ -241,6 +241,7 @@
     font-size: 24px;
     color: #39c5bb;
     margin-bottom: 10px;
+    letter-spacing: 1px;
   }
   .list-sub-title{
     font-size: 12px;
@@ -289,6 +290,7 @@
     overflow:hidden;
     text-align: justify;
     font-size: 13px;
+    line-height: 1.75;
   }
   .list-box .article-info{
     color: #999;

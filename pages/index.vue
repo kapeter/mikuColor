@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="box-footer">
-        <nuxt-link to="/post" class="btn more-btn">READ MORE</nuxt-link>
+        <nuxt-link to="/post" class="btn btn-primary more-btn">READ MORE</nuxt-link>
       </div>
     </div>
     <!-- END Recent Articles -->
@@ -88,32 +88,6 @@
 </script>
 
 <style>
-  .box {
-    width: 100%;
-    margin-bottom: 75px;
-  }
-  .box-header{
-    width: 100%;
-    position: relative;
-    margin-bottom: 45px;
-    text-align: center;
-  }
-  .box-header > h3{
-    display: inline-block;
-    font-size: 18px;
-    font-weight: normal;
-    color: #39c5bb;
-    letter-spacing: 0.25em;
-  }
-  .box-header > h3 > span{
-    font-size: 12px;
-    color: #999;
-    text-transform: uppercase;
-  }
-  .box-footer{
-    text-align: center;
-    margin-top: 30px;
-  }
   .swiper-slide{
     background: #ddd;
   }

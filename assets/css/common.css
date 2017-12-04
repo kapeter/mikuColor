@@ -45,14 +45,27 @@
 
 ::-webkit-scrollbar
 {
-    width: 4px;
-    height: 4px;
-    background-color: rgba(0,0,0,0.15);
+  width: 4px;
+  height: 4px;
+  background-color: rgba(0,0,0,0.15);
 }
 
 ::-webkit-scrollbar-thumb
 {
-    background-color: #999;
+  background-color: #999;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: #999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: #999;
+}
+input:-ms-input-placeholder{
+  color: #999;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
+  color: #999;
 }
 
 * {
@@ -62,7 +75,6 @@
 html,body {
 	width: 100%;
   font: 14px/1.42857143 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
-  letter-spacing: 1px;
   color: #666;
 }
 ul,li,ol {
@@ -151,13 +163,22 @@ p{
   position: absolute;
   left: 0;
   top: 0;
-  background: #39c5bb;
   z-index: -1;
   transition: all 0.3s;
 }
-.btn:hover{
+.btn-primary:after{
+  background: #39c5bb;
+}
+.btn-default:after{
+  background: #ddd;
+}
+.btn-primary:hover{
   color: #fff;
   border:1px solid #39c5bb;
+}
+.btn-default:hover{
+  color: #666;
+  border:1px solid #ddd;
 }
 .btn:hover:after{
   width: 100%;
@@ -180,11 +201,18 @@ p{
 .push-30{
   margin-bottom: 30px;
 }
+.push-30-t{
+  margin-top: 30px;
+}
 .content-padding{
   padding: 30px 0;
 }
+.form-group{
+  margin-bottom: 15px;
+}
 .form-control{
     display: block;
+    box-sizing: border-box;
     height: 34px;
     padding: 6px 12px;
     font-size: 14px;
@@ -198,9 +226,12 @@ p{
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+textarea.form-control{
+  height: auto;
+}
 .btn:focus, .form-control:focus {
-    border-color: #39c5bb;
-    outline: 0;
+  border-color: #39c5bb;
+  outline: 0;
 }
 .pull-right{
   float: right;
@@ -355,4 +386,31 @@ p{
 }
 .page-enter, .page-leave-active {
   opacity: 0;
+}
+
+.box {
+  width: 100%;
+  margin-bottom: 75px;
+}
+.box-header{
+  width: 100%;
+  position: relative;
+  margin-bottom: 45px;
+  text-align: center;
+}
+.box-header > h3{
+  display: inline-block;
+  font-size: 18px;
+  font-weight: normal;
+  color: #39c5bb;
+  letter-spacing: 0.25em;
+}
+.box-header > h3 > span{
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+}
+.box-footer{
+  text-align: center;
+  margin-top: 30px;
 }

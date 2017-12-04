@@ -7,7 +7,7 @@
       <div class="panel">
         <form class="search-box clearfix">
           <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
-          <a class="btn col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
+          <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
         </form>
       </div>
       <div class="panel">

@@ -1,16 +1,16 @@
 module.exports = {
   env: {
-    apiUrl: 'http://api.test.com/'
+    apiUrl: 'http://api.myapp.com/'
   },
   /*
   ** Headers of the page
   */
   head: {
-    title: 'Kapeter',
+    title: 'My Title',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'I am Kapeter, a front-end engineer.' }
+      { hid: 'description', name: 'description', content: 'My Description' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
