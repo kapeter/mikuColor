@@ -7,19 +7,19 @@
       <div class="box-content">
         <form class="mail-form" v-if="mailState == '0'">
           <div class="form-group">
-            <input type="text" name="name" placeholder="发件人" class="form-control" v-model="name.value" @blur="validate('name')">
+            <input type="text" name="name" placeholder="发件人 / Name" class="form-control" v-model="name.value" @blur="validate('name')">
             <div class="error-text" v-show="name.error != ''">{{ name.error }}</div>
           </div>
           <div class="form-group">
-            <input type="text" name="email" placeholder="邮箱地址" class="form-control" v-model="email.value" @blur="validate('email')">
+            <input type="text" name="email" placeholder="邮箱地址 / Address" class="form-control" v-model="email.value" @blur="validate('email')">
             <div class="error-text" v-show="email.error != ''">{{ email.error }}</div>
           </div>
           <div class="form-group">
-            <input type="text" name="subject" placeholder="邮件主题" class="form-control" v-model="subject.value" @blur="validate('subject')">
+            <input type="text" name="subject" placeholder="邮件主题 / Theme" class="form-control" v-model="subject.value" @blur="validate('subject')">
             <div class="error-text" v-show="subject.error != ''">{{ subject.error }}</div>
           </div>
           <div class="form-group">
-            <textarea class="form-control" rows="10" name="content" placeholder="邮件内容" v-model="content.value" @blur="validate('content')">
+            <textarea class="form-control" rows="10" name="content" placeholder="邮件内容 / Content" v-model="content.value" @blur="validate('content')">
             </textarea>
             <div class="error-text" v-show="content.error != ''">{{ content.error }}</div>
           </div>

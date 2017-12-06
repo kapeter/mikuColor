@@ -9,7 +9,7 @@
       <div id="marked-content" v-html="postContent"></div>
     </div>
     <div class="content-footer">
-      <p>目前网站尚未开放评论功能，如需联系，请发邮件至: hfxsky@hotmail.com</p>
+      <p>目前网站尚未开放评论功能，请通过邮件 <nuxt-link to="/contact">联系我</nuxt-link></p>
     </div>
   </div>
 </template>
@@ -200,6 +200,9 @@
   }
   .content-footer{
     margin-top: 30px;
+  }
+  .content-footer a{
+    text-decoration: underline;
   }
   .content-footer p{
     color: #999;
