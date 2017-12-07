@@ -5,7 +5,7 @@
         <h3>联系我<br><span>contact me</span></h3>
       </div>
       <div class="box-content">
-        <form class="mail-form" v-if="mailState == '0'">
+        <form class="mail-form" v-if="mailState.code == 0">
           <div class="form-group">
             <input type="text" name="name" placeholder="发件人 / Name" class="form-control" v-model="name.value" @blur="validate('name')">
             <div class="error-text" v-show="name.error != ''">{{ name.error }}</div>
@@ -28,11 +28,15 @@
             <a href="javascript:;" class="btn btn-default" @click="reset()">重置表单</a>
           </div>
         </form>
-        <div v-else-if="mailState == '10000'">
-          成功
+        <div v-else-if="mailState.code == 10000" class="text-center">
+          <img src="~assets/img/success.jpg" alt="Success">
+          <h1 class="success-color">Success!</h1>
+          <p>啦啦啦(～￣▽￣)～ 投递成功！我将尽快与你取得联系。</p>
         </div>
-        <div v-else>
-          异常状态
+        <div v-else class="text-center">
+          <img src="~assets/img/error.jpg" alt="Page Not Found">
+          <h1 class="error-color">Error Code : {{ mailState.code }}</h1>
+          <p>呜呜呜┭┮﹏┭┮ {{ mailState.message }}。</p>
         </div>
       </div>
     </div>
@@ -61,7 +65,10 @@
           value: '',
           error: ''
         },
-        mailState: '0' // 0为初始状态，10000为成功状态，其他为异常状态
+        mailState: {
+          code: 0, // 0为初始状态，10000为成功状态，其他为异常状态
+          message: ''
+        }
       }
     },
     methods: {
@@ -123,7 +130,7 @@
           axios.post('mail/send', data)
             .then(function (res) {
               if ('code' in res.data) {
-                _self.mailState = res.data.code
+                _self.mailState = res.data
               }
             })
         } else {

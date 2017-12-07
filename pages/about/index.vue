@@ -1,6 +1,7 @@
 <template>
   <div class="error-box text-center">
     <img src="~assets/img/doing.jpg" alt="Comming Soon">
+    <h1 class="comming-color">Comming Soon……</h1>
   </div>
 </template>
 

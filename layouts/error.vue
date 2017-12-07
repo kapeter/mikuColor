@@ -4,7 +4,7 @@
     <header class="header">
       <div class="container">
         <div class="logo">
-          <a href="/"><img src="~assets/img/logo-lg.png"></a>
+          <nuxt-link to="/" exact><img src="~assets/img/logo-lg.png"></nuxt-link>
         </div>
         <div class="slogan">I'm Kapeter, a front-end engineer.</div>
         <nav class="nav">
@@ -19,15 +19,18 @@
     <main class="main">
       <div class="container" id="content">
         <div class="error-box text-center">
-          <img src="~assets/img/404.png" alt="Page Not Found">
+          <img src="~assets/img/error.jpg" alt="Page Not Found">
+          <h1 class="error-color">404 - Page Not Found</h1>
+          <p>呜呜呜┭┮﹏┭┮ 你找的页面已经去了火星，点击<nuxt-link to="/" exact class="text-underline"> 返回首页 </nuxt-link></p>
         </div>
       </div>
     </main>
     <!-- Page Footer  -->
     <footer class="footer">
       <div class="container">
-        <ul class="society-list">
-          <li><a href="https://github.com/kapeter"><i class="iconfont">&#xe69f;</i></a></li>
+        <ul class="link-list clearfix">
+          <li><a href="https://www.github.com/kapeter">github</a></li>
+          <li><nuxt-link to="/contact">联系我</nuxt-link></li>
         </ul>
         <p class="copyright">&copy;{{ thisYear }} KAPETER.COM <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号</a></p>
       </div>
@@ -67,6 +70,9 @@ export default {
     width: 100%;
     text-align: center;
   }
+  .logo .nuxt-link-active:after {
+    display: none;
+  }
   .slogan{
     color: #666;
     font-size: 16px;
@@ -99,6 +105,7 @@ export default {
   }
   .nav > ul > li > a{
     display: inline-block;
+    letter-spacing: 1px;
   }
   .nuxt-link-active{
     color: #39c5bb;
@@ -156,24 +163,35 @@ export default {
     text-align: center;
     color: #999;
   }
-  .society-list{
+  .link-list{
     display: inline-block;
-  }
-  .society-list > li {
-    margin:0 15px;
-    float: left;
-    font-size: 32px;
-  }
-  .society-list > li > a {
     letter-spacing: 1px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .link-list > li{
+    float: left;
+    margin: 0px 5px;
+    text-align: center;
+  }
+  .link-list > li:after{
+    content: '/';
+    margin-left: 10px;
+  }
+  .link-list > li:last-child:after{
+    content: '';
   }
   .copyright{
     font-size: 12px;
+    letter-spacing: 1px;
   }
   .copyright a{
     color: #999;
   }
   .copyright a:hover{
     color: #39c5bb;
+  }
+  .link-list .nuxt-link-active:after {
+    display: none;
   }
 </style>

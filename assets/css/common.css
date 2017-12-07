@@ -414,3 +414,17 @@ textarea.form-control{
   text-align: center;
   margin-top: 30px;
 }
+
+.error-color{
+  color:#f4516c;
+}
+.comming-color{
+  color: #82aff9;
+}
+.success-color{
+  color: #39c5bb;
+}
+
+.text-underline{
+  text-decoration: underline;
+}
