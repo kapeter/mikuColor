@@ -47,6 +47,14 @@
   import axios from '~/plugins/axios'
 
   export default {
+    head () {
+      return {
+        title: '联系我 / Kapeter',
+        meta: [
+          { hid: 'description', name: 'description', content: 'I am Kapeter, a front-end engineer.' }
+        ]
+      }
+    },
     data () {
       return {
         name: {
