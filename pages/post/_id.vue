@@ -148,10 +148,10 @@
   }
   .content-body{
     line-height: 1.5;
-    font-size: 15px;
+    font-size: 14px;
   }
   .content-body p{
-    margin-bottom: .85em;
+    margin-bottom: 0.5em;
   }
   .content-body h1{
     font-weight: 600;
@@ -160,9 +160,8 @@
     font-size: 28px;
   }
   .content-body h2, .content-body h3, .content-body h4, .content-body h5, .content-body h6 {
-    font-weight: 400;
-    margin-bottom: 0.85em;
-    margin-top: 0;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
   }
   .content-body h1:first-of-type{
     margin-top: 0;
@@ -190,6 +189,16 @@
     overflow-x: auto;
     margin-bottom: 0.85em;
     background: #f4f4f4;
+  }
+  .content-body blockquote {
+    padding: 10px 15px;
+    overflow-x: auto;
+    margin-bottom: 0.85em;
+    background: #f4f4f4;
+    border-left:2px solid #39c5bb;
+  }
+  .content-body blockquote p:last-child{
+    margin-bottom: 0;
   }
   .content-body code{
     font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;

@@ -52,7 +52,8 @@
       }
     },
     mounted () {
-      this.isShow = document.body.scrollTop > 100
+      let sTop = document.documentElement.scrollTop || document.body.scrollTop
+      this.isShow = sTop > 100
       window.addEventListener('scroll', this.handleScroll)
     },
     methods: {
@@ -67,7 +68,8 @@
         }, 30)
       },
       handleScroll () {
-        this.isShow = document.body.scrollTop > 100
+        let sTop = document.documentElement.scrollTop || document.body.scrollTop
+        this.isShow = sTop > 100
         document.addEventListener('mousewheel', () => {
           clearInterval(this.timer)
         })
