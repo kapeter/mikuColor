@@ -75,13 +75,13 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
 html,body {
 	width: 100%;
   font: 14px/1.42857143 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
-  color: #666;
+  color: #5a6665;
 }
 ul,li,ol {
   list-style: none;
 }
 a {
-  color: #666;
+  color: #5a6665;
   text-decoration: none;
   transition: all .25s ease-out;
 }

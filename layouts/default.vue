@@ -174,10 +174,21 @@
 
   .footer{
     width: 100%;
-    padding-top: 15px;
+    padding-top: 30px;
     position: relative;
     text-align: center;
     color: #999;
+  }
+  .footer::before {
+    background-color: #eee;
+    content: "";
+    height: 2px;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: 30px;
   }
   .link-list{
     display: inline-block;

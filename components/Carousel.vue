@@ -35,7 +35,7 @@
     props: {
       height: {
         type: String,
-        default: '550px'
+        default: '575px'
       },
       defaultIndex: {
         type: Number,
@@ -47,7 +47,7 @@
       },
       interval: {
         type: Number,
-        default: 5000
+        default: 3000
       }
     },
     data () {
@@ -142,25 +142,27 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 80px;
-    line-height: 80px;
-    background: rgba(255,255,255,.85);
     z-index: 10;
-    text-align: center;
     cursor: pointer;
     transition: all 0.25s ease-out;
-    color: #39c5bb;
+    color: rgba(255,255,255,0.5);
+    font-size: 32px;
+    font-weight: normal;
   }
-  .swiper-button-prev:hover ,.swiper-button-next:hover{
+  .swiper-button-prev:hover,.swiper-button-next:hover{
     color: #fff;
-    background: rgba(57,197,187,0.85);
   }
   .swiper-button-prev{
-    left: 0;
+    left: -30px;
   }
   .swiper-button-next{
-    right: 0;
+    right: -30px;
+  }
+  .swiper-container:hover .swiper-button-prev{
+    left: 15px;
+  }
+  .swiper-container:hover .swiper-button-next{
+    right: 15px;
   }
   .button-disabled{
     opacity: .5;
@@ -170,22 +172,20 @@
   .swiper-pagination{
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 30px;
     width: 100%;
-    height: 5px;
-    display: flex;
+    height: 2px;
+    text-align: center;
   }
   .swiper-pagination-bullet{
+    display: inline-block;
+    margin:0 5px;
     position: relative;
-    flex: 1;
+    width: 50px;
     height: 100%;
-    background: rgba(0,0,0,.75);
+    background: rgba(255,255,255,.85);
     z-index: 10;
     cursor: pointer;
-    border-right: 1px solid #999;
-  }
-  .swiper-pagination-bullet:last-child{
-    border-right: 0;
   }
   .swiper-pagination-content{
     position: absolute;

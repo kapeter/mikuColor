@@ -3,7 +3,7 @@
     <div class="col-8">
       <nuxt-child/>
     </div>
-    <div class="col-4 list-right" id="list-navbar">
+    <div class="col-4 list-right">
       <div class="panel">
         <form class="search-box clearfix">
           <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
@@ -28,6 +28,7 @@
           <li><a href="#">2017年6月</a><span class="pull-right">(12)</span></li>
         </ul>
       </div>
+      <div id="toc" class="toc"></div>
     </div>
   </div>
 </template>
@@ -37,6 +38,8 @@
     middleware: 'category', // 引入文章目录
     data () {
       return {
+        left: 0,
+        top: 0,
         filter: ''
       }
     },
@@ -50,12 +53,42 @@
         this.filter = ''
       },
       addToc (tocDom) {
-        document.getElementById('list-navbar').append(tocDom)
+        let dom = document.getElementById('toc')
+        dom.append(tocDom)
+        this.left = this.getAbsLeft(dom)
+        this.top = this.getAbsTop(dom)
+        window.addEventListener('scroll', this.handleScroll)
       },
       deleteToc () {
-        if (document.getElementById('content-toc')) {
-          document.getElementById('list-navbar').removeChild(document.getElementById('content-toc'))
+        document.getElementById('toc').innerHTML = ''
+        window.removeEventListener('scroll', this.handleScroll)
+      },
+      handleScroll () {
+        let dom = document.getElementById('toc')
+        let winTop = document.documentElement.scrollTop || document.body.scrollTop
+        if (winTop >= this.top - 30) {
+          dom.style.position = 'fixed'
+          dom.style.left = this.left + 'px'
+          dom.style.top = '30px'
+        } else {
+          dom.style.position = 'static'
         }
+      },
+      getAbsTop (obj) {
+        let top = obj.offsetTop
+        while (obj.offsetParent != null) {
+          obj = obj.offsetParent
+          top += obj.offsetTop
+        }
+        return top
+      },
+      getAbsLeft (obj) {
+        let left = obj.offsetLeft
+        while (obj.offsetParent != null) {
+          obj = obj.offsetParent
+          left += obj.offsetLeft
+        }
+        return left
       }
     }
   }
@@ -95,5 +128,8 @@
   }
   .panel-list .toc-h6{
     padding-left: 75px;
+  }
+  .toc{
+    width: 335px;
   }
 </style>

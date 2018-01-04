@@ -96,22 +96,23 @@
   }
   .banner-cover{
     position: absolute;
-    left: 160px;
-    top: 52%;
+    left: 50%;
+    top: 50%;
     overflow:hidden;
-    width: 0px;
-    transition: all .4s ease-in-out .4s;
-  }
-  .swiper-slide-active .banner-cover{
-    width: 400px;
+    width: 500px;
+    margin-left: -250px;
+    height: 180px;
+    margin-top: -90px;
+    border: 2px solid #39c5bb;
+    padding: 5px;
+    box-sizing: border-box;
   }
   .banner-content{
-    width: 400px;
-    min-height: 175px;
-    background: rgba(255,255,255,0.85);
-    padding: 30px;
+    background: rgba(255,255,255,0.95);
+    padding: 30px 15px;
+    height: 100%;
     box-sizing: border-box;
-    border-left: 4px solid #39c5bb;
+    text-align: center;
   }
   .banner-content .category{
     display: inline-block;
@@ -125,6 +126,7 @@
   }
   .banner-content .dateline{
     color: #999;
+    font-size: 12px;
   }
   .more-btn{
     color: #999;
@@ -133,7 +135,7 @@
   }
   .article-link {
     display: block;
-    margin-bottom: 30px;
+    margin-bottom: 45px;
     position: relative;
     transition: all 0.3s ease-in-out;
   }
