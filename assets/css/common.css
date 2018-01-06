@@ -161,10 +161,12 @@ p{
   width: 0;
   height: 100%;
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -1px;
+  top: -1px;
   z-index: -1;
   transition: all 0.3s;
+  opacity: 0;
+  border: 1px solid #39c5bb;
 }
 .btn-primary:after{
   background: #39c5bb;
@@ -181,6 +183,7 @@ p{
   border:1px solid #ddd;
 }
 .btn:hover:after{
+  opacity: 1;
   width: 100%;
 }
 .text-center{

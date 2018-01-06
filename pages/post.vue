@@ -4,6 +4,7 @@
       <nuxt-child/>
     </div>
     <div class="col-4 list-right">
+      <Avatar></Avatar>
       <div class="panel">
         <form class="search-box clearfix">
           <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
@@ -19,23 +20,19 @@
           </li>
         </ul>
       </div>
-      <div class="panel">
-        <h3 class="panel-title">文章归档</h3>
-        <ul class="panel-list">
-          <li><a href="#">2017年9月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年8月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年7月</a><span class="pull-right">(12)</span></li>
-          <li><a href="#">2017年6月</a><span class="pull-right">(12)</span></li>
-        </ul>
-      </div>
       <div id="toc" class="toc"></div>
     </div>
   </div>
 </template>
 
 <script>
+  import Avatar from '~/components/Avatar.vue'
   export default {
     middleware: 'category', // 引入文章目录
+
+    components: {
+      Avatar
+    },
     data () {
       return {
         left: 0,

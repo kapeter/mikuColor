@@ -113,7 +113,7 @@
       }
     },
     async asyncData (context) {
-      let paraData = { per_page: 5, category: 0, filter: '', page: 1 }
+      let paraData = { per_page: 6, category: 0, filter: '', page: 1 }
       let title = '所有文章'
       // 处理参数
       if ('filter' in context.route.query && context.route.query.filter !== '') {

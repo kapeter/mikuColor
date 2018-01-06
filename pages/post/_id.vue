@@ -163,9 +163,6 @@
     margin-bottom: 0.5em;
     margin-top: 0.5em;
   }
-  .content-body h1:first-of-type{
-    margin-top: 0;
-  }
   .content-body ul, .content-body ol{
     margin-left: 30px;
     margin-bottom: 0.85em;

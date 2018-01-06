@@ -6,12 +6,13 @@
         <div class="logo">
           <nuxt-link to="/" exact><img src="~assets/img/logo-lg.png"></nuxt-link>
         </div>
-        <div class="slogan">I'm Kapeter, a front-end engineer.</div>
+        <div class="slogan">Always believe that something wonderful is about to happen.</div>
         <nav class="nav">
           <ul>
             <li><nuxt-link to="/" exact>首页</nuxt-link></li>
             <li><nuxt-link to="/post">文章</nuxt-link></li>
             <li><nuxt-link to="/about" exact>关于我</nuxt-link></li>
+            <li><nuxt-link to="/contact" exact>联系我</nuxt-link></li>
           </ul>
         </nav>
       </div>
@@ -24,10 +25,6 @@
     <!-- Page Footer  -->
     <footer class="footer">
       <div class="container">
-        <ul class="link-list clearfix">
-          <li><a href="https://www.github.com/kapeter">github</a></li>
-          <li><nuxt-link to="/contact">联系我</nuxt-link></li>
-        </ul>
         <p class="copyright">&copy;{{ thisYear }} KAPETER.COM <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号</a></p>
       </div>
     </footer>
@@ -90,9 +87,7 @@
     display: none;
   }
   .slogan{
-    color: #666;
-    font-size: 16px;
-    letter-spacing: 1px;
+    color: #5a6665;
     margin-top: 30px;
   }
   .nav{
