@@ -1,6 +1,6 @@
 {
   "name": "mikuColor",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "a Blog theme built with Nuxt.js",
   "author": "kapeter <hfxsky@hotmail.com>",
   "private": true,
@@ -15,12 +15,10 @@
   "dependencies": {
     "axios": "^0.17.1",
     "marked": "^0.3.6",
-    "nuxt": "^1.0.0-rc11"
+    "nuxt": "next"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.3.0",
     "eslint-config-standard": "^10.2.1",
