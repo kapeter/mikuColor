@@ -18,11 +18,6 @@
   import axios from '~/plugins/axios'
 
   export default {
-    // transition: {
-    //   mode: 'out-in',
-    //   enterActiveClass: 'animated fadeInUp',
-    //   leaveActiveClass: 'animated fadeOutDown'
-    // },
     head () {
       return {
         title: this.thisPost.title + ' / Kapeter',
@@ -41,15 +36,7 @@
         apiUrl: 'post',
         postId: 0,
         postLoaded: false,
-        thisPost: {
-          title: '这是一篇默认文章',
-          published_at: {
-            date: '2017-10-18 17:13:31.000000',
-            timezone: 'Asia/Shanghai',
-            timezone_type: 3
-          },
-          content: '<p>永远相信美好的事情即将发生</p>'
-        }
+        thisPost: {}
       }
     },
     computed: {

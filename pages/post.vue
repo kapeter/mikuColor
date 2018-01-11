@@ -3,22 +3,24 @@
     <div class="col-8">
       <nuxt-child/>
     </div>
-    <div class="col-4 list-right">
-      <Avatar></Avatar>
-      <div class="panel">
-        <form class="search-box clearfix">
-          <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
-          <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
-        </form>
-      </div>
-      <div class="panel">
-        <h3 class="panel-title">分类栏目</h3>
-        <ul class="panel-list">
-          <li v-for="item in $store.state.catLists">
-            <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}</a>
-            <span class="pull-right">({{ item.detail.count }})</span>
-          </li>
-        </ul>
+    <div class="col-4">
+      <div class="list-right">
+        <Avatar></Avatar>
+        <div class="panel">
+          <form class="search-box clearfix">
+            <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
+            <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
+          </form>
+        </div>
+        <div class="panel">
+          <h3 class="panel-title">分类栏目</h3>
+          <ul class="panel-list">
+            <li v-for="item in $store.state.catLists">
+              <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}</a>
+              <span class="pull-right">({{ item.detail.count }})</span>
+            </li>
+          </ul>
+        </div>
       </div>
       <div id="toc" class="toc"></div>
     </div>

@@ -66,22 +66,21 @@
         </ul>
       </div>
     </div>
-    <div v-else class="loading">
-      <img src="~assets/img/loading.gif">
-      <p>列表正在努力加载中……</p>
+    <div v-else>
+      <Loading text="列表正在努力加载中……"></Loading>
     </div>
   </div>
 </template>
 
 <script>
   import axios from '~/plugins/axios'
+  import Loading from '~/components/Loading.vue'
 
   export default{
-    // transition: {
-    //   mode: 'out-in',
-    //   enterActiveClass: 'animated fadeInUp',
-    //   leaveActiveClass: 'animated fadeOutDown'
-    // },
+    components: {
+      Loading
+    },
+
     head () {
       return {
         title: this.listTitle + ' / Kapeter',

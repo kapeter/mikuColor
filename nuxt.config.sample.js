@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    apiUrl: 'http://api.myapp.com/'
+    apiUrl: 'https://api.app.com/'
   },
   /*
   ** Headers of the page
@@ -24,6 +24,14 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    extractCSS: {
+      allChunks: true
+    },
+    postcss: {
+      plugins: {
+        'autoprefixer': {}
+      }
+    },
     /*
     ** Run ESLint on save
     */
@@ -39,20 +47,13 @@ module.exports = {
     },
 
     // 防止重复引入
-    vendor: ['axios'],
-
-    babel: {
-      "presets": [
-        ["env", { "modules": false }],
-        "stage-2"
-      ],
-      "plugins": ["transform-runtime"],
-    }
+    vendor: ['axios']
   },
 
   //引入全局css变量
   css: [
-    '~assets/css/index.css'
+    '~assets/css/normalize.css',
+    '~assets/css/common.css'
   ],
 
   // // 页面过渡效果

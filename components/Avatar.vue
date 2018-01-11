@@ -15,7 +15,7 @@
 <style>
 .about{
 	position: relative;
-	padding: 30px 45px;
+	padding: 30px;
 	margin-bottom: 45px;
 	text-align: center;
 	border: 1px solid #ddd;
