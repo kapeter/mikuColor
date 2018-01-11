@@ -21,8 +21,8 @@
             </li>
           </ul>
         </div>
+        <div id="toc" class="toc"></div>
       </div>
-      <div id="toc" class="toc"></div>
     </div>
   </div>
 </template>
