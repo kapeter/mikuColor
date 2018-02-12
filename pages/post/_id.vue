@@ -179,7 +179,8 @@
     overflow-x: auto;
     margin-bottom: 0.85em;
     background: #f4f4f4;
-    border-left:2px solid #39c5bb;
+    border: 1px solid #ddd;
+    border-left:3px solid #39c5bb;
   }
   .content-body blockquote p:last-child{
     margin-bottom: 0;
@@ -189,7 +190,6 @@
   }
   .content-body img{
     max-width: 100%;
-    margin-bottom: .85em;
   }
   .content-footer{
     margin-top: 30px;

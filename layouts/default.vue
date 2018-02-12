@@ -1,37 +1,42 @@
 <template>
   <div class="page-bg">
-    <!-- Page Header  -->
-    <header class="header">
-      <div class="container">
-        <div class="logo">
-          <nuxt-link to="/" exact><img src="~assets/img/logo-lg.png"></nuxt-link>
+    <div class="main-bg">
+      <!-- Page Header  -->
+      <header class="header">
+        <div class="container">
+          <div class="logo">
+            <nuxt-link to="/" exact><img src="~assets/img/logo-lg.png"></nuxt-link>
+          </div>
+          <div class="slogan">Always believe that something wonderful is about to happen.</div>
+          <nav class="nav">
+            <ul>
+              <li><nuxt-link to="/" exact>首页</nuxt-link></li>
+              <li><nuxt-link to="/post">文章</nuxt-link></li>
+              <li><nuxt-link to="/about" exact>关于我</nuxt-link></li>
+              <li><nuxt-link to="/contact" exact>联系我</nuxt-link></li>
+            </ul>
+          </nav>
         </div>
-        <div class="slogan">Always believe that something wonderful is about to happen.</div>
-        <nav class="nav">
-          <ul>
-            <li><nuxt-link to="/" exact>首页</nuxt-link></li>
-            <li><nuxt-link to="/post">文章</nuxt-link></li>
-            <li><nuxt-link to="/about" exact>关于我</nuxt-link></li>
-            <li><nuxt-link to="/contact" exact>联系我</nuxt-link></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    <main class="main">
-      <div class="container" id="content">
-          <nuxt/>
-      </div>
-    </main>
+      </header>
+      <main class="main">
+        <div class="container" id="content">
+            <nuxt/>
+        </div>
+      </main>
+
+    </div>
     <!-- Page Footer  -->
     <footer class="footer">
+      <canvas id="canvas"  class="canvas"></canvas>
       <div class="container">
-        <p class="copyright">&copy;{{ thisYear }} KAPETER.COM <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号</a></p>
+        <p class="copyright">&copy; 2014 - {{ thisYear }} KAPETER.COM  <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号</a></p>
       </div>
     </footer>
     <a href="javascript:;" class="go-top" @click="backToTop()" :class="{ 'top-active' : isShow }">
       <i class="iconfont">&#xe600;</i>
     </a>
   </div>
+
 </template>
 
 
@@ -52,6 +57,38 @@
       let sTop = document.documentElement.scrollTop || document.body.scrollTop
       this.isShow = sTop > 100
       window.addEventListener('scroll', this.handleScroll)
+
+      let canvas = document.getElementById('canvas')
+      let ctx = canvas.getContext('2d')
+      canvas.width = canvas.parentNode.offsetWidth
+      canvas.height = canvas.parentNode.offsetHeight
+
+      let boHeight = canvas.height / 2.5
+      let posHeight = canvas.height / 1.5
+
+      let step = 0
+
+      let lines = ['rgba(57,197,187,0.25)', 'rgba(102,204,255,0.25)', 'rgba(146,203,213,0.25)']
+      function loop () {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        step++
+        for (let j = lines.length - 1; j >= 0; j--) {
+          ctx.fillStyle = lines[j]
+          let angle = (step + j * 75) * Math.PI / 180
+          let deltaHeight = Math.sin(angle) * boHeight
+          let deltaHeightRight = Math.cos(angle) * boHeight
+          ctx.beginPath()
+          ctx.moveTo(0, posHeight + deltaHeight)
+          ctx.bezierCurveTo(canvas.width / 2, posHeight + deltaHeight - boHeight, canvas.width / 2, posHeight + deltaHeightRight - boHeight, canvas.width, posHeight + deltaHeightRight)
+          ctx.lineTo(canvas.width, canvas.height)
+          ctx.lineTo(0, canvas.height)
+          ctx.lineTo(0, posHeight + deltaHeight)
+          ctx.closePath()
+          ctx.fill()
+        }
+        window.requestAnimationFrame(loop)
+      }
+      loop()
     },
     methods: {
       backToTop () {
@@ -76,7 +113,10 @@
 </script>
 
 <style>
-  .header{
+  .main-bg{
+    min-height: calc(100vh - 64px);
+  }
+  .header .container{
     padding: 60px 0 30px;
   }
   .logo, .slogan{
@@ -135,6 +175,7 @@
   .main{
     position: relative;
     width: 100%;
+    min-height: calc(100% - 40px);
     overflow: hidden;
   }
   .go-top{
@@ -150,6 +191,8 @@
     border-radius: 30px;
     border:1px solid #ddd;
     transition: all 0.35s ease-in-out;
+    z-index: 10;
+    background: #fff;
   }
   .go-top:hover{
     background-color: #39c5bb;
@@ -169,10 +212,12 @@
 
   .footer{
     width: 100%;
-    padding-top: 30px;
+    height: 64px;
+    padding: 30px 0 15px;
+    box-sizing: border-box;
     position: relative;
     text-align: center;
-    color: #999;
+    color: #666;
   }
   .footer::before {
     background-color: #eee;
@@ -184,6 +229,12 @@
     right: 0;
     top: 0;
     width: 30px;
+  }
+  .canvas{
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:-1;
   }
   .link-list{
     display: inline-block;
@@ -206,9 +257,10 @@
   .copyright{
     font-size: 12px;
     letter-spacing: 1px;
+    margin-bottom: 0;
   }
   .copyright a{
-    color: #999;
+    color: #666;
   }
   .copyright a:hover{
     color: #39c5bb;

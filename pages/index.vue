@@ -128,10 +128,9 @@
     color: #999;
     font-size: 12px;
   }
-  .more-btn{
-    color: #999;
+  .box-footer .more-btn{
     border:1px solid #C4C4C4;
-    padding: 8px 25px;
+    padding: 8px 30px;
   }
   .article-link {
     display: block;

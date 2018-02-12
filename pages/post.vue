@@ -29,6 +29,7 @@
 
 <script>
   import Avatar from '~/components/Avatar.vue'
+
   export default {
     middleware: 'category', // 引入文章目录
 
