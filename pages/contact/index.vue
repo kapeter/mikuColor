@@ -157,11 +157,6 @@
   .mail-form input {
     width: 100%;
   }
-  .mail-form textarea {
-    width: 100%;
-    resize: none;
-    font: 14px/1.42857143 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
-  }
   .mail-form .btn{
     margin: 0px 10px;
   }

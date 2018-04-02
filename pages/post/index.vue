@@ -228,7 +228,9 @@
   }
 </script>
 
-<style>
+<style lang="less">
+  @import '~assets/less/variable.less';
+
   .list-header{
     width: 100%;
     padding: 20px;
@@ -238,13 +240,13 @@
   }
   .list-title{
     font-size: 24px;
-    color: #39c5bb;
+    color: @main-color;
     margin-bottom: 10px;
     letter-spacing: 1px;
   }
   .list-sub-title{
     font-size: 12px;
-    color: #999;
+    color: @text-sub-color;
     margin-bottom: 0;
   }
   .list-content{
@@ -308,34 +310,36 @@
   }
   .pagination{
     display: inline-block;
-  }
-  .pagination li{
-    float: left;
-    margin: 0 5px;
-    font-size: 14px;
-    font-weight: 600;
-  }
-  .pagination li a{
-    display: inline-block;
-    padding: 6px;
-  }
-  .pagination li a:hover{
-    color: #39c5bb;
-  }
-  .pagination .iconfont{
-    font-weight: 400;
-  }
-  .pagination .active{
-    border-bottom: 2px solid #39c5bb;
-  }
-  .pagination .disabled a{
-    color: #c9c9c9;
-    cursor: not-allowed;
-  }
-  .pagination .disabled a:hover{
-    color: #c9c9c9;
-  }
-  .pagination .active a{
-    color: #39c5bb;
+    li{
+      float: left;
+      margin: 0 5px;
+      font-size: 14px;
+      font-weight: 600;
+      a{
+        display: inline-block;
+        padding: 6px;
+        &:hover{
+          color: @main-color;
+        }
+      }
+    }
+    .iconfont{
+      font-weight: 400;
+    }
+    .active{
+      border-bottom: 2px solid @main-color;
+      a{
+        color: @main-color;
+      }
+    }
+    .disabled{
+      a{
+        color: #c9c9c9;
+        cursor: not-allowed;
+        &:hover{
+          color: #c9c9c9;
+        }
+      }
+    }
   }
 </style>

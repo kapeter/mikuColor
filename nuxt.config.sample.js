@@ -11,7 +11,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'My Description' },
-      { hid: 'keyword', name: 'keyword', content: 'My Keyword' }
+      { hid: 'keywords', name: 'keywords', content: 'My KeyWords' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

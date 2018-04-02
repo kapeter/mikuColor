@@ -1,6 +1,5 @@
 <template>
   <div class="swiper-container"
-    :style="{ height: height }"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave"
   >
@@ -13,7 +12,7 @@
     <div class="swiper-button-next" @click="next()">
       <i class="iconfont">&#xe603;</i>
     </div>
-    <ul class="swiper-pagination">
+<!--     <ul class="swiper-pagination">
       <li class="swiper-pagination-bullet"
         v-for="(item, index) in items"
         :class="{ 'swiper-pagination-active': index === activeIndex }"
@@ -26,17 +25,13 @@
           }">
         </span>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
 <script>
   export default{
     props: {
-      height: {
-        type: String,
-        default: '575px'
-      },
       defaultIndex: {
         type: Number,
         default: 0
@@ -127,9 +122,15 @@
   }
 </script>
 
-<style>
+<style lang="less">
+  @import '~assets/less/variable.less';
+
   .swiper-container{
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 20%);
+    height: 72vh;
     overflow: hidden;
   }
   .swiper-wrapper{
@@ -194,7 +195,7 @@
     display: block;
     width: 0;
     height: 100%;
-    background: #39c5bb;
+    background: @main-color;
     z-index: 11;
     transition-timing-function: linear;
     opacity: 0;

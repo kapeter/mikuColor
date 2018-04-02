@@ -15,6 +15,7 @@
 </template>
 
 <script>
+  import marked from 'marked'
   import axios from '~/plugins/axios'
 
   export default {
@@ -44,7 +45,6 @@
         return this.thisPost.published_at.date.slice(0, 10)
       },
       postContent () {
-        const marked = require('marked')
         marked.setOptions({
           renderer: new marked.Renderer(),
           gfm: true,
@@ -105,7 +105,9 @@
 </script>
 
 
-<style>
+<style lang="less">
+  @import '~assets/less/variable.less';
+
   .content-title{
     margin-top: 0;
     margin-bottom: 15px;
@@ -116,111 +118,92 @@
     color: #999;
     font-size: 14px;
     margin-bottom: 15px;
-  }
-  .content-info span{
-    margin-right: 15px;
+    span{
+      margin-right: 15px;
+    }
   }
   .content-desc{
     padding: 15px;
     border: 1px dashed #ddd;
   }
-  .content-body{
-    padding: 15px 0;
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-  }
-  .fade-enter, .fade-leave-to {
-    opacity: 0
-  }
+
   .content-body{
     line-height: 1.5;
     font-size: 14px;
-  }
-  .content-body p{
-    margin-bottom: 0.5em;
-  }
-  .content-body h1{
-    font-weight: 600;
-    margin-top: 0.85em;
-    margin-bottom: 0.85em;
-    font-size: 28px;
-  }
-  .content-body h2, .content-body h3, .content-body h4, .content-body h5, .content-body h6 {
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
-  }
-  .content-body ul, .content-body ol{
-    margin-left: 30px;
-    margin-bottom: 0.85em;
-    word-break: break-word;
-  }
-  .content-body ul li, .content-body ol li{
-    list-style-type: disc;
-    display: list-item;
-    text-align: -webkit-match-parent;
-  }
-  .content-body a{
-    color: #39c5bb;
-  }
-  .content-body a:hover{
-    color: #39c5bb;
-    text-decoration: underline;
-  }
-  .content-body pre {
-    border: 1px solid #ddd;
-    padding: 10px 15px;
-    overflow-x: auto;
-    margin-bottom: 0.85em;
-    background: #f4f4f4;
-  }
-  .content-body blockquote {
-    padding: 10px 15px;
-    overflow-x: auto;
-    margin-bottom: 0.85em;
-    background: #f4f4f4;
-    border: 1px solid #ddd;
-    border-left:3px solid #39c5bb;
-  }
-  .content-body blockquote p:last-child{
-    margin-bottom: 0;
-  }
-  .content-body code{
-    font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
-  }
-  .content-body img{
-    max-width: 100%;
+    padding: 15px 0;
+    h1{
+      margin-top: 0.85em;
+      margin-bottom: 0.85em;
+      font-size: 28px;
+      border-left: 3px solid @main-color;
+      padding-left: 15px;
+      line-height: 1;
+    }
+    h2, h3, h4, h5, h6{
+      margin-bottom: 0.5em;
+      margin-top: 0.5em;
+    }
+    ul, ol{
+      margin-left: 30px;
+      margin-bottom: 0.85em;
+      word-break: break-word;
+      li{
+        list-style-type: disc;
+        display: list-item;
+        text-align: -webkit-match-parent;
+      }
+    }
+    a{
+      color: @main-color;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    .temp{
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      overflow-x: auto;
+      margin-bottom: 0.85em;
+      background: #f4f4f4;
+    }
+    pre{
+      .temp;
+    }
+    blockquote{
+      .temp;
+      border-left:3px solid @main-color;
+      p{
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+    code{
+      font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    img{
+      max-width: 100%;
+    }
   }
   .content-footer{
     margin-top: 30px;
+    a{
+      text-decoration: underline;
+    }
+    p{
+      color: #999;
+      padding-left: 15px;
+      position: relative;
+      &:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 2px;
+        height: 100%;
+        background: @main-color;
+      }
+    }
   }
-  .content-footer a{
-    text-decoration: underline;
-  }
-  .content-footer p{
-    color: #999;
-    padding-left: 15px;
-    position: relative;
-  }
-  .content-footer p:before{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: block;
-    width: 2px;
-    height: 100%;
-    background: #39c5bb;
-  }
-  .content-toc{
-    width: 360px;
-    padding: 15px;
-    box-sizing: border-box;
-    border:1px dashed #39c5bb;
-    float: right;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    word-break: break-all;
-  }
-
 </style>

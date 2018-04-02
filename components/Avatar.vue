@@ -13,41 +13,45 @@
     </div>
 </template>
 
-<style>
-.about{
-	position: relative;
-	padding: 30px;
-	margin-bottom: 45px;
-	text-align: center;
-	border: 1px solid #ddd;
-}
-.about .avatar{
-	display: inline-block;
-	width: 120px;
-	height: 120px;
-	border-radius: 50%;
-}
-.about .info > h1{
-	color: #333;
-	font-size: 24px;
-}
-.about .info > p{
-	color: #999;
-	text-align: left;
-}
-.about .info > ul {
-	display: inline-block;
-  margin-top: 15px;
-}
-.about .info > ul li {
-  float: left;
-  margin: 0px 5px;
-}
-.about .info > ul > li > a{
-	font-size: 28px;
-	color: #999;
-}
-.about .info > ul > li > a:hover{
-	color: #39c5bb;
-}
+<style lang="less">
+  @import '~assets/less/variable.less';
+
+  .about{
+  	position: relative;
+  	padding: 30px;
+  	margin-bottom: 45px;
+  	text-align: center;
+  	border: 1px solid #ddd;
+    .avatar {
+      display: inline-block;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+    .info {
+      h1{
+        color: @text-color;
+        font-size: 24px;
+      }
+      p{
+        color: @text-sub-color;
+        text-align: left;
+      }
+      ul {
+        display: inline-block;
+        margin-top: 15px;
+        li{
+          float: left;
+          margin: 0px 5px;
+          a{
+            font-size: 28px;
+            color: @text-sub-color;
+            &:hover{
+              color: @main-color;
+            }
+          }
+        }
+      }
+    }
+  }
 </style>
