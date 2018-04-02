@@ -74,15 +74,15 @@
       }
     },
     mounted () {
-      this.$nextTick(() => {
-        let markedDom = document.getElementById('marked-content')
-        if (markedDom) {
-          this.generateTOC(markedDom)
-        }
-      })
+      // this.$nextTick(() => {
+      //   let markedDom = document.getElementById('marked-content')
+      //   if (markedDom) {
+      //     this.generateTOC(markedDom)
+      //   }
+      // })
     },
     beforeDestroy () {
-      this.$parent.deleteToc()
+      // this.$parent.deleteToc()
     },
     methods: {
       generateTOC (markedDom) {
@@ -109,12 +109,12 @@
   @import '~assets/less/variable.less';
 
   .content-title{
-    margin-top: 0;
-    margin-bottom: 15px;
     font-size: 30px;
     letter-spacing: 1px;
+    text-align: center;
   }
   .content-info{
+    text-align: center;
     color: #999;
     font-size: 14px;
     margin-bottom: 15px;
@@ -128,9 +128,9 @@
   }
 
   .content-body{
-    line-height: 1.5;
+    line-height: 1.75;
     font-size: 14px;
-    padding: 15px 0;
+    padding: 30px 0;
     h1{
       margin-top: 0.85em;
       margin-bottom: 0.85em;
@@ -162,7 +162,6 @@
     .temp{
       border: 1px solid #ddd;
       padding: 10px 15px;
-      overflow-x: auto;
       margin-bottom: 0.85em;
       background: #f4f4f4;
     }
@@ -186,7 +185,7 @@
     }
   }
   .content-footer{
-    margin-top: 30px;
+    margin-bottom: 60px;
     a{
       text-decoration: underline;
     }

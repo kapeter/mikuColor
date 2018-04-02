@@ -1,6 +1,11 @@
 <template>
   <section>
-    <Carousel>
+    <header class="header">
+      <div class="text-center">
+        <img src="~assets/img/slogan.png" alt="Always believe that something wonderful is about to happen.">
+      </div>
+    </header>
+    <Carousel class="banner">
       <CarouselItem v-for="item in bannerItems" :key="item.id">
         <img v-if="item.cover_img != 'null'"  :src="item.cover_img">
         <div class="banner-cover">
@@ -85,6 +90,12 @@
 <style lang="less">
   @import '~assets/less/variable.less';
 
+  .banner{
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 20%);
+    height: 72vh;
+  }
   .swiper-slide{
     background: #ddd;
     img {

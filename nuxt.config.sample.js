@@ -54,7 +54,7 @@ module.exports = {
   //引入全局css变量
   css: [
     '~assets/css/normalize.css',
-    '~assets/css/common.css'
+    '~assets/less/common.less'
   ],
 
   // // 页面过渡效果

@@ -12,7 +12,7 @@
     <div class="swiper-button-next" @click="next()">
       <i class="iconfont">&#xe603;</i>
     </div>
-<!--     <ul class="swiper-pagination">
+    <ul class="swiper-pagination">
       <li class="swiper-pagination-bullet"
         v-for="(item, index) in items"
         :class="{ 'swiper-pagination-active': index === activeIndex }"
@@ -25,7 +25,7 @@
           }">
         </span>
       </li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 
@@ -127,10 +127,6 @@
 
   .swiper-container{
     position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    width: calc(100% - 20%);
-    height: 72vh;
     overflow: hidden;
   }
   .swiper-wrapper{

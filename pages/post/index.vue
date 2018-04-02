@@ -2,7 +2,6 @@
   <div>
     <div class="list-header">
       <h3 class="list-title">{{ listTitle }}</h3>
-      <p class="list-sub-title">文章总数：{{ pagination.total }}</p>
     </div>
     <div class="list-content" v-if="listLoaded">
       <ul v-if="lists.length > 0">
@@ -35,7 +34,8 @@
           </div>
         </li>
       </ul>
-      <div class="text-center" v-else>
+      <div class="text-center content-padding" v-else>
+        <p><img src="~assets/img/error.jpg" alt="Page Not Found"></p>
         <p>没找到文章，要不换个姿势再试试</p>
       </div>
       <div class="list-footer">
@@ -232,48 +232,36 @@
   @import '~assets/less/variable.less';
 
   .list-header{
-    width: 100%;
-    padding: 20px;
-    border: 1px solid #ddd;
-    box-sizing: border-box;
+    padding: 30px;
     text-align: center;
   }
   .list-title{
-    font-size: 24px;
+    font-size: 28px;
     color: @main-color;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-  }
-  .list-sub-title{
-    font-size: 12px;
-    color: @text-sub-color;
-    margin-bottom: 0;
+    letter-spacing: 0.25rem;
   }
   .list-content{
-    padding: 30px 0;
-  }
-  .list-right{
-    padding-left: 60px;
+    padding: 30px 0 60px 0;
   }
   .list-box{
     position: relative;
     margin-bottom: 30px;
   }
   .list-box .article-img{
-    height: 138px;
+    height: 214px;
     overflow:hidden;
     background: #ddd;
   }
   .list-box .article-img img{
     max-width: 100%;
     min-height: 100%;
-    transition: all 0.25s ease-out;
+    .transition;
   }
   .list-box .article-img:hover img{
     transform: scale(1.1);
   }
   .list-box .article-title{
-    font-size: 18px;
+    font-size: 20px;
     font-weight: normal;
     overflow: hidden;
     white-space: nowrap;
@@ -281,16 +269,16 @@
   }
   .list-box .article-title span{
     float: right;
-    font-size: 14px;
+    font-size: 16px;
     color: #999;
   }
   .list-box .article-desc{
     margin: 15px 0;
     color: #999;
-    height: 68px;
+    height: 138px;
     overflow:hidden;
     text-align: justify;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.75;
   }
   .list-box .article-info{

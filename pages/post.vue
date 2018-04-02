@@ -1,46 +1,46 @@
 <template>
-  <div class="row content-padding">
-    <div class="col-8">
-      <nuxt-child/>
-    </div>
-    <div class="col-4">
-      <div class="list-right">
-        <Avatar></Avatar>
-        <div class="panel">
+  <section class="container">
+    <header class="header">
+      <div class="row">
+        <div class="col-8">
+          <ul class="category-list">
+            <li>
+              <a href="javascript:;" @click="changeCategory(0)">所有文章({{ total }})</a>
+            </li>
+            <li v-for="item in $store.state.catLists">
+              <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}({{ item.detail.count }})</a>
+            </li>
+          </ul>          
+        </div>
+        <div class="col-4">
           <form class="search-box clearfix">
             <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
             <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
-          </form>
+          </form>          
         </div>
-        <div class="panel">
-          <h3 class="panel-title">分类栏目</h3>
-          <ul class="panel-list">
-            <li v-for="item in $store.state.catLists">
-              <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}</a>
-              <span class="pull-right">({{ item.detail.count }})</span>
-            </li>
-          </ul>
-        </div>
-        <div id="toc" class="toc"></div>
       </div>
-    </div>
-  </div>
+    </header>
+    <nuxt-child/>   
+  </section>
+
 </template>
 
 <script>
-  import Avatar from '~/components/Avatar.vue'
-
   export default {
     middleware: 'category', // 引入文章目录
 
-    components: {
-      Avatar
-    },
     data () {
       return {
         left: 0,
         top: 0,
         filter: ''
+      }
+    },
+    computed: {
+      total () {
+        return this.$store.state.catLists.reduce((total, currentValue) => {
+          return total + currentValue.detail.count
+        }, 0)
       }
     },
     methods: {
@@ -94,9 +94,24 @@
   }
 </script>
 
-<style>
-  .list-right{
-    padding-left: 60px;
+<style lang="less">
+  .category-list{
+    padding-right: 60px;
+    line-height: 2;
+    li{
+      float: left;
+      margin-right: 15px;
+      font-size: 16px;
+      &:after{
+        content: "/";
+        padding-left: 15px;
+      }
+      &:last-child{
+        &:after{
+          content: "";
+        }
+      }
+    }
   }
   .toc-list{
     margin:15px 0 0;

@@ -77,7 +77,7 @@ p{
 }
 .container {
   position: relative;
-  width: 1200px;
+  width: 1024px;
   margin:0 auto;
   box-sizing: border-box;
 }
@@ -242,9 +242,6 @@ textarea.form-control{
   padding: 60px 0;
   text-align: center;
 }
-.error-box{
-  margin: 60px auto;
-}
 .animated {
   -webkit-animation-duration: .4s;
   animation-duration: .4s;
@@ -400,4 +397,17 @@ textarea.form-control{
 
 .success-color{
   color: @main-color;
+}
+
+.header{
+  padding: 45px 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .container{
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(100% - 20%);
+    min-height: 72vh;
+  }
 }
