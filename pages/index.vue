@@ -1,26 +1,34 @@
 <template>
   <section>
-    <header class="header">
-      <div class="text-center">
-        <img src="~assets/img/slogan.png" alt="Always believe that something wonderful is about to happen.">
-      </div>
-    </header>
-    <Carousel class="banner">
-      <CarouselItem v-for="item in bannerItems" :key="item.id">
-        <img v-if="item.cover_img != 'null'"  :src="item.cover_img">
-        <div class="banner-cover">
-          <div class="banner-content">
-            <span class="category">{{ item.category.name }}</span>
-            <h2 class="title">
-              <nuxt-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</nuxt-link>
-            </h2>
-            <span class="dateline">{{ item.published_at.date.slice(0, 10) }}</span>
-          </div>
+    <div class="first-screen">
+      <header class="header">
+        <div class="text-center">
+          <img src="~assets/img/slogan.png" alt="Always believe that something wonderful is about to happen." class="slogan" width="320">
         </div>
-      </CarouselItem>
-    </Carousel>
+      </header>
+      <Carousel class="banner">
+        <CarouselItem v-for="item in bannerItems" :key="item.id">
+          <img v-if="item.cover_img != 'null'"  :src="item.cover_img">
+          <div class="banner-cover">
+            <div class="banner-content">
+              <span class="category">{{ item.category.name }}</span>
+              <h2 class="title">
+                <nuxt-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</nuxt-link>
+              </h2>
+              <span class="dateline">{{ item.published_at.date.slice(0, 10) }}</span>
+            </div>
+          </div>
+        </CarouselItem>
+      </Carousel>
+      <div class="scroll">
+        <a href="javascript:void(0);" @click="scrollToNews()">
+          <p>Scroll</p>
+          <p><i class="iconfont">&#xe65b;</i></p>
+        </a>
+      </div>
+    </div>
     <!-- Recent Articles -->
-    <div class="container">
+    <div class="container" id="news">
       <div class="box">
         <div class="box-header">
           <h3>近期文章<br><span>Lastest Articles</span></h3>
@@ -30,7 +38,7 @@
             <div class="col-4" v-for="item in postItems">
               <nuxt-link class="article-link" :to="apiUrl.post + '/' + item.id">
                 <div class="article-pic">
-                  <img v-if="item.cover_img != 'null'" :src="item.cover_img" :alt="item.title">
+                  <img v-if="item.cover_img != 'null'" v-lazy="item.cover_img" :alt="item.title" width="322" height="180">
                 </div>
                 <div class="article-info">
                   <p class="article-category">{{  item.category != null ? item.category.name : '' }}</p>
@@ -55,8 +63,10 @@
   import axios from '~/plugins/axios'
   import Carousel from '~/components/Carousel'
   import CarouselItem from '~/components/CarouselItem'
+  import scrollAnimate from '~/components/mixins/scrollAnimate'
 
   export default {
+    mixins: [scrollAnimate],
     components: {
       Carousel,
       CarouselItem
@@ -83,18 +93,39 @@
         postItems: postRes.data.data,
         bannerItems: bannerRes.data.data
       }
+    },
+    mounted () {
+      window.addEventListener('scroll', () => {
+        this.stopScroll()
+      })
+    },
+    methods: {
+      scrollToNews () {
+        let oDom = document.getElementById('news')
+        if (oDom) {
+          this.scrollToGoal(oDom.offsetTop)
+        } else {
+          this.scrollToGoal(document.body.clientHeight + document.documentElement.clientHeight)
+        }
+      }
     }
   }
 </script>
 
 <style lang="less">
   @import '~assets/less/variable.less';
-
   .banner{
     margin-left: auto;
     margin-right: auto;
-    width: calc(100% - 20%);
-    height: 72vh;
+    width: calc(100% - 22%);
+    height: 68vh;
+    position: relative;
+  }
+  .slogan{
+    border: none;
+    height: auto;
+    vertical-align: top;
+    max-width: 100%;
   }
   .swiper-slide{
     background: #ddd;
@@ -136,13 +167,41 @@
       font-size: 12px;
     }
   }
-  .box-footer .more-btn{
-    border:1px solid #C4C4C4;
-    padding: 8px 30px;
+  .scroll{
+    width: 100%;
+    margin-bottom: 60px;
+    text-align: center;
+    letter-spacing: 1px;
+    a{
+      display: inline-block;
+      padding: 0 15px;
+      p{
+        margin-bottom: 0;
+        .iconfont{
+          display: inline-block;
+          font-size: 24px;
+          animation: scroll 2s infinite;
+        }
+      }
+      &:hover{
+        letter-spacing: 2px;
+      }
+    }
+  }
+  @keyframes scroll {
+    0% {
+      transform: translate3d(0, -5px, 0);
+    }
+    50% {
+      transform: translate3d(0, 5px, 0);
+    }
+    100% {
+      transform: translate3d(0, -5px, 0);
+    }
   }
   .article-link {
     display: block;
-    margin-bottom: 45px;
+    margin-bottom: 30px;
     position: relative;
     .transition;
   }
@@ -165,7 +224,7 @@
   }
   .article-pic{
     width: 100%;
-    height: 214px;
+    height: 180px;
     overflow:hidden;
     position: relative;
     background: #ddd;
@@ -217,6 +276,10 @@
         left: 100%;
       }
     }
+  }
+  .box-footer .more-btn{
+    border:1px solid #c4c4c4;
+    padding: 10px 45px;
   }
 </style>
 

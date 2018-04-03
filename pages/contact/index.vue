@@ -1,5 +1,5 @@
 <template>
-  <div class="push-30-t">
+  <div class="first-screen">
     <div class="box">
       <div class="box-header">
         <h3>联系我<br><span>contact me</span></h3>
@@ -159,6 +159,7 @@
   }
   .mail-form .btn{
     margin: 0px 10px;
+    padding: 10px 45px;
   }
   .error-text{
     color: #f4516c;

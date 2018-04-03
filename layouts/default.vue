@@ -6,7 +6,6 @@
     <!-- Page Footer  -->
     <footer class="footer">
       <p>Copyright &copy; 2014 - {{ thisYear }} KAPETER.COM</p>
-<!--       <p><a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action">浙ICP备14040866号</a></p> -->
     </footer>
     <a href="javascript:;" class="go-top" @click="backToTop()" :class="{ 'top-active' : isShow }">
       <i class="iconfont">&#xe600;</i>
@@ -63,7 +62,10 @@
 
 
 <script>
+  import scrollAnimate from '~/components/mixins/scrollAnimate'
+
   export default {
+    mixins: [scrollAnimate],
     computed: {
       thisYear () {
         return (new Date()).getFullYear()
@@ -72,7 +74,6 @@
     data () {
       return {
         isShow: false,
-        timer: null,
         menuIsOpened: false,
         currentTime: null
       }
@@ -80,7 +81,9 @@
     watch: {
       menuIsOpened (val) {
         if (val) {
-          document.body.style.overflow = 'hidden'
+          setTimeout(() => {
+            document.body.style.overflow = 'hidden'
+          }, 500)
         } else {
           document.body.style.overflow = 'auto'
         }
@@ -92,26 +95,16 @@
     mounted () {
       let sTop = document.documentElement.scrollTop || document.body.scrollTop
       this.isShow = sTop > 100
-      window.addEventListener('scroll', this.handleScroll)
+      window.addEventListener('scroll', () => {
+        let sTop = document.documentElement.scrollTop || document.body.scrollTop
+        this.isShow = sTop > 100
+        this.stopScroll()
+      })
       this.setClock()
     },
     methods: {
       backToTop () {
-        this.timer = setInterval(() => {
-          let oTop = document.documentElement.scrollTop || document.body.scrollTop
-          let oSpeed = Math.floor(oTop / 5)
-          document.documentElement.scrollTop = document.body.scrollTop = oTop - oSpeed
-          if (oTop === 0) {
-            clearInterval(this.timer)
-          }
-        }, 30)
-      },
-      handleScroll () {
-        let sTop = document.documentElement.scrollTop || document.body.scrollTop
-        this.isShow = sTop > 100
-        document.addEventListener('mousewheel', () => {
-          clearInterval(this.timer)
-        })
+        this.scrollToGoal(0)
       },
       setClock () {
         this.currentTime = new Date()
@@ -227,7 +220,8 @@
     bottom: 0;
     background: @main-color;
     z-index: 1000;
-    transform: translateX(100%);
+    transform: translate3d(100%,0,0);
+    opacity: 0.5;
     transition: all .8s cubic-bezier(.23,1,.32,1);
     .menu-close{
       display: block;
@@ -275,12 +269,12 @@
             }
             &:hover{
               color: #fff;
-              transform: translateX(30px);
+              transform: translate3d(30px,0,0);
             }
-          } 
+          }
           .nuxt-link-active{
             color: #fff;
-          }         
+          }
         }
       }
       .side-info{
@@ -315,7 +309,8 @@
     }
   }
   .menu-active{
-    transform: translateX(0%);
+    opacity: 1;
+    transform: translate3d(0%,0,0);
   }
 
   .clock{

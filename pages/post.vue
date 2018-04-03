@@ -1,26 +1,16 @@
 <template>
   <section class="container">
     <header class="header">
-      <div class="row">
-        <div class="col-8">
-          <ul class="category-list">
-            <li>
-              <a href="javascript:;" @click="changeCategory(0)">所有文章({{ total }})</a>
-            </li>
-            <li v-for="item in $store.state.catLists">
-              <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}({{ item.detail.count }})</a>
-            </li>
-          </ul>          
-        </div>
-        <div class="col-4">
-          <form class="search-box clearfix">
-            <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
-            <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
-          </form>          
-        </div>
-      </div>
+      <ul class="category-list clearfix">
+        <li :class="{active: currentCategory == 0 }">
+          <a href="javascript:;" @click="changeCategory(0)">所有文章({{ total }})</a>
+        </li>
+        <li v-for="item in $store.state.catLists" :class="{active: currentCategory == item.id }">
+          <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}({{ item.detail.count }})</a>
+        </li>
+      </ul>
     </header>
-    <nuxt-child/>   
+    <nuxt-child/>
   </section>
 
 </template>
@@ -31,9 +21,7 @@
 
     data () {
       return {
-        left: 0,
-        top: 0,
-        filter: ''
+        currentCategory: 0
       }
     },
     computed: {
@@ -43,65 +31,36 @@
         }, 0)
       }
     },
+    mounted () {
+      if ('category' in this.$route.query) {
+        this.currentCategory = parseInt(this.$route.query.category)
+      }
+    },
     methods: {
       changeCategory (id) {
+        this.currentCategory = id
         this.$router.push({ path: '/post', query: { category: id } })
-      },
-      searchPost () {
-        let _temp = this.filter
-        this.$router.push({ path: '/post', query: { filter: _temp } })
-        this.filter = ''
-      },
-      addToc (tocDom) {
-        let dom = document.getElementById('toc')
-        dom.append(tocDom)
-        this.left = this.getAbsLeft(dom)
-        this.top = this.getAbsTop(dom)
-        window.addEventListener('scroll', this.handleScroll)
-      },
-      deleteToc () {
-        document.getElementById('toc').innerHTML = ''
-        window.removeEventListener('scroll', this.handleScroll)
-      },
-      handleScroll () {
-        let dom = document.getElementById('toc')
-        let winTop = document.documentElement.scrollTop || document.body.scrollTop
-        if (winTop >= this.top - 30) {
-          dom.style.position = 'fixed'
-          dom.style.left = this.left + 'px'
-          dom.style.top = '30px'
-        } else {
-          dom.style.position = 'static'
-        }
-      },
-      getAbsTop (obj) {
-        let top = obj.offsetTop
-        while (obj.offsetParent != null) {
-          obj = obj.offsetParent
-          top += obj.offsetTop
-        }
-        return top
-      },
-      getAbsLeft (obj) {
-        let left = obj.offsetLeft
-        while (obj.offsetParent != null) {
-          obj = obj.offsetParent
-          left += obj.offsetLeft
-        }
-        return left
       }
     }
   }
 </script>
 
 <style lang="less">
+  @import '~assets/less/variable.less';
+
   .category-list{
-    padding-right: 60px;
     line-height: 2;
     li{
       float: left;
       margin-right: 15px;
-      font-size: 16px;
+      a{
+        position: relative;
+        color: #999;
+        font-size: 16px;
+        &:hover{
+          color: @main-color;
+        }
+      }
       &:after{
         content: "/";
         padding-left: 15px;
@@ -109,6 +68,21 @@
       &:last-child{
         &:after{
           content: "";
+        }
+      }
+    }
+    .active{
+      a{
+        color: @main-color;
+        &:after{
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          display: block;
+          width: 100%;
+          height: 1px;
+          background: @main-color;
         }
       }
     }

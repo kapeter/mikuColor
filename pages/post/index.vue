@@ -1,34 +1,36 @@
 <template>
   <div>
     <div class="list-header">
-      <h3 class="list-title">{{ listTitle }}</h3>
+      <h3 class="list-title pull-left">{{ listTitle }}</h3>
+      <div class="pull-right">
+        <form class="search-box clearfix">
+          <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
+          <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
+        </form>
+      </div>
     </div>
     <div class="list-content" v-if="listLoaded">
       <ul v-if="lists.length > 0">
-        <li class="list-box row" v-for="item in lists">
-          <div class="col-4" v-show="item.cover_img != 'null'">
-            <div class="article-img">
-              <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">
-                <img :src="item.cover_img" :alt="item.title">
-              </nuxt-link>
-            </div>
+        <li class="list-box clearfix" v-for="item in lists">
+          <div class="list-img" v-show="item.cover_img != 'null'">
+            <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">
+              <img :src="item.cover_img" :alt="item.title">
+            </nuxt-link>
           </div>
-          <div class="col-8" :class="{ 'col-8' : item.cover_img != 'null' }">
-            <div class="article-text">
-              <h3 class="article-title">
-                <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</nuxt-link>
-              </h3>
-              <p class="article-desc">{{ item.description }}</p>
-              <div class="article-info clearfix">
-                <div class="pull-left">
-                  <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
-                  <span v-if="item.category != null">
-                    栏目：
-                    <a href="javascript:;" @click="changeCategory(item.category.id)">
-                      {{ item.category.name }}
-                    </a>
-                  </span>
-                </div>
+          <div class="list-right">
+            <h3 class="article-title">
+              <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</nuxt-link>
+            </h3>
+            <p class="article-desc">{{ item.description }}</p>
+            <div class="article-info clearfix">
+              <div class="pull-left">
+                <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
+                <span v-if="item.category != null">
+                  栏目：
+                  <a href="javascript:;" @click="changeCategory(item.category.id)">
+                    {{ item.category.name }}
+                  </a>
+                </span>
               </div>
             </div>
           </div>
@@ -100,7 +102,8 @@
         listTitle: '',
         pagination: {},
         pages: [],
-        listLoaded: true
+        listLoaded: true,
+        filter: ''
       }
     },
     mounted () {
@@ -119,25 +122,27 @@
         paraData.category = 0
         paraData.filter = context.route.query.filter
         title = '“' + paraData.filter + '” 的搜索结果'
-      }
-      if ('category' in context.route.query) {
-        let catItem = null
-        let catId = parseInt(context.route.query.category)
-        let lists = context.store.state.catLists
-        for (let i = 0; i < lists.length; i++) {
-          if (catId === lists[i].id) {
-            catItem = lists[i]
-            break
+      } else {
+        if ('category' in context.route.query) {
+          let catItem = null
+          let catId = parseInt(context.route.query.category)
+          let lists = context.store.state.catLists
+          for (let i = 0; i < lists.length; i++) {
+            if (catId === lists[i].id) {
+              catItem = lists[i]
+              break
+            }
+          }
+          if (catItem !== null) {
+            paraData.category = catItem.id
+            title = catItem.name
+          } else {
+            paraData.category = 0
+            title = '所有文章'
           }
         }
-        if (catItem !== null) {
-          paraData.category = catItem.id
-          title = catItem.name
-        } else {
-          paraData.category = 0
-          title = '所有文章'
-        }
       }
+
       let listRes = await axios.get('post', { params: paraData })
 
       return {
@@ -159,6 +164,11 @@
             _self.setPageList()
             _self.listLoaded = true
           })
+      },
+      searchPost () {
+        let _temp = this.filter
+        this.$router.push({ path: '/post', query: { filter: _temp } })
+        this.filter = ''
       },
       setParams () {
         let catItem = null
@@ -232,13 +242,14 @@
   @import '~assets/less/variable.less';
 
   .list-header{
-    padding: 30px;
+    padding: 45px 0;
     text-align: center;
+    border-bottom: 1px solid #ddd;
   }
   .list-title{
     font-size: 28px;
     color: @main-color;
-    letter-spacing: 0.25rem;
+    letter-spacing: 0.1rem;
   }
   .list-content{
     padding: 30px 0 60px 0;
@@ -247,49 +258,53 @@
     position: relative;
     margin-bottom: 30px;
   }
-  .list-box .article-img{
-    height: 214px;
+  .list-box .list-img{
+    width: 320px;
+    height: 180px;
     overflow:hidden;
     background: #ddd;
+    float: left;
   }
-  .list-box .article-img img{
+  .list-box .list-img img{
     max-width: 100%;
-    min-height: 100%;
     .transition;
   }
-  .list-box .article-img:hover img{
+  .list-box .list-img:hover img{
     transform: scale(1.1);
   }
-  .list-box .article-title{
+  .list-right{
+    margin-left: 350px;
+  }
+  .list-right .article-title{
     font-size: 20px;
     font-weight: normal;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-  .list-box .article-title span{
+  .list-right .article-title span{
     float: right;
     font-size: 16px;
     color: #999;
   }
-  .list-box .article-desc{
+  .list-right .article-desc{
     margin: 15px 0;
     color: #999;
-    height: 138px;
+    height: 104px;
     overflow:hidden;
     text-align: justify;
     font-size: 15px;
-    line-height: 1.75;
+    line-height: 1.5;
   }
-  .list-box .article-info{
+  .list-right .article-info{
     color: #999;
     font-size: 13px;
     padding: 0;
   }
-  .list-box .article-info span{
+  .list-right .article-info span{
     margin-right: 15px;
   }
-  .list-box .article-info .btn{
+  .list-right .article-info .btn{
     font-size: 13px;
   }
   .list-footer{

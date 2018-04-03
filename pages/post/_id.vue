@@ -112,6 +112,7 @@
     font-size: 30px;
     letter-spacing: 1px;
     text-align: center;
+    margin-top: 45px;
   }
   .content-info{
     text-align: center;
@@ -162,6 +163,7 @@
     .temp{
       border: 1px solid #ddd;
       padding: 10px 15px;
+      overflow-x: auto;
       margin-bottom: 0.85em;
       background: #f4f4f4;
     }

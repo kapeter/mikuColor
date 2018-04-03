@@ -15,7 +15,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "marked": "^0.3.6",
-    "nuxt": "next"
+    "nuxt": "next",
+    "vue-lazyload": "^1.2.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
