@@ -130,7 +130,11 @@
   .swiper-slide{
     background: #ddd;
     img {
-      width: 100%;
+      position: absolute;
+      min-width: 100%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
     }
   }
   .banner-cover{

@@ -33,28 +33,30 @@
         <div class="side-info">
           <img src="~assets/img/logo-white.png" alt="KAPETER">
           <h1>Kapeter</h1>
-          <p>想要学设计，会点PHP的前端工程师。</p>
-          <p>热爱二次元，热爱摄影。</p>
+          <p>想要学设计，会点PHP的前端工程师；热爱二次元与摄影。</p>
           <ul class="clearfix">
             <li>
               <a href="https://github.com/kapeter" title="github" target="_blank">
-                <i class="iconfont">&#xeee2;</i>
+                <i class="iconfont">&#xe691;</i>
               </a>
             </li>
             <li>
               <a href="http://note.youdao.com/noteshare?id=c800efd52739529c54b5e3d86ddc47cd" title="有道云笔记" target="_blank">
-                <i class="iconfont">&#xe621;</i>
+                <i class="iconfont">&#xe65a;</i>
               </a>
             </li>
             <li>
-              <a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">浙ICP备14040866号</a>
+              <a href="https://tuchong.com/1669457/" title="图虫" target="_blank">
+                <i class="iconfont">&#xe665;</i>
+              </a>
             </li>
           </ul>
+          <p class="copyright"><a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">浙ICP备14040866号</a></p>
         </div>
       </div>
     </div>
     <div class="clock">
-      <p>{{ currentTime }}</p>
+      <p>「 {{ currentTime }} 」</p>
     </div>
   </div>
 
@@ -107,10 +109,15 @@
         this.scrollToGoal(0)
       },
       setClock () {
-        this.currentTime = new Date()
+        this.currentTime = this.parseDate()
         setInterval(() => {
-          this.currentTime = new Date()
+          this.currentTime = this.parseDate()
         }, 1000)
+      },
+      parseDate () {
+        let obj = new Date()
+
+        return obj.toJSON()
       }
     }
   }
@@ -263,7 +270,7 @@
         li{
           a{
             display: inline-block;
-            color: #00ffee;
+            color: @light-color;
             span{
               font-size: 2rem;
             }
@@ -280,11 +287,11 @@
       .side-info{
         padding-left: 8%;
         font-size: 1rem;
-        color: #00ffee;
+        color: @light-color;
         letter-spacing: .08rem;
-        padding-top: -2rem;
         h1{
           color: #fff;
+          text-transform: uppercase;
         }
         ul {
           display: inline-block;
@@ -295,13 +302,18 @@
               .iconfont{
                 font-size: 28px;
               }
-              color: #00ffee;
+              color: @light-color;
               &:hover{
                 color: #fff;
               }
             }
-            &:last-child {
-              margin-top: 15px;
+          }
+        }
+        .copyright{
+          a{
+            color: @light-color;
+            &:hover{
+              color: #fff;
             }
           }
         }
@@ -314,15 +326,15 @@
   }
 
   .clock{
-    width: 300px;
+    width: 350px;
+    text-align: center;
     letter-spacing: 0.25rem;
     color: @main-color;
     font-weight: bold;
     position: fixed;
-    left: 50px;
-    top: 60%;
+    left: -94px;
+    top: 50%;
     z-index: 999;
-    transform: rotate(-90deg);
-    transform-origin: 0 0;
+    transform: rotate(-90deg) translateY(-50%);
   }
 </style>
