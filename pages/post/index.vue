@@ -24,7 +24,7 @@
             <p class="article-desc">{{ item.description }}</p>
             <div class="article-info clearfix">
               <div class="pull-left">
-                <span>发布日期：{{ item.published_at.date.slice(0, 10) }}</span>
+                <span>发布日期：{{ item.published_at }}</span>
                 <span v-if="item.category != null">
                   栏目：
                   <a href="javascript:;" @click="changeCategory(item.category.id)">

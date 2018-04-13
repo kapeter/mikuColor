@@ -3,13 +3,14 @@
     <h1 class="content-title">{{ thisPost.title }}</h1>
     <div class="content-info">
       <span>栏目：{{  thisPost.category != null ? thisPost.category.name : '' }}</span>
-      <span>发布日期：{{ publishedTime }}</span>
+      <span>发布日期：{{ thisPost.published_at }}</span>
     </div>
     <div class="content-body">
       <div id="marked-content" v-html="postContent"></div>
     </div>
     <div class="content-footer">
-      <p>目前网站尚未开放评论功能，请通过邮件 <nuxt-link to="/contact">联系我</nuxt-link></p>
+      <!-- <p>目前网站尚未开放评论功能，请通过邮件 <nuxt-link to="/contact">联系我</nuxt-link></p> -->
+      <Comment model="post" :uid="thisPost.id"></Comment>
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@
 <script>
   import marked from 'marked'
   import axios from '~/plugins/axios'
+  import Comment from '~/components/Comment.vue'
 
   export default {
     head () {
@@ -27,6 +29,9 @@
           { hid: 'keyword', name: 'keyword', content: 'Kapeter' }
         ]
       }
+    },
+    components: {
+      Comment
     },
     validate ({ params }) {
       // Must be a number
@@ -41,9 +46,6 @@
       }
     },
     computed: {
-      publishedTime () {
-        return this.thisPost.published_at.date.slice(0, 10)
-      },
       postContent () {
         marked.setOptions({
           renderer: new marked.Renderer(),
@@ -188,23 +190,5 @@
   }
   .content-footer{
     margin-bottom: 60px;
-    a{
-      text-decoration: underline;
-    }
-    p{
-      color: #999;
-      padding-left: 15px;
-      position: relative;
-      &:before{
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        display: block;
-        width: 2px;
-        height: 100%;
-        background: @main-color;
-      }
-    }
   }
 </style>

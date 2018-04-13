@@ -15,7 +15,7 @@
               <h2 class="title">
                 <nuxt-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</nuxt-link>
               </h2>
-              <span class="dateline">{{ item.published_at.date.slice(0, 10) }}</span>
+              <span class="dateline">{{ item.published_at }}</span>
             </div>
           </div>
         </CarouselItem>
@@ -43,7 +43,7 @@
                 <div class="article-info">
                   <p class="article-category">{{  item.category != null ? item.category.name : '' }}</p>
                   <h3>{{ item.title }}</h3>
-                  <p class="article-dateline">{{ item.published_at.date.slice(0, 10) }}</p>
+                  <p class="article-dateline">{{ item.published_at }}</p>
                 </div>
               </nuxt-link>
             </div>
@@ -143,9 +143,7 @@
     top: 50%;
     overflow:hidden;
     width: 500px;
-    margin-left: -250px;
-    height: 180px;
-    margin-top: -90px;
+    transform: translate(-50%,-50%);
     border: 2px solid @main-color;
     padding: 5px;
     box-sizing: border-box;
