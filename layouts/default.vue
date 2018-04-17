@@ -271,6 +271,7 @@
           a{
             display: inline-block;
             color: @light-color;
+            white-space: nowrap;
             span{
               font-size: 2rem;
             }
@@ -336,5 +337,30 @@
     top: 50%;
     z-index: 999;
     transform: rotate(-90deg) translateY(-50%);
+  }
+
+
+  @media screen and (max-width: 640px) {
+    .footer{
+      position: relative;
+      background: transparent;
+    }
+    .go-top{
+      right: 15px;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+    }
+    .top-active{
+      bottom: 15px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .clock, .menu-icon{
+      display: none;
+    }
   }
 </style>

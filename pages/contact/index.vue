@@ -166,4 +166,11 @@
     font-size: 12px;
     margin-top: 5px;
   }
+  @media screen and (max-width: 640px) {
+    .mail-form{
+      width: 100%;
+      padding: 0 15px;
+      box-sizing: border-box;
+    }
+  }
 </style>

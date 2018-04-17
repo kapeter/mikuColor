@@ -418,11 +418,30 @@ textarea.form-control{
 }
 
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1024px) {
   .container{
     margin-left: auto;
     margin-right: auto;
     width: calc(100% - 20%);
     min-height: 72vh;
+  }
+}
+
+
+@media screen and (max-width: 640px) {
+  .container{
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+  .first-screen{
+    min-height: 90vh;
+  }
+  .col-4{
+    width: 100%;
+  }
+  .error-img{
+    width: 75%;
+    margin: 0 auto;
   }
 }

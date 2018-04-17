@@ -6,9 +6,9 @@
           <img src="~assets/img/slogan.png" alt="Always believe that something wonderful is about to happen." class="slogan" width="320">
         </div>
       </header>
-      <Carousel class="banner">
-        <CarouselItem v-for="item in bannerItems" :key="item.id">
-          <img v-if="item.cover_img != 'null'"  :src="item.cover_img">
+      <Carousel class="banner" v-lazy-container="{ selector: 'img' }">
+        <CarouselItem v-for="item in bannerItems" :key="item.id" >
+          <img v-lazy="item.cover_img" :alt="item.title" data-error="/big-img-error.jpg">
           <div class="banner-cover">
             <div class="banner-content">
               <span class="category">{{ item.category.name }}</span>
@@ -38,7 +38,7 @@
             <div class="col-4" v-for="item in postItems">
               <nuxt-link class="article-link" :to="apiUrl.post + '/' + item.id">
                 <div class="article-pic">
-                  <img v-if="item.cover_img != 'null'" v-lazy="item.cover_img" :alt="item.title" width="322" height="180">
+                  <img v-lazy="item.cover_img" :alt="item.title">
                 </div>
                 <div class="article-info">
                   <p class="article-category">{{  item.category != null ? item.category.name : '' }}</p>
@@ -95,6 +95,7 @@
       }
     },
     mounted () {
+      console.log(this.bannerItems)
       window.addEventListener('scroll', () => {
         this.stopScroll()
       })
@@ -226,7 +227,7 @@
   }
   .article-pic{
     width: 100%;
-    height: 180px;
+    height: 169px;
     overflow:hidden;
     position: relative;
     background: #ddd;
@@ -282,6 +283,36 @@
   .box-footer .more-btn{
     border:1px solid #c4c4c4;
     padding: 10px 45px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    .swiper-slide{
+      img {
+        min-height: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 640px) {
+    .banner{
+      width: 100%;
+      padding: 0 15px;
+      box-sizing: border-box;
+      margin-bottom: 45px;
+      .banner-cover{
+        width: 90%;
+      }
+    }
+    .scroll{
+      display: none;
+    }
+    .article-pic{
+      height: auto;
+      min-height: 180px;
+      img{
+        display: block;
+      }
+    }
   }
 </style>
 

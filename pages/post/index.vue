@@ -12,9 +12,9 @@
     <div class="list-content" v-if="listLoaded">
       <ul v-if="lists.length > 0">
         <li class="list-box clearfix" v-for="item in lists">
-          <div class="list-img" v-show="item.cover_img != 'null'">
+          <div class="list-img" v-if="item.cover_img != 'null'">
             <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">
-              <img :src="item.cover_img" :alt="item.title">
+              <img v-lazy="item.cover_img" :alt="item.title">
             </nuxt-link>
           </div>
           <div class="list-right">
@@ -37,35 +37,11 @@
         </li>
       </ul>
       <div class="text-center content-padding" v-else>
-        <p><img src="~assets/img/error.jpg" alt="Page Not Found"></p>
+        <p><img src="~assets/img/error.jpg" alt="Page Not Found" class="error-img"></p>
         <p>没找到文章，要不换个姿势再试试</p>
       </div>
-      <div class="list-footer">
-        <ul class="pagination" v-show="lists.length > 0">
-          <li :class="{ disabled: pagination.current_page === 1  }">
-            <a href="javascript:;" title="首页" @click="changePage(1)">
-              <i class="iconfont">&#xe605;</i>
-            </a>
-          </li>
-          <li :class="{ disabled: pagination.current_page === 1  }">
-            <a href="javascript:;" title="上一页" @click="changePage(pagination.current_page - 1)">
-              <i class="iconfont">&#xe602;</i>
-            </a>
-          </li>
-          <li v-for="num in showPageNum(pages)" :class="{ active: num == pagination.current_page }">
-            <a href="javascript:;" @click="changePage(num)">{{ num }}</a>
-          </li>
-          <li :class="{ disabled: pagination.current_page === pagination.total_pages  }">
-            <a href="javascript:;" title="下一页" @click="changePage(pagination.current_page + 1)">
-              <i class="iconfont">&#xe603;</i>
-            </a>
-          </li>
-          <li :class="{ disabled: pagination.current_page === pagination.total_pages  }">
-            <a href="javascript:;" title="下一页" @click="changePage(pagination.total_pages)">
-              <i class="iconfont">&#xe604;</i>
-            </a>
-          </li>
-        </ul>
+      <div class="list-footer" v-if="lists.length > 0">
+        <Pagination :pagination="pagination" v-on:change="changePage"></Pagination>
       </div>
     </div>
     <div v-else>
@@ -77,10 +53,12 @@
 <script>
   import axios from '~/plugins/axios'
   import Loading from '~/components/Loading.vue'
+  import Pagination from '~/components/Pagination.vue'
 
   export default{
     components: {
-      Loading
+      Loading,
+      Pagination
     },
 
     head () {
@@ -105,9 +83,6 @@
         listLoaded: true,
         filter: ''
       }
-    },
-    mounted () {
-      this.setPageList()
     },
     watch: {
       $route () {
@@ -161,7 +136,6 @@
           .then(function (res) {
             _self.lists = res.data.data
             _self.pagination = res.data.meta.pagination
-            _self.setPageList()
             _self.listLoaded = true
           })
       },
@@ -204,32 +178,9 @@
         this.params.category = 0
         this.params.filter = ''
       },
-      setPageList () {
-        this.pages = []
-        for (let i = 0; i < this.pagination.total_pages; i++) {
-          let x = i + 1
-          this.pages.splice(i, 1, x)
-        }
-      },
-      changePage (num) {
-        if (num < 1 || num > this.pagination.total_pages) {
-          return false
-        }
-        this.params.page = num
+      changePage ({ pageNum }) {
+        this.params.page = pageNum
         this.loadListData()
-      },
-      showPageNum (pages) {
-        let current = this.pagination.current_page
-        let total = this.pagination.total_pages
-        return pages.filter(function (page) {
-          if (current < 5) {
-            return page < 10
-          } else if (current > (total - 5)) {
-            return page > total - 9
-          } else {
-            return Math.abs(page - current) < 5
-          }
-        })
       },
       changeCategory (id) {
         this.$router.push({ path: '/post', query: { category: id } })
@@ -311,36 +262,34 @@
     margin-top: 60px;
     text-align: center;
   }
-  .pagination{
-    display: inline-block;
-    li{
-      float: left;
-      margin: 0 5px;
-      font-size: 14px;
-      font-weight: 600;
-      a{
-        display: inline-block;
-        padding: 6px;
-        &:hover{
-          color: @main-color;
+
+  @media screen and (max-width: 1024px) {
+
+  }
+
+  @media screen and (max-width: 640px) {
+    .list-box{
+      .list-img{
+        width: 100%;
+        float: none;
+        height: auto;
+        min-height: 180px;
+        img{
+          display: block;
         }
       }
-    }
-    .iconfont{
-      font-weight: 400;
-    }
-    .active{
-      border-bottom: 2px solid @main-color;
-      a{
-        color: @main-color;
-      }
-    }
-    .disabled{
-      a{
-        color: #c9c9c9;
-        cursor: not-allowed;
-        &:hover{
-          color: #c9c9c9;
+      .list-right{
+        width: 100%;
+        margin: 0;
+        .article-title{
+          white-space: normal;
+          text-align: justify;
+          padding-top: 15px;
+          font-size: 18px;
+        }
+        .article-desc{
+          height: auto;
+          font-size: 14px;
         }
       }
     }
