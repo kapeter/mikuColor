@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <header class="header">
+    <div class="page-header">
       <ul class="category-list clearfix">
         <li :class="{active: currentCategory == 0 }">
           <a href="javascript:;" @click="changeCategory(0)">所有文章({{ total }})</a>
@@ -9,7 +9,7 @@
           <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}({{ item.detail.count }})</a>
         </li>
       </ul>
-    </header>
+    </div>
     <nuxt-child/>
   </section>
 
@@ -53,6 +53,7 @@
     li{
       float: left;
       margin-right: 15px;
+      margin-bottom: 10px;
       a{
         position: relative;
         color: #999;
@@ -86,39 +87,5 @@
         }
       }
     }
-  }
-  .toc-list{
-    margin:15px 0 0;
-  }
-  .toc-list li{
-    list-style-type: none;
-    margin-bottom: 10px;
-  }
-  .toc-list li:last-child{
-    margin-bottom: 0;
-  }
-  .toc-list li a{
-    color: #666;
-  }
-  .toc-list li a:hover{
-    text-decoration: none;
-  }
-  .panel-list .toc-h2{
-    padding-left: 15px;
-  }
-  .panel-list.toc-h3{
-    padding-left: 30px;
-  }
-  .panel-list .toc-h4{
-    padding-left: 45px;
-  }
-  .panel-list .toc-h5{
-    padding-left: 60px;
-  }
-  .panel-list .toc-h6{
-    padding-left: 75px;
-  }
-  .toc{
-    width: 335px;
   }
 </style>

@@ -1,11 +1,11 @@
 <template>
   <section>
     <div class="first-screen">
-      <header class="header">
+      <div class="page-header">
         <div class="text-center">
           <img src="~assets/img/slogan.png" alt="Always believe that something wonderful is about to happen." class="slogan" width="320">
         </div>
-      </header>
+      </div>
       <Carousel class="banner" v-lazy-container="{ selector: 'img' }">
         <CarouselItem v-for="item in bannerItems" :key="item.id" >
           <img v-lazy="item.cover_img" :alt="item.title" data-error="/big-img-error.jpg">
@@ -298,7 +298,6 @@
       width: 100%;
       padding: 0 15px;
       box-sizing: border-box;
-      margin-bottom: 45px;
       .banner-cover{
         width: 90%;
       }

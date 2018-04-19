@@ -1,5 +1,13 @@
 <template>
   <div class="page-bg">
+    <header class="header">
+      <div class="logo">
+        <img src="~assets/img/logo-sm.png" alt="kapeter">
+      </div>
+      <a href="javascript:void(0)" class="menu pull-right" @click="menuIsOpened = true">
+        <i class="iconfont">&#xe652;</i>
+      </a>
+    </header>
     <main class="main">
       <nuxt/>
     </main>
@@ -31,8 +39,7 @@
           </ul>
         </nav>
         <div class="side-info">
-          <img src="~assets/img/logo-white.png" alt="KAPETER">
-          <h1>Kapeter</h1>
+          <h1>About Me</h1>
           <p>想要学设计，会点PHP的前端工程师；热爱二次元与摄影。</p>
           <ul class="clearfix">
             <li>
@@ -126,10 +133,32 @@
 <style scoped lang="less">
   @import '~assets/less/variable.less';
 
+  .header{
+    display: none;
+    position: fixed;
+    left: 0;
+    right:0;
+    top: 0;
+    padding: 0 15px;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid @border-color;
+    background: #fff;
+    z-index: 10;
+    .logo{
+      display: inline-block;
+      img{
+        vertical-align: middle;
+      }
+    }
+    .menu{
+      font-size: 2.5rem;
+    }
+  }
+
   .main{
     position: relative;
     width: 100%;
-    min-height: 100%;
     overflow: hidden;
   }
   .go-top{
@@ -292,7 +321,6 @@
         letter-spacing: .08rem;
         h1{
           color: #fff;
-          text-transform: uppercase;
         }
         ul {
           display: inline-block;
@@ -341,6 +369,9 @@
 
 
   @media screen and (max-width: 640px) {
+    .header{
+      display: block;
+    }
     .footer{
       position: relative;
       background: transparent;
@@ -355,6 +386,47 @@
     }
     .top-active{
       bottom: 15px;
+    }
+    .menu-content{
+      .menu-body{
+        display: block;
+        padding: 0 15px;
+        .side-nav{
+          font-size: 2.5rem;
+          padding: 60px 0;
+          li{
+            a{
+              span{
+                font-size: 1.5rem;
+              }
+            }
+          }
+
+        }
+        .side-info{
+          padding: 0;
+          img {
+            display: none;
+          }
+          h1{
+            font-size: 1.5rem;
+          }
+        }
+      }
+      .menu-close{
+        width: 30px;
+        height: 30px;
+        bottom: 45px;
+        left: 50%;
+        top: auto;
+        transform: translate(-50%, 0);
+        span{
+          width: 28px;
+        }
+      }
+    }
+    .main{
+      padding-top: 50px;
     }
   }
 
