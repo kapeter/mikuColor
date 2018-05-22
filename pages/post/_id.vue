@@ -9,7 +9,6 @@
       <div id="marked-content" v-html="postContent"></div>
     </div>
     <div class="content-footer">
-      <!-- <p>目前网站尚未开放评论功能，请通过邮件 <nuxt-link to="/contact">联系我</nuxt-link></p> -->
       <Comment model="post" :uid="thisPost.id"></Comment>
     </div>
   </div>
@@ -112,9 +111,7 @@
 
   .content-title{
     font-size: 30px;
-    letter-spacing: 1px;
     text-align: center;
-    margin-top: 45px;
   }
   .content-info{
     text-align: center;

@@ -48,7 +48,23 @@ module.exports = {
     },
 
     // 防止重复引入
-    vendor: ['axios']
+    vendor: [
+      'axios', 
+      'vue-lazyload'
+    ],
+
+    babel: {
+      "presets": [
+        ["env", { "modules": false }],
+        "stage-2"
+      ],
+      "plugins": ["transform-runtime"],
+    },
+
+    // vue插件
+    plugins: [
+      { src: '~/plugins/vue-lazyload', ssr: false }
+    ]
   },
 
   //引入全局css变量

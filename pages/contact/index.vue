@@ -27,15 +27,20 @@
             <a href="javascript:;" class="btn btn-primary" @click="submit()">提交邮件</a>
             <a href="javascript:;" class="btn btn-default" @click="reset()">重置表单</a>
           </div>
+          <div class="emoji">
+            <img src="~assets/img/look.png">
+          </div>
         </form>
-        <div v-else-if="mailState.code == 10000" class="text-center">
-          <img src="~assets/img/success.jpg" alt="Success">
-          <h1 class="success-color">Success!</h1>
-          <p>啦啦啦(～￣▽￣)～ 投递成功！我将尽快与你取得联系。</p>
+        <div v-else-if="mailState.code == 10000" class="text-center push-30-t">
+          <p>
+            <img src="~assets/img/success.png" alt="Success">
+          </p>
+          <p>啦啦啦(～￣▽￣)～ 邮件投递成功！</p>
         </div>
-        <div v-else class="text-center">
-          <img src="~assets/img/error.jpg" alt="Page Not Found">
-          <h1 class="error-color">Error Code : {{ mailState.code }}</h1>
+        <div v-else class="text-center push-30-t">
+          <p>
+            <img src="~assets/img/error.png" alt="Page Not Found">
+          </p>
           <p>呜呜呜┭┮﹏┭┮ {{ mailState.message }}。</p>
         </div>
       </div>
@@ -149,28 +154,32 @@
   }
 </script>
 
-<style>
+<style scoped lang="less">
   .mail-form {
     width: 480px;
     margin: 0 auto;
-  }
-  .mail-form input {
-    width: 100%;
-  }
-  .mail-form .btn{
-    margin: 0px 10px;
-    padding: 10px 45px;
-  }
-  .error-text{
-    color: #f4516c;
-    font-size: 12px;
-    margin-top: 5px;
+    position: relative;
+    input {
+      width: 100%;
+    }
+    .emoji{
+      position: absolute;
+      right: -108px;
+      bottom: 35px;
+    }
+    .btn{
+      margin: 0px 10px;
+      padding: 10px 45px;      
+    }
   }
   @media screen and (max-width: 640px) {
     .mail-form{
       width: 100%;
       padding: 0 15px;
       box-sizing: border-box;
+      .emoji{
+        display: none;
+      }
     }
   }
 </style>

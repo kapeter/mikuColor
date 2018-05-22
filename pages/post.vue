@@ -49,11 +49,10 @@
   @import '~assets/less/variable.less';
 
   .category-list{
-    line-height: 2;
+    line-height: 2.5;
     li{
       float: left;
       margin-right: 15px;
-      margin-bottom: 10px;
       a{
         position: relative;
         color: #999;

@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div class="list-header">
+    <div class="list-header clearfix">
       <h3 class="list-title pull-left">{{ listTitle }}</h3>
-      <div class="pull-right">
-        <form class="search-box clearfix">
-          <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
-          <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
-        </form>
-      </div>
+      <form class="search-box pull-right clearfix" v-if="searchVisible">
+        <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
+        <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
+      </form>
+      <a href="javascript:;" @click="searchVisible = !searchVisible" class="pull-right search-icon">
+        <i class="iconfont">&#xe61f;</i>
+      </a>
     </div>
     <div class="list-content" v-if="listLoaded">
       <ul v-if="lists.length > 0">
@@ -36,8 +37,8 @@
           </div>
         </li>
       </ul>
-      <div class="text-center content-padding" v-else>
-        <p><img src="~assets/img/error.jpg" alt="Page Not Found" class="error-img"></p>
+      <div class="text-center push-30-t" v-else>
+        <p><img src="~assets/img/error.png" alt="Page Not Found" class="error-img"></p>
         <p>没找到文章，要不换个姿势再试试</p>
       </div>
       <div class="list-footer" v-if="lists.length > 0">
@@ -81,7 +82,8 @@
         pagination: {},
         pages: [],
         listLoaded: true,
-        filter: ''
+        filter: '',
+        searchVisible: false
       }
     },
     watch: {
@@ -143,6 +145,7 @@
         let _temp = this.filter
         this.$router.push({ path: '/post', query: { filter: _temp } })
         this.filter = ''
+        this.handleSearchVisible()
       },
       setParams () {
         let catItem = null
@@ -150,33 +153,31 @@
           this.params.category = 0
           this.params.filter = this.$route.query.filter
           this.listTitle = '“' + this.params.filter + '” 的搜索结果'
-          return
-        }
-
-        if ('category' in this.$route.query) {
-          let catId = parseInt(this.$route.query.category)
-          let lists = this.$store.state.catLists
-          for (let i = 0; i < lists.length; i++) {
-            if (catId === lists[i].id) {
-              catItem = lists[i]
-              break
+        } else {
+          this.params.filter = ''
+          if ('category' in this.$route.query) {
+            let catId = parseInt(this.$route.query.category)
+            let lists = this.$store.state.catLists
+            for (let i = 0; i < lists.length; i++) {
+              if (catId === lists[i].id) {
+                catItem = lists[i]
+                break
+              }
             }
-          }
-          if (catItem !== null) {
-            if (this.params.category !== catItem.id) {
-              this.params.page = 1
+            if (catItem !== null) {
+              if (this.params.category !== catItem.id) {
+                this.params.page = 1
+              }
+              this.params.category = catItem.id
+              this.listTitle = catItem.name
+            } else {
+              this.params.category = 0
+              this.listTitle = '所有文章'
             }
-            this.params.category = catItem.id
-            this.listTitle = catItem.name
           } else {
             this.params.category = 0
-            this.listTitle = '所有文章'
           }
-          return
         }
-
-        this.params.category = 0
-        this.params.filter = ''
       },
       changePage ({ pageNum }) {
         this.params.page = pageNum
@@ -184,7 +185,15 @@
       },
       changeCategory (id) {
         this.$router.push({ path: '/post', query: { category: id } })
+      },
+      handleSearchVisible () {
+        let winW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+        this.searchVisible = winW > 640
       }
+    },
+
+    mounted () {
+      this.handleSearchVisible()
     }
   }
 </script>
@@ -193,15 +202,24 @@
   @import '~assets/less/variable.less';
 
   .list-header{
-    padding: 45px 0;
     text-align: center;
     border-bottom: 1px solid #ddd;
+    height: 45px;
+    line-height: 45px;
+    .list-title{
+      font-size: 28px;
+      color: @main-color;
+      letter-spacing: 0.1rem;
+    }    
+    .search-box{
+      margin-top: 5px;
+    }
+    .search-icon{
+      font-size: 24px;
+      display: none;
+    }
   }
-  .list-title{
-    font-size: 28px;
-    color: @main-color;
-    letter-spacing: 0.1rem;
-  }
+
   .list-content{
     padding: 30px 0 60px 0;
   }
@@ -268,14 +286,33 @@
   }
 
   @media screen and (max-width: 640px) {
+    .list-header {
+      position: relative;
+      .list-title{
+        font-size: 24px;
+      }
+      .search-box{
+        position: absolute;
+        left: 0;
+        bottom: -65px;
+        z-index: 10;
+        padding: 15px 0px;
+        background: #fff;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .search-icon{
+        display: block;
+      }
+    }
     .list-box{
       .list-img{
         width: 100%;
         float: none;
-        height: auto;
-        min-height: 180px;
         img{
           display: block;
+          width: 100%;
+          height: 180px;
         }
       }
       .list-right{

@@ -95,7 +95,6 @@
       }
     },
     mounted () {
-      console.log(this.bannerItems)
       window.addEventListener('scroll', () => {
         this.stopScroll()
       })
@@ -294,6 +293,9 @@
   }
 
   @media screen and (max-width: 640px) {
+    .slogan{
+      width: 75%;
+    }
     .banner{
       width: 100%;
       padding: 0 15px;
@@ -310,6 +312,8 @@
       min-height: 180px;
       img{
         display: block;
+        width: 100%;
+        height: 180px;
       }
     }
   }

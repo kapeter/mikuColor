@@ -30,6 +30,9 @@
         <span></span>
         <span></span>
       </a>
+      <div class="emoji">
+        <img src="~assets/img/kiss.png">
+      </div>
       <div class="menu-body" v-if="menuIsOpened">
         <nav class="side-nav">
           <ul>
@@ -142,7 +145,7 @@
     padding: 0 15px;
     height: 50px;
     line-height: 50px;
-    border-bottom: 1px solid @border-color;
+    box-shadow: 0px 0px 15px rgba(0,0,0,.1);
     background: #fff;
     z-index: 10;
     .logo{
@@ -283,6 +286,13 @@
         }
       }
     }
+    .emoji{
+
+      position: absolute;
+      left: 50px;
+      bottom:  50px;
+
+    }
     .menu-body{
       display: flex;
       -webkit-box-pack: center;
@@ -388,6 +398,9 @@
       bottom: 15px;
     }
     .menu-content{
+      .emoji{
+        display: none;
+      }
       .menu-body{
         display: block;
         padding: 0 15px;
