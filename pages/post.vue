@@ -3,10 +3,10 @@
     <div class="page-header">
       <ul class="category-list clearfix">
         <li :class="{active: currentCategory == 0 }">
-          <a href="javascript:;" @click="changeCategory(0)">所有文章({{ total }})</a>
+          <a class="btn btn-primary" href="javascript:void(0);" @click="changeCategory(0)">所有文章</a>
         </li>
-        <li v-for="item in $store.state.catLists" :class="{active: currentCategory == item.id }">
-          <a href="javascript:;" @click="changeCategory(item.id)">{{ item.name }}({{ item.detail.count }})</a>
+        <li v-for="item in $store.state.catLists" :class="{active: currentCategory == item.id }" :key="item.id">
+          <a class="btn btn-primary" href="javascript:void(0);" @click="changeCategory(item.id)">{{ item.name }}</a>
         </li>
       </ul>
     </div>
@@ -25,11 +25,6 @@
       }
     },
     computed: {
-      total () {
-        return this.$store.state.catLists.reduce((total, currentValue) => {
-          return total + currentValue.detail.count
-        }, 0)
-      }
     },
     mounted () {
       if ('category' in this.$route.query) {
@@ -49,41 +44,16 @@
   @import '~assets/less/variable.less';
 
   .category-list{
-    line-height: 2.5;
     li{
       float: left;
       margin-right: 15px;
-      a{
-        position: relative;
-        color: #999;
-        font-size: 16px;
-        &:hover{
-          color: @main-color;
-        }
-      }
-      &:after{
-        content: "/";
-        padding-left: 15px;
-      }
-      &:last-child{
-        &:after{
-          content: "";
-        }
-      }
+      margin-bottom: 15px;
     }
     .active{
-      a{
-        color: @main-color;
-        &:after{
-          content: '';
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          display: block;
-          width: 100%;
-          height: 1px;
-          background: @main-color;
-        }
+      .btn{
+        background: @main-color;
+        color: #fff;
+        border: 1px solid #39c5bb;
       }
     }
   }

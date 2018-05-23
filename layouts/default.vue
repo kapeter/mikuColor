@@ -287,11 +287,9 @@
       }
     }
     .emoji{
-
       position: absolute;
       left: 50px;
       bottom:  50px;
-
     }
     .menu-body{
       display: flex;
@@ -379,34 +377,12 @@
 
 
   @media screen and (max-width: 640px) {
-    .header{
-      display: block;
-    }
-    .footer{
-      position: relative;
-      background: transparent;
-    }
-    .go-top{
-      right: 15px;
-      border-radius: 100%;
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-      font-size: 14px;
-    }
-    .top-active{
-      bottom: 15px;
-    }
     .menu-content{
-      .emoji{
-        display: none;
-      }
       .menu-body{
         display: block;
-        padding: 0 15px;
         .side-nav{
           font-size: 2.5rem;
-          padding: 60px 0;
+          padding: 45px 0;
           li{
             a{
               span{
@@ -429,23 +405,51 @@
       .menu-close{
         width: 30px;
         height: 30px;
-        bottom: 45px;
-        left: 50%;
-        top: auto;
-        transform: translate(-50%, 0);
         span{
           width: 28px;
         }
       }
+    } 
+  }
+
+  @media screen and (max-width: 1200px) {
+    .clock, .menu-icon{
+      display: none;
+    }
+    .go-top{
+      right: 15px;
+      border-radius: 100%;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+    }
+    .top-active{
+      bottom: 15px;
+    }
+    .header{
+      display: block;
+    }
+    .footer{
+      position: relative;
+      background: transparent;
+    }
+    .menu-content{
+      .menu-body{
+        padding: 0 30px;
+      }
+      .emoji{
+        display: none;
+      }
+      .menu-close{
+        bottom: 30px;
+        left: 50%;
+        top: auto;
+        transform: translate(-50%, 0);
+      }
     }
     .main{
       padding-top: 50px;
-    }
-  }
-
-  @media screen and (max-width: 1024px) {
-    .clock, .menu-icon{
-      display: none;
     }
   }
 </style>

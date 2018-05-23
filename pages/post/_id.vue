@@ -112,12 +112,12 @@
   .content-title{
     font-size: 30px;
     text-align: center;
+    margin-top: 0;
   }
   .content-info{
     text-align: center;
     color: #999;
     font-size: 14px;
-    margin-bottom: 15px;
     span{
       margin-right: 15px;
     }

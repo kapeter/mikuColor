@@ -35,7 +35,7 @@
         </div>
         <div class="box-content">
           <div class="row">
-            <div class="col-4" v-for="item in postItems">
+            <div class="col-4" v-for="item in postItems" :key="item.id">
               <nuxt-link class="article-link" :to="apiUrl.post + '/' + item.id">
                 <div class="article-pic">
                   <img v-lazy="item.cover_img" :alt="item.title">

@@ -12,7 +12,7 @@
     </div>
     <div class="list-content" v-if="listLoaded">
       <ul v-if="lists.length > 0">
-        <li class="list-box clearfix" v-for="item in lists">
+        <li class="list-box clearfix" v-for="item in lists" :key="item.id">
           <div class="list-img" v-if="item.cover_img != 'null'">
             <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">
               <img v-lazy="item.cover_img" :alt="item.title">
@@ -143,9 +143,11 @@
       },
       searchPost () {
         let _temp = this.filter
-        this.$router.push({ path: '/post', query: { filter: _temp } })
-        this.filter = ''
-        this.handleSearchVisible()
+        if (_temp) {
+          this.$router.push({ path: '/post', query: { filter: _temp } })
+          this.filter = ''
+          this.handleSearchVisible()
+        }
       },
       setParams () {
         let catItem = null
@@ -204,12 +206,10 @@
   .list-header{
     text-align: center;
     border-bottom: 1px solid #ddd;
-    height: 45px;
-    line-height: 45px;
+    padding-bottom: 15px;
     .list-title{
-      font-size: 28px;
+      font-size: 27px;
       color: @main-color;
-      letter-spacing: 0.1rem;
     }    
     .search-box{
       margin-top: 5px;
