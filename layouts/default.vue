@@ -18,13 +18,6 @@
     <a href="javascript:;" class="go-top" @click="backToTop()" :class="{ 'top-active' : isShow }">
       <i class="iconfont">&#xe600;</i>
     </a>
-    <a href="javascript:void(0)" class="menu-icon" @click="menuIsOpened = true">
-      <div class="menu-lines">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </a>
     <div class="menu-content" :class="{ 'menu-active': menuIsOpened }" >
       <a href="javascript:void(0)" class="menu-close" @click="menuIsOpened = false">
         <span></span>
@@ -64,9 +57,6 @@
           <p class="copyright"><a href="http://www.miitbeian.gov.cn/publish/query/indexFirst.action" target="_blank">浙ICP备14040866号</a></p>
         </div>
       </div>
-    </div>
-    <div class="clock">
-      <p>「 {{ currentTime }} 」</p>
     </div>
   </div>
 
@@ -137,25 +127,20 @@
   @import '~assets/less/variable.less';
 
   .header{
-    display: none;
-    position: fixed;
-    left: 0;
-    right:0;
-    top: 0;
-    padding: 0 15px;
-    height: 50px;
-    line-height: 50px;
-    box-shadow: 0px 0px 15px rgba(0,0,0,.1);
-    background: #fff;
+    margin: 0 auto;
+    width: 90%;
+    height: 80px;
+    line-height: 80px;
     z-index: 10;
     .logo{
       display: inline-block;
       img{
         vertical-align: middle;
+        height: 40px;
       }
     }
     .menu{
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
   }
 
@@ -189,11 +174,6 @@
   }
 
   .footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: #fff;
     padding: 15px 0;
     text-align: center;
     z-index: 999;
@@ -213,8 +193,9 @@
     top: 50%;
     transform: translateY(-50%);
     .menu-lines{
+      line-height: 1;
       span{
-        display: block;
+        display: inline-block;
         width: 40px;
         height: 2px;
         background-color: @main-color;
@@ -376,7 +357,26 @@
   }
 
 
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 768px) {
+    .header{
+      position: fixed;
+      left: 0;
+      right:0;
+      top: 0;
+      padding: 0 15px;
+      height: 50px;
+      line-height: 50px;
+      box-shadow: 0px 0px 15px rgba(0,0,0,.1);
+      background: #fff;
+      .logo{
+        img{
+          height: 30px;
+        }
+      }
+      .menu{
+        font-size: 2.5rem;
+      }
+    }
     .menu-content{
       .menu-body{
         display: block;
@@ -426,9 +426,6 @@
     }
     .top-active{
       bottom: 15px;
-    }
-    .header{
-      display: block;
     }
     .footer{
       position: relative;

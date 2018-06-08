@@ -18,17 +18,17 @@
             <input type="text" name="subject" placeholder="邮件主题 / Theme" class="form-control" v-model="subject.value" @blur="validate('subject')">
             <div class="error-text" v-show="subject.error != ''">{{ subject.error }}</div>
           </div>
-          <div class="form-group">
+          <div class="form-group emoji-box">
             <textarea class="form-control" rows="10" name="content" placeholder="邮件内容 / Content" v-model="content.value" @blur="validate('content')">
             </textarea>
             <div class="error-text" v-show="content.error != ''">{{ content.error }}</div>
+            <div class="emoji">
+              <img src="~assets/img/look.png">
+            </div>
           </div>
           <div class="form-group text-center push-30-t">
             <a href="javascript:;" class="btn btn-primary" @click="submit()">提交邮件</a>
             <a href="javascript:;" class="btn btn-default" @click="reset()">重置表单</a>
-          </div>
-          <div class="emoji">
-            <img src="~assets/img/look.png">
           </div>
         </form>
         <div v-else-if="mailState.code == 10000" class="text-center push-30-t">
@@ -155,6 +155,8 @@
 </script>
 
 <style scoped lang="less">
+  @import '~assets/less/variable.less';
+  
   .mail-form {
     width: 480px;
     margin: 0 auto;
@@ -162,14 +164,22 @@
     input {
       width: 100%;
     }
+    .emoji-box{
+      position: relative;
+    }
     .emoji{
       position: absolute;
       right: -108px;
-      bottom: 35px;
+      top: 52px;
     }
     .btn{
       margin: 0px 10px;
       padding: 10px 45px;      
+    }
+    .error-text{
+      color: @error-color;
+      margin-top: 5px;
+      font-style: italic;
     }
   }
   @media screen and (max-width: 640px) {

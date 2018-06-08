@@ -1,31 +1,21 @@
 <template>
   <section>
     <div class="first-screen">
-      <div class="page-header">
-        <div class="text-center">
-          <img src="~assets/img/slogan.png" alt="Always believe that something wonderful is about to happen." class="slogan" width="320">
-        </div>
-      </div>
       <Carousel class="banner" v-lazy-container="{ selector: 'img' }">
         <CarouselItem v-for="item in bannerItems" :key="item.id" >
           <img v-lazy="item.cover_img" :alt="item.title" data-error="/big-img-error.jpg">
-          <div class="banner-cover">
+          <nuxt-link class="banner-cover" :to="apiUrl.post + '/' + item.id">
             <div class="banner-content">
               <span class="category">{{ item.category.name }}</span>
-              <h2 class="title">
-                <nuxt-link :to="apiUrl.post + '/' + item.id">{{ item.title }}</nuxt-link>
-              </h2>
+              <h2 class="title">{{ item.title }}</h2>
               <span class="dateline">{{ item.published_at }}</span>
             </div>
-          </div>
+          </nuxt-link>
         </CarouselItem>
       </Carousel>
-      <div class="scroll">
-        <a href="javascript:void(0);" @click="scrollToNews()">
-          <p>Scroll</p>
-          <p><i class="iconfont">&#xe65b;</i></p>
-        </a>
-      </div>
+      <a class="scroll" href="javascript:void(0);" @click="scrollToNews()">
+        <i class="iconfont">&#xe65b;</i>
+      </a>
     </div>
     <!-- Recent Articles -->
     <div class="container" id="news">
@@ -115,17 +105,10 @@
 <style lang="less">
   @import '~assets/less/variable.less';
   .banner{
-    margin-left: auto;
-    margin-right: auto;
-    width: calc(100% - 22%);
-    height: 68vh;
+    margin: 0 auto;
+    width: 90%;
+    height: 75vh;
     position: relative;
-  }
-  .slogan{
-    border: none;
-    height: auto;
-    vertical-align: top;
-    max-width: 100%;
   }
   .swiper-slide{
     background: #ddd;
@@ -142,6 +125,7 @@
     left: 50%;
     top: 50%;
     overflow:hidden;
+    display: block;
     width: 500px;
     transform: translate(-50%,-50%);
     border: 2px solid @main-color;
@@ -170,24 +154,14 @@
     }
   }
   .scroll{
+    display: block;
     width: 100%;
     margin-bottom: 60px;
     text-align: center;
-    letter-spacing: 1px;
-    a{
+    .iconfont{
       display: inline-block;
-      padding: 0 15px;
-      p{
-        margin-bottom: 0;
-        .iconfont{
-          display: inline-block;
-          font-size: 24px;
-          animation: scroll 2s infinite;
-        }
-      }
-      &:hover{
-        letter-spacing: 2px;
-      }
+      font-size: 32px;
+      animation: scroll 2s infinite;
     }
   }
   @keyframes scroll {
@@ -293,9 +267,6 @@
   }
 
   @media screen and (max-width: 640px) {
-    .slogan{
-      width: 75%;
-    }
     .banner{
       width: 100%;
       padding: 0 15px;

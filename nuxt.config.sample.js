@@ -60,24 +60,17 @@ module.exports = {
       ],
       "plugins": ["transform-runtime"],
     },
-
-    // vue插件
-    plugins: [
-      { src: '~/plugins/vue-lazyload', ssr: false }
-    ]
   },
+
+
+  // vue插件
+  plugins: [
+    { src: '~/plugins/vue-lazyload', ssr: false }
+  ],
 
   //引入全局css变量
   css: [
     '~assets/css/normalize.css',
     '~assets/less/common.less'
-  ],
-
-  // // 页面过渡效果
-  // transition: {
-  //   name: 'page',
-  //   mode: 'out-in',
-  //   enterActiveClass: 'animated fadeInRight',
-  //   leaveActiveClass: 'animated fadeOutLeft'
-  // }
+  ]
 }
