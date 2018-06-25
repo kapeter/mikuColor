@@ -129,11 +129,10 @@
 
   .content-body{
     line-height: 1.75;
-    font-size: 14px;
+    font-size: 15px;
     padding: 30px 0;
     h1{
-      margin-top: 0.75em;
-      margin-bottom: 0.75em;
+      margin: 0.75em 0;
       font-size: 28px;
       border-bottom: 1px solid #ddd;
       padding-bottom: 15px;
