@@ -132,12 +132,23 @@
     font-size: 14px;
     padding: 30px 0;
     h1{
-      margin-top: 0.85em;
-      margin-bottom: 0.85em;
+      margin-top: 0.75em;
+      margin-bottom: 0.75em;
       font-size: 28px;
-      border-left: 3px solid @main-color;
-      padding-left: 15px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
       line-height: 1;
+      position: relative;
+      &:after{
+        content: '';
+        display: block;
+        width: 115px;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        background: @main-color;
+      }
     }
     h2, h3, h4, h5, h6{
       margin-bottom: 0.5em;
@@ -145,7 +156,7 @@
     }
     ul, ol{
       margin-left: 30px;
-      margin-bottom: 0.85em;
+      margin-bottom: 0.75em;
       word-break: break-word;
       li{
         list-style-type: disc;
@@ -159,15 +170,27 @@
         text-decoration: underline;
       }
     }
+    code{
+      margin: 0 5px;
+      color: #333;
+      font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    img{
+      max-width: 100%;
+    }
     .temp{
       border: 1px solid #ddd;
       padding: 10px 15px;
       overflow-x: auto;
       margin-bottom: 0.85em;
-      background: #f4f4f4;
+      background: #f8f8f8;
     }
     pre{
       .temp;
+      code{
+        margin: 0;
+        color: #5a6665;
+      }
     }
     blockquote{
       .temp;
@@ -178,11 +201,29 @@
         }
       }
     }
-    code{
-      font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
-    }
-    img{
-      max-width: 100%;
+
+    table{
+      display: block;
+      width: 100%;
+      overflow: auto;
+      border-spacing: 0;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+      tr{
+        background-color: #fff;
+        border-top: 1px solid @border-color;
+        &:nth-child(2n) {
+          background-color: #f6f8fa;
+        }
+        th{
+          font-weight: 600;
+        }
+        th,td{
+          padding: 6px 15px;
+          border: 1px solid @border-color;
+        }
+      }
+
     }
   }
   .content-footer{
