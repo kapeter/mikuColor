@@ -170,7 +170,9 @@
       }
     }
     code{
-      margin: 0 5px;
+      margin: 0 2px;
+      padding: 0 2px;
+      background: #f4f4f4;
       color: #333;
       font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
     }
@@ -182,7 +184,7 @@
       padding: 10px 15px;
       overflow-x: auto;
       margin-bottom: 0.85em;
-      background: #f8f8f8;
+      background: #f4f4f4;
     }
     pre{
       .temp;
@@ -194,7 +196,7 @@
     blockquote{
       .temp;
       border-left:3px solid @main-color;
-      p{
+      ul,ol,p{
         &:last-child{
           margin-bottom: 0;
         }
@@ -203,7 +205,7 @@
 
     table{
       display: block;
-      width: 100%;
+      white-space: nowrap;
       overflow: auto;
       border-spacing: 0;
       border-collapse: collapse;
@@ -227,5 +229,8 @@
   }
   .content-footer{
     margin-bottom: 60px;
+  }
+  @media screen and (max-width: 640px) {
+
   }
 </style>

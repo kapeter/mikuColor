@@ -1,6 +1,6 @@
 <template>
   <div class="loading">
-    <img src="~assets/img/loading.gif">
+    <img src="~assets/svg/bars.svg">
     <p>{{ text }}</p>
   </div>
 </template>
@@ -16,9 +16,18 @@
   }
 </script>
 
-<style>
+<style scoped lang="less">
+@import '~assets/less/variable.less';
+
 .loading{
   padding: 60px 0;
   text-align: center;
+}
+.loading img{
+  width: 75px;
+  margin-bottom: 15px;
+}
+.loading p{
+  color: @text-sub-color;
 }
 </style>

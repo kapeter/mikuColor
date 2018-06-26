@@ -222,6 +222,7 @@
 
   .list-content{
     padding: 30px 0 60px 0;
+    min-height: 300px;
   }
   .list-box{
     position: relative;
@@ -312,7 +313,6 @@
         img{
           display: block;
           width: 100%;
-          height: 180px;
         }
       }
       .list-right{
