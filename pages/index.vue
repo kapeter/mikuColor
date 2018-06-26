@@ -1,22 +1,5 @@
 <template>
   <section>
-    <div class="first-screen">
-      <Carousel class="banner" v-lazy-container="{ selector: 'img' }">
-        <CarouselItem v-for="item in bannerItems" :key="item.id" >
-          <img v-lazy="item.cover_img" :alt="item.title" data-error="/big-img-error.jpg">
-          <nuxt-link class="banner-cover" :to="apiUrl.post + '/' + item.id">
-            <div class="banner-content">
-              <span class="category">{{ item.category.name }}</span>
-              <h2 class="title">{{ item.title }}</h2>
-              <span class="dateline">{{ item.published_at }}</span>
-            </div>
-          </nuxt-link>
-        </CarouselItem>
-      </Carousel>
-      <a class="scroll" href="javascript:void(0);" @click="scrollToNews()">
-        <i class="iconfont">&#xe65b;</i>
-      </a>
-    </div>
     <!-- Recent Articles -->
     <div class="container" id="news">
       <div class="box">
@@ -104,77 +87,7 @@
 
 <style lang="less">
   @import '~assets/less/variable.less';
-  .banner{
-    margin: 0 auto;
-    width: 90%;
-    height: 75vh;
-    position: relative;
-  }
-  .swiper-slide{
-    background: #ddd;
-    img {
-      position: absolute;
-      min-width: 100%;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-    }
-  }
-  .banner-cover{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    overflow:hidden;
-    display: block;
-    width: 500px;
-    transform: translate(-50%,-50%);
-    border: 2px solid @main-color;
-    padding: 5px;
-    box-sizing: border-box;
-  }
-  .banner-content{
-    background: rgba(255,255,255,0.95);
-    padding: 30px 15px;
-    height: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    .category{
-      display: inline-block;
-      padding-bottom: 5px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid @main-color;
-      color: @main-color;
-    }
-    .title{
-      margin-bottom: 15px;
-    }
-    .dateline{
-      color: #999;
-      font-size: 12px;
-    }
-  }
-  .scroll{
-    display: block;
-    width: 100%;
-    margin-bottom: 60px;
-    text-align: center;
-    .iconfont{
-      display: inline-block;
-      font-size: 32px;
-      animation: scroll 2s infinite;
-    }
-  }
-  @keyframes scroll {
-    0% {
-      transform: translate3d(0, -5px, 0);
-    }
-    50% {
-      transform: translate3d(0, 5px, 0);
-    }
-    100% {
-      transform: translate3d(0, -5px, 0);
-    }
-  }
+
   .article-link {
     display: block;
     margin-bottom: 30px;

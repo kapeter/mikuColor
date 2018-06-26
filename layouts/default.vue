@@ -1,12 +1,20 @@
 <template>
   <div class="page-bg">
-    <header class="header">
-      <div class="logo">
-        <img src="~assets/img/logo-sm.png" alt="kapeter">
+    <header class="header clearfix">
+      <div class="cover">
+        <img src="~assets/img/bg.jpg">
       </div>
-      <a href="javascript:void(0)" class="menu pull-right" @click="menuIsOpened = true">
-        <i class="iconfont">&#xe652;</i>
-      </a>
+      <div class="logo">
+        <nuxt-link to="/" exact><img src="~assets/img/logo-sm.png" alt="kapeter"></nuxt-link>
+      </div>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><nuxt-link to="/" exact>首页</nuxt-link></li>
+          <li><nuxt-link to="/about">关于我</nuxt-link></li>
+          <li><nuxt-link to="/post">技术</nuxt-link></li>
+          <li><nuxt-link to="/contact">联系我</nuxt-link></li>
+        </ul>
+      </nav>
     </header>
     <main class="main">
       <nuxt/>
@@ -127,27 +135,59 @@
   @import '~assets/less/variable.less';
 
   .header{
-    margin: 0 auto;
-    width: 90%;
-    height: 80px;
-    line-height: 80px;
-    z-index: 10;
-    .logo{
-      display: inline-block;
+    position: relative;
+    width: 100%;
+    padding: 50px;
+    box-sizing: border-box;
+    height: 240px;
+    overflow: hidden;
+    .cover{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: -1;
+      animation: cover 25s linear;
+      animation-fill-mode: forwards;
       img{
-        vertical-align: middle;
-        height: 40px;
+        width: 100%;
       }
     }
-    .menu{
-      font-size: 3rem;
+    .logo{
+      float: left;
+      img{
+        height: 18px;
+      }
+    }
+    .nav{
+      float: right;
+      .nav-list{
+        li{
+          float: left;
+          padding: 0px 15px;
+          line-height: 18px;
+          a{
+            color: #ffffff;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  @-webkit-keyframes cover {
+    0% {
+      top: 0;
+    }
+    100% {
+      top: -100%;
     }
   }
 
   .main{
     position: relative;
     width: 100%;
-    overflow: hidden;
+    padding: 60px 0;
   }
   .go-top{
     position: fixed;
@@ -187,48 +227,17 @@
   }
 
   .menu-icon{
-    width: 50px;
+    width: 30px;
     position: fixed;
     right: 50px;
-    top: 50%;
-    transform: translateY(-50%);
-    .menu-lines{
-      line-height: 1;
-      span{
-        display: inline-block;
-        width: 40px;
-        height: 2px;
-        background-color: @main-color;
-        transition: width .8s cubic-bezier(.23,1,.32,1) 0s;
-        margin-bottom: 8px;
-        &:first-child{
-          width: 50px;
-        }
-        &:last-child{
-          width: 30px;
-        }
-      }
-    }
-    p{
-      font-weight: bold;
-      color: @main-color;
-      line-height: 1;
-      transition: all .5s cubic-bezier(.23,1,.32,1);
-    }
-    &:hover{
-      p{
-        letter-spacing: 1px;
-      }
-      .menu-lines{
-        span{
-          &:first-child{
-            width: 30px;
-          }
-          &:last-child{
-            width: 50px;
-          }
-        }
-      }
+    top: 50px;
+    line-height: 1;
+    span{
+      display: inline-block;
+      width: 30px;
+      height: 1px;
+      background-color: @main-color;
+      margin-bottom: 8px;
     }
   }
 
@@ -368,11 +377,6 @@
       line-height: 50px;
       box-shadow: 0px 0px 15px rgba(0,0,0,.1);
       background: #fff;
-      .logo{
-        img{
-          height: 30px;
-        }
-      }
       .menu{
         font-size: 2.5rem;
       }
