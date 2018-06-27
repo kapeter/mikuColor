@@ -44,6 +44,9 @@
       animation: cover 25s linear;
       animation-fill-mode: forwards;
       text-align: center;
+      img{
+        width: 100%;
+      }
     }
     .title{
       display: inline-block;
