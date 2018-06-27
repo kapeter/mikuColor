@@ -132,6 +132,7 @@
     line-height: 1.75;
     font-size: 15px;
     padding: 30px 0;
+    word-wrap: break-word;
     h1{
       margin: 0.75em 0;
       font-size: 28px;
