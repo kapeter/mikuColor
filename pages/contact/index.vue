@@ -183,6 +183,7 @@
       color: @error-color;
       margin-top: 5px;
       font-style: italic;
+      font-size: 12px;
     }
   }
   @media screen and (max-width: 640px) {
@@ -192,6 +193,9 @@
       box-sizing: border-box;
       .emoji{
         display: none;
+      }
+      .btn{
+        margin: 10px 0;
       }
     }
   }
