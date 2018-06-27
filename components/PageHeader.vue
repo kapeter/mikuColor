@@ -40,7 +40,6 @@
       left: 0;
       top: 0;
       width: 100%;
-      z-index: -1;
       animation: cover 25s linear;
       animation-fill-mode: forwards;
       text-align: center;
@@ -52,12 +51,16 @@
       display: inline-block;
       font-size: 28px;
       letter-spacing: 0.1em;
+      z-index: 10;
+      position: relative;
     }
     .sub-title{
       font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.5em;
       font-weight: normal;
+      z-index: 10;
+      position: relative;
     }
 }
 
