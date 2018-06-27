@@ -1,21 +1,23 @@
 <template>
   <div>
-    <h1 class="content-title">{{ thisPost.title }}</h1>
-    <div class="content-info">
-      <span>栏目：{{  thisPost.category != null ? thisPost.category.name : '' }}</span>
-      <span>发布日期：{{ publishedTime }}</span>
-    </div>
-    <div class="content-body">
-      <div id="marked-content" v-html="postContent"></div>
-    </div>
-    <div class="content-footer">
-      <p>目前网站尚未开放评论功能，请通过邮件 <nuxt-link to="/contact">联系我</nuxt-link></p>
+    <PageHeader :title="thisPost.title" :sub-title="thisPost.category != null ? thisPost.category.name : ''"></PageHeader>
+    
+    <div class="container">
+      <div class="content-body">
+        <div id="marked-content" v-html="postContent"></div>
+      </div>
+      <div class="content-footer">
+        <Comment model="post" :uid="thisPost.id"></Comment>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import marked from 'marked'
   import axios from '~/plugins/axios'
+  import Comment from '~/components/Comment.vue'
+  import PageHeader from '~/components/PageHeader'
 
   export default {
     head () {
@@ -26,6 +28,10 @@
           { hid: 'keyword', name: 'keyword', content: 'Kapeter' }
         ]
       }
+    },
+    components: {
+      Comment,
+      PageHeader
     },
     validate ({ params }) {
       // Must be a number
@@ -40,11 +46,7 @@
       }
     },
     computed: {
-      publishedTime () {
-        return this.thisPost.published_at.date.slice(0, 10)
-      },
       postContent () {
-        const marked = require('marked')
         marked.setOptions({
           renderer: new marked.Renderer(),
           gfm: true,
@@ -74,15 +76,15 @@
       }
     },
     mounted () {
-      this.$nextTick(() => {
-        let markedDom = document.getElementById('marked-content')
-        if (markedDom) {
-          this.generateTOC(markedDom)
-        }
-      })
+      // this.$nextTick(() => {
+      //   let markedDom = document.getElementById('marked-content')
+      //   if (markedDom) {
+      //     this.generateTOC(markedDom)
+      //   }
+      // })
     },
     beforeDestroy () {
-      this.$parent.deleteToc()
+      // this.$parent.deleteToc()
     },
     methods: {
       generateTOC (markedDom) {
@@ -105,122 +107,131 @@
 </script>
 
 
-<style>
+<style lang="less">
+  @import '~assets/less/variable.less';
+
   .content-title{
-    margin-top: 0;
-    margin-bottom: 15px;
     font-size: 30px;
-    letter-spacing: 1px;
+    text-align: center;
+    margin-top: 0;
   }
   .content-info{
+    text-align: center;
     color: #999;
     font-size: 14px;
-    margin-bottom: 15px;
-  }
-  .content-info span{
-    margin-right: 15px;
+    span{
+      margin-right: 15px;
+    }
   }
   .content-desc{
     padding: 15px;
     border: 1px dashed #ddd;
   }
+
   .content-body{
-    padding: 15px 0;
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s
-  }
-  .fade-enter, .fade-leave-to {
-    opacity: 0
-  }
-  .content-body{
-    line-height: 1.5;
-    font-size: 14px;
-  }
-  .content-body p{
-    margin-bottom: 0.5em;
-  }
-  .content-body h1{
-    font-weight: 600;
-    margin-top: 0.85em;
-    margin-bottom: 0.85em;
-    font-size: 28px;
-  }
-  .content-body h2, .content-body h3, .content-body h4, .content-body h5, .content-body h6 {
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
-  }
-  .content-body ul, .content-body ol{
-    margin-left: 30px;
-    margin-bottom: 0.85em;
-    word-break: break-word;
-  }
-  .content-body ul li, .content-body ol li{
-    list-style-type: disc;
-    display: list-item;
-    text-align: -webkit-match-parent;
-  }
-  .content-body a{
-    color: #39c5bb;
-  }
-  .content-body a:hover{
-    color: #39c5bb;
-    text-decoration: underline;
-  }
-  .content-body pre {
-    border: 1px solid #ddd;
-    padding: 10px 15px;
-    overflow-x: auto;
-    margin-bottom: 0.85em;
-    background: #f4f4f4;
-  }
-  .content-body blockquote {
-    padding: 10px 15px;
-    overflow-x: auto;
-    margin-bottom: 0.85em;
-    background: #f4f4f4;
-    border: 1px solid #ddd;
-    border-left:3px solid #39c5bb;
-  }
-  .content-body blockquote p:last-child{
-    margin-bottom: 0;
-  }
-  .content-body code{
-    font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
-  }
-  .content-body img{
-    max-width: 100%;
+    line-height: 1.75;
+    font-size: 15px;
+    padding: 30px 0;
+    h1{
+      margin: 0.75em 0;
+      font-size: 28px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+      line-height: 1;
+      position: relative;
+      &:after{
+        content: '';
+        display: block;
+        width: 115px;
+        height: 1px;
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        background: @main-color;
+      }
+    }
+    h2, h3, h4, h5, h6{
+      margin-bottom: 0.5em;
+      margin-top: 0.5em;
+    }
+    ul, ol{
+      margin-left: 30px;
+      margin-bottom: 0.75em;
+      word-break: break-word;
+      li{
+        list-style-type: disc;
+        display: list-item;
+        text-align: -webkit-match-parent;
+      }
+    }
+    a{
+      color: @main-color;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    code{
+      margin: 0 2px;
+      padding: 0 2px;
+      background: #f4f4f4;
+      color: #333;
+      font: 13px/1.5 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    img{
+      max-width: 100%;
+    }
+    .temp{
+      border: 1px solid #ddd;
+      padding: 10px 15px;
+      overflow-x: auto;
+      margin-bottom: 0.85em;
+      background: #f4f4f4;
+    }
+    pre{
+      .temp;
+      code{
+        margin: 0;
+        color: #5a6665;
+      }
+    }
+    blockquote{
+      .temp;
+      border-left:3px solid @main-color;
+      ul,ol,p{
+        &:last-child{
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    table{
+      display: block;
+      white-space: nowrap;
+      overflow: auto;
+      border-spacing: 0;
+      border-collapse: collapse;
+      margin-bottom: 15px;
+      tr{
+        background-color: #fff;
+        border-top: 1px solid @border-color;
+        &:nth-child(2n) {
+          background-color: #f6f8fa;
+        }
+        th{
+          font-weight: 600;
+        }
+        th,td{
+          padding: 6px 15px;
+          border: 1px solid @border-color;
+        }
+      }
+
+    }
   }
   .content-footer{
-    margin-top: 30px;
+    margin-bottom: 60px;
   }
-  .content-footer a{
-    text-decoration: underline;
-  }
-  .content-footer p{
-    color: #999;
-    padding-left: 15px;
-    position: relative;
-  }
-  .content-footer p:before{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: block;
-    width: 2px;
-    height: 100%;
-    background: #39c5bb;
-  }
-  .content-toc{
-    width: 360px;
-    padding: 15px;
-    box-sizing: border-box;
-    border:1px dashed #39c5bb;
-    float: right;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    word-break: break-all;
-  }
+  @media screen and (max-width: 640px) {
 
+  }
 </style>

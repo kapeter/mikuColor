@@ -11,7 +11,7 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'My Description' },
-      { hid: 'keyword', name: 'keyword', content: 'My Keyword' }
+      { hid: 'keywords', name: 'keywords', content: 'My KeyWords' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -48,20 +48,29 @@ module.exports = {
     },
 
     // 防止重复引入
-    vendor: ['axios']
+    vendor: [
+      'axios', 
+      'vue-lazyload'
+    ],
+
+    babel: {
+      "presets": [
+        ["env", { "modules": false }],
+        "stage-2"
+      ],
+      "plugins": ["transform-runtime"],
+    },
   },
+
+
+  // vue插件
+  plugins: [
+    { src: '~/plugins/vue-lazyload', ssr: false }
+  ],
 
   //引入全局css变量
   css: [
     '~assets/css/normalize.css',
-    '~assets/css/common.css'
-  ],
-
-  // // 页面过渡效果
-  // transition: {
-  //   name: 'page',
-  //   mode: 'out-in',
-  //   enterActiveClass: 'animated fadeInRight',
-  //   leaveActiveClass: 'animated fadeOutLeft'
-  // }
+    '~assets/less/common.less'
+  ]
 }

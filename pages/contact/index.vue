@@ -1,9 +1,7 @@
 <template>
-  <div class="push-30-t">
+  <section>
+    <PageHeader title="联系我" sub-title="contact me"></PageHeader>
     <div class="box">
-      <div class="box-header">
-        <h3>联系我<br><span>contact me</span></h3>
-      </div>
       <div class="box-content">
         <form class="mail-form" v-if="mailState.code == 0">
           <div class="form-group">
@@ -18,33 +16,40 @@
             <input type="text" name="subject" placeholder="邮件主题 / Theme" class="form-control" v-model="subject.value" @blur="validate('subject')">
             <div class="error-text" v-show="subject.error != ''">{{ subject.error }}</div>
           </div>
-          <div class="form-group">
+          <div class="form-group emoji-box">
             <textarea class="form-control" rows="10" name="content" placeholder="邮件内容 / Content" v-model="content.value" @blur="validate('content')">
             </textarea>
             <div class="error-text" v-show="content.error != ''">{{ content.error }}</div>
+            <div class="emoji">
+              <img src="~assets/img/look.png">
+            </div>
           </div>
           <div class="form-group text-center push-30-t">
             <a href="javascript:;" class="btn btn-primary" @click="submit()">提交邮件</a>
             <a href="javascript:;" class="btn btn-default" @click="reset()">重置表单</a>
           </div>
         </form>
-        <div v-else-if="mailState.code == 10000" class="text-center">
-          <img src="~assets/img/success.jpg" alt="Success">
-          <h1 class="success-color">Success!</h1>
-          <p>啦啦啦(～￣▽￣)～ 投递成功！我将尽快与你取得联系。</p>
+        <div v-else-if="mailState.code == 10000" class="text-center push-30-t">
+          <p>
+            <img src="~assets/img/success.png" alt="Success">
+          </p>
+          <p>啦啦啦(～￣▽￣)～ 邮件投递成功！</p>
         </div>
-        <div v-else class="text-center">
-          <img src="~assets/img/error.jpg" alt="Page Not Found">
-          <h1 class="error-color">Error Code : {{ mailState.code }}</h1>
+        <div v-else class="text-center push-30-t">
+          <p>
+            <img src="~assets/img/error.png" alt="Page Not Found">
+          </p>
           <p>呜呜呜┭┮﹏┭┮ {{ mailState.message }}。</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
 </template>
 
 <script>
   import axios from '~/plugins/axios'
+  import PageHeader from '~/components/PageHeader'
 
   export default {
     head () {
@@ -54,6 +59,9 @@
           { hid: 'description', name: 'description', content: 'I am Kapeter, a front-end engineer.' }
         ]
       }
+    },
+    components: {
+      PageHeader
     },
     data () {
       return {
@@ -149,25 +157,42 @@
   }
 </script>
 
-<style>
+<style scoped lang="less">
+  @import '~assets/less/variable.less';
+  
   .mail-form {
     width: 480px;
     margin: 0 auto;
+    position: relative;
+    input {
+      width: 100%;
+    }
+    .emoji-box{
+      position: relative;
+    }
+    .emoji{
+      position: absolute;
+      right: -108px;
+      top: 52px;
+    }
+    .btn{
+      margin: 0px 10px;
+      padding: 10px 45px;      
+    }
+    .error-text{
+      color: @error-color;
+      margin-top: 5px;
+      font-style: italic;
+    }
   }
-  .mail-form input {
-    width: 100%;
-  }
-  .mail-form textarea {
-    width: 100%;
-    resize: none;
-    font: 14px/1.42857143 'Poppins','PingFang SC',"Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
-  }
-  .mail-form .btn{
-    margin: 0px 10px;
-  }
-  .error-text{
-    color: #f4516c;
-    font-size: 12px;
-    margin-top: 5px;
+  @media screen and (max-width: 640px) {
+    .mail-form{
+      width: 100%;
+      padding: 0 15px;
+      box-sizing: border-box;
+      .emoji{
+        display: none;
+      }
+    }
   }
 </style>

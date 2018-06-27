@@ -1,6 +1,5 @@
 <template>
   <div class="swiper-container"
-    :style="{ height: height }"
     @mouseenter.stop="handleMouseEnter"
     @mouseleave.stop="handleMouseLeave"
   >
@@ -33,10 +32,6 @@
 <script>
   export default{
     props: {
-      height: {
-        type: String,
-        default: '575px'
-      },
       defaultIndex: {
         type: Number,
         default: 0
@@ -127,7 +122,9 @@
   }
 </script>
 
-<style>
+<style lang="less">
+  @import '~assets/less/variable.less';
+
   .swiper-container{
     position: relative;
     overflow: hidden;
@@ -194,7 +191,7 @@
     display: block;
     width: 0;
     height: 100%;
-    background: #39c5bb;
+    background: @main-color;
     z-index: 11;
     transition-timing-function: linear;
     opacity: 0;

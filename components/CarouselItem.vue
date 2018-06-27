@@ -60,7 +60,9 @@
 </script>
 
 
-<style>
+<style lang="less">
+  @import '~assets/less/variable.less';
+
   .swiper-slide{
     position: absolute;
     top: 0;
