@@ -1,11 +1,9 @@
 <template>
   <section>
     <!-- Recent Articles -->
+    <PageHeader title="寂" sub-title="永远相信美好的事情即将发生"></PageHeader>
     <div class="container" id="news">
       <div class="box">
-        <div class="box-header">
-          <h3>近期文章<br><span>Lastest Articles</span></h3>
-        </div>
         <div class="box-content">
           <div class="row">
             <div class="col-4" v-for="item in postItems" :key="item.id">
@@ -34,37 +32,30 @@
 
 <script>
   import axios from '~/plugins/axios'
-  import Carousel from '~/components/Carousel'
-  import CarouselItem from '~/components/CarouselItem'
+  import PageHeader from '~/components/PageHeader'
   import scrollAnimate from '~/components/mixins/scrollAnimate'
 
   export default {
     mixins: [scrollAnimate],
     components: {
-      Carousel,
-      CarouselItem
+      PageHeader
     },
     data () {
       return {
         apiUrl: {
           post: 'post'
         },
-        postItems: [],
-        bannerItems: []
+        postItems: []
       }
     },
     async asyncData ({ params }) {
-      let [postRes, bannerRes] = await Promise.all([
+      let [postRes] = await Promise.all([
         axios.get('post', {
           params: {per_page: 6, sort: 'published_at|desc'}
-        }),
-        axios.get('post', {
-          params: {per_page: 3, recommend: 0}
         })
       ])
       return {
-        postItems: postRes.data.data,
-        bannerItems: bannerRes.data.data
+        postItems: postRes.data.data
       }
     },
     mounted () {
@@ -85,7 +76,7 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   @import '~assets/less/variable.less';
 
   .article-link {
@@ -118,6 +109,7 @@
     position: relative;
     background: #ddd;
     img{
+      display: block;
       max-width: 100%;
       .transition;
     }
@@ -171,34 +163,9 @@
     padding: 10px 45px;
   }
 
-  @media screen and (max-width: 1024px) {
-    .swiper-slide{
-      img {
-        min-height: 100%;
-      }
-    }
-  }
-
-  @media screen and (max-width: 640px) {
-    .banner{
-      width: 100%;
-      padding: 0 15px;
-      box-sizing: border-box;
-      .banner-cover{
-        width: 90%;
-      }
-    }
-    .scroll{
-      display: none;
-    }
+  @media screen and (max-width: 768px) {
     .article-pic{
       height: auto;
-      min-height: 180px;
-      img{
-        display: block;
-        width: 100%;
-        height: 180px;
-      }
     }
   }
 </style>

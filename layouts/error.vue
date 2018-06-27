@@ -1,15 +1,22 @@
 <template>
-  <div class="error-box text-center">
-    <div class="error-content">
-      <img src="~assets/img/error.png" alt="Page Not Found">
-      <h1 class="error-color">Page Not Found</h1>
-      <p>呜呜呜┭┮﹏┭┮ 你找的页面已经去了火星……</p>
+  <section>
+    <PageHeader title="404" sub-title="Page Not Found"></PageHeader>
+    <div class="error-box text-center">
+      <div class="error-content">
+        <img src="~assets/img/error.png" alt="Page Not Found">
+        <p>呜呜呜┭┮﹏┭┮ 你找的页面已经去了火星……</p>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import PageHeader from '~/components/PageHeader'
+
 export default {
+  components: {
+    PageHeader
+  },
   head () {
     return {
       title: '404 / Page Not Found',
@@ -30,9 +37,12 @@ export default {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  padding: 60px 0;
+  margin-bottom: 75px;
 }
 .error-content{
   flex: 1;
+}
+.error-content img{
+  margin-bottom: 15px;
 }
 </style>

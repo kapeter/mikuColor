@@ -1,72 +1,77 @@
 <template>
-  <div>
-    <div class="list-header clearfix">
-      <h3 class="list-title pull-left">{{ listTitle }}</h3>
-      <form class="search-box pull-right clearfix" v-if="searchVisible">
-        <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
-        <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
-      </form>
-      <a href="javascript:;" @click="searchVisible = !searchVisible" class="pull-right search-icon">
-        <i class="iconfont">&#xe61f;</i>
-      </a>
-    </div>
-    <div class="list-content" v-if="listLoaded">
-      <ul v-if="lists.length > 0">
-        <li class="list-box clearfix" v-for="item in lists" :key="item.id">
-          <div class="list-img" v-if="item.cover_img != 'null'">
-            <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">
-              <img v-lazy="item.cover_img" :alt="item.title">
-            </nuxt-link>
-          </div>
-          <div class="list-right">
-            <h3 class="article-title">
-              <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</nuxt-link>
-            </h3>
-            <p class="article-desc">{{ item.description }}</p>
-            <div class="article-info clearfix">
-              <div class="pull-left">
-                <span>发布日期：{{ item.published_at }}</span>
-                <span v-if="item.category != null">
-                  栏目：
-                  <a href="javascript:;" @click="changeCategory(item.category.id)">
-                    {{ item.category.name }}
-                  </a>
-                </span>
+  <section>
+    <PageHeader :title="pageTitle" :sub-title="pageSubTitle"></PageHeader>
+    <div class="container">
+      <!-- <div class="list-header clearfix">
+        <form class="search-box pull-right clearfix" v-if="searchVisible">
+          <input class="form-control col-9" type="text" name="filter" placeholder="输入关键词……" v-model="filter">
+          <a class="btn btn-primary col-3" style="border-left:0" href="javascript:;" @click="searchPost()">搜  索</a>
+        </form>
+        <a href="javascript:;" @click="searchVisible = !searchVisible" class="pull-right search-icon">
+          <i class="iconfont">&#xe61f;</i>
+        </a>
+      </div> -->
+      <div class="list-content" v-if="listLoaded">
+        <ul v-if="lists.length > 0">
+          <li class="list-box clearfix" v-for="item in lists" :key="item.id">
+            <div class="list-img" v-if="item.cover_img != 'null'">
+              <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">
+                <img v-lazy="item.cover_img" :alt="item.title">
+              </nuxt-link>
+            </div>
+            <div class="list-right">
+              <h3 class="article-title">
+                <nuxt-link :to="apiUrl.list + '/' + item.id" :title="item.title">{{ item.title }}</nuxt-link>
+              </h3>
+              <p class="article-desc">{{ item.description }}</p>
+              <div class="article-info clearfix">
+                <div class="pull-left">
+                  <span v-if="item.category != null">
+                    栏目：
+                    <a href="javascript:;" @click="changeCategory(item.category.id)">
+                      {{ item.category.name }}
+                    </a>
+                  </span>
+                  <span>日期：{{ item.published_at }}</span>
+
+                </div>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
-      <div class="text-center push-30-t" v-else>
-        <p><img src="~assets/img/error.png" alt="Page Not Found" class="error-img"></p>
-        <p>没找到文章，要不换个姿势再试试</p>
+          </li>
+        </ul>
+        <div class="text-center push-30-t" v-else>
+          <p><img src="~assets/img/error.png" alt="Page Not Found" class="error-img"></p>
+          <p>没找到文章，要不换个姿势再试试</p>
+        </div>
+        <div class="list-footer" v-if="lists.length > 0">
+          <Pagination :pagination="pagination" v-on:change="changePage"></Pagination>
+        </div>
       </div>
-      <div class="list-footer" v-if="lists.length > 0">
-        <Pagination :pagination="pagination" v-on:change="changePage"></Pagination>
+      <div v-else class="list-content">
+        <Loading text="列表正在努力加载中……"></Loading>
       </div>
     </div>
-    <div v-else>
-      <Loading text="列表正在努力加载中……"></Loading>
-    </div>
-  </div>
+  </section>
 </template>
 
 <script>
   import axios from '~/plugins/axios'
-  import Loading from '~/components/Loading.vue'
-  import Pagination from '~/components/Pagination.vue'
+  import Loading from '~/components/Loading'
+  import Pagination from '~/components/Pagination'
+  import PageHeader from '~/components/PageHeader'
 
   export default{
+    middleware: 'category',
     components: {
       Loading,
-      Pagination
+      Pagination,
+      PageHeader
     },
-
     head () {
       return {
-        title: this.listTitle + ' / Kapeter',
+        title: this.pageTitle + ' / Kapeter',
         meta: [
-          { hid: 'description', name: 'description', content: this.listTitle },
+          { hid: 'description', name: 'description', content: this.pageTitle },
           { hid: 'filter', name: 'filter', content: 'Kapeter' }
         ]
       }
@@ -78,7 +83,8 @@
         },
         lists: [],
         params: {},
-        listTitle: '',
+        pageTitle: '',
+        pageSubTitle: '',
         pagination: {},
         pages: [],
         listLoaded: true,
@@ -94,11 +100,13 @@
     async asyncData (context) {
       let paraData = { per_page: 6, category: 0, filter: '', page: 1 }
       let title = '所有文章'
+      let pageSubTitle = 'all articles'
       // 处理参数
       if ('filter' in context.route.query && context.route.query.filter !== '') {
         paraData.category = 0
         paraData.filter = context.route.query.filter
         title = '“' + paraData.filter + '” 的搜索结果'
+        pageSubTitle = 'search'
       } else {
         if ('category' in context.route.query) {
           let catItem = null
@@ -113,9 +121,11 @@
           if (catItem !== null) {
             paraData.category = catItem.id
             title = catItem.name
+            pageSubTitle = catItem.slug
           } else {
             paraData.category = 0
             title = '所有文章'
+            pageSubTitle = 'all articles'
           }
         }
       }
@@ -126,7 +136,8 @@
         params: paraData,
         lists: listRes.data.data,
         pagination: listRes.data.meta.pagination,
-        listTitle: title
+        pageTitle: title,
+        pageSubTitle: pageSubTitle
       }
     },
     methods: {
@@ -154,7 +165,8 @@
         if ('filter' in this.$route.query && this.$route.query.filter !== '') {
           this.params.category = 0
           this.params.filter = this.$route.query.filter
-          this.listTitle = '“' + this.params.filter + '” 的搜索结果'
+          this.pageTitle = '“' + this.params.filter + '” 的搜索结果'
+          this.pageSubTitle = 'search'
         } else {
           this.params.filter = ''
           if ('category' in this.$route.query) {
@@ -171,13 +183,17 @@
                 this.params.page = 1
               }
               this.params.category = catItem.id
-              this.listTitle = catItem.name
+              this.pageTitle = catItem.name
+              this.pageSubTitle = catItem.slug
             } else {
               this.params.category = 0
-              this.listTitle = '所有文章'
+              this.pageTitle = '所有文章'
+              this.pageSubTitle = 'all articles'
             }
           } else {
             this.params.category = 0
+            this.pageTitle = '所有文章'
+            this.pageSubTitle = 'all articles'
           }
         }
       },
@@ -237,6 +253,7 @@
   }
   .list-box .list-img img{
     max-width: 100%;
+    display: block;
     .transition;
   }
   .list-box .list-img:hover img{
@@ -282,11 +299,7 @@
     text-align: center;
   }
 
-  @media screen and (max-width: 1024px) {
-
-  }
-
-  @media screen and (max-width: 640px) {
+  @media screen and (max-width: 768px) {
     .list-header {
       position: relative;
       .list-title{
@@ -310,10 +323,7 @@
       .list-img{
         width: 100%;
         float: none;
-        img{
-          display: block;
-          width: 100%;
-        }
+        height: auto;
       }
       .list-right{
         width: 100%;

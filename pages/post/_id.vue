@@ -1,15 +1,14 @@
 <template>
   <div>
-    <h1 class="content-title">{{ thisPost.title }}</h1>
-    <div class="content-info">
-      <span>栏目：{{  thisPost.category != null ? thisPost.category.name : '' }}</span>
-      <span>发布日期：{{ thisPost.published_at }}</span>
-    </div>
-    <div class="content-body">
-      <div id="marked-content" v-html="postContent"></div>
-    </div>
-    <div class="content-footer">
-      <Comment model="post" :uid="thisPost.id"></Comment>
+    <PageHeader :title="thisPost.title" :sub-title="thisPost.category != null ? thisPost.category.name : ''"></PageHeader>
+    
+    <div class="container">
+      <div class="content-body">
+        <div id="marked-content" v-html="postContent"></div>
+      </div>
+      <div class="content-footer">
+        <Comment model="post" :uid="thisPost.id"></Comment>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +17,7 @@
   import marked from 'marked'
   import axios from '~/plugins/axios'
   import Comment from '~/components/Comment.vue'
+  import PageHeader from '~/components/PageHeader'
 
   export default {
     head () {
@@ -30,7 +30,8 @@
       }
     },
     components: {
-      Comment
+      Comment,
+      PageHeader
     },
     validate ({ params }) {
       // Must be a number
