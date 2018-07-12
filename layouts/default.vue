@@ -9,12 +9,11 @@
       </div>
       <nav class="nav" :class="{'nav-open' : menuIsOpened}">
         <ul class="nav-list">
-          <li><nuxt-link to="/" exact>首页</nuxt-link></li>
           <li><nuxt-link to="/about">关于</nuxt-link></li>
           <li><nuxt-link to="/post">博客</nuxt-link></li>
           <li><nuxt-link to="/contact">联系</nuxt-link></li>
           <li>
-            <a href="https://github.com/kapeter" target="_blank">Github</a>
+            <a href="https://github.com/kapeter" target="_blank">GitHub</a>
           </li>
         </ul>
       </nav>
@@ -23,8 +22,12 @@
         <span></span>
         <span></span>
       </a>
+      <a href="javascript:void(0);" @click="toggleAudio()" class="audio-btn" :class="{'playing' : $store.state.audioIsPlayed }">
+        <i class="iconfont">&#xe62b;</i>
+      </a>
     </header>
     <main class="main">
+      <PageHeader></PageHeader>
       <nuxt/>
     </main>
     <!-- Page Footer  -->
@@ -44,8 +47,12 @@
 
 <script>
   import scrollAnimate from '~/components/mixins/scrollAnimate'
+  import PageHeader from '~/components/PageHeader'
 
   export default {
+    components: {
+      PageHeader
+    },
     mixins: [scrollAnimate],
     computed: {
       thisYear () {
@@ -78,6 +85,9 @@
     methods: {
       backToTop () {
         this.scrollToGoal(0)
+      },
+      toggleAudio () {
+        this.$store.commit('toggleAudio')
       }
     }
   }
@@ -117,13 +127,33 @@
             font-size: 16px;
             box-sizing: border-box;
             letter-spacing: .1em;
+            &:hover{
+              color: @main-color;
+              text-shadow: 0px 0px 5px rgba(0,0,0,.15);
+            }
           }
         }
         .nuxt-link-active{
           color: @main-color;
           font-weight: 600;
+          text-shadow: 0px 0px 5px rgba(0,0,0,.15);
         }
       }
+    }
+    .audio-btn{
+      float: right;
+      font-size: 26px;
+      color: #fff;
+      line-height: 1;
+      margin-top: -5px; 
+      margin-right: 15px;
+      &:hover{
+        color: @main-color;
+        text-shadow: 0px 0px 5px rgba(0,0,0,.25);
+      }
+    }
+    .playing{
+      animation: audioRotate linear 1s infinite;
     }
   }
   .is-black{
@@ -138,6 +168,9 @@
           }
         }
       }
+    }
+    .audio-btn{
+      color: #333;
     }
   }
   .main{
@@ -216,6 +249,7 @@
         float: right;
         position: relative;
         width: 24px;
+        height: 18px;
         span{
           position: absolute;
           left: 0;
@@ -272,5 +306,14 @@
     .top-active{
       bottom: 15px;
     }
+  }
+
+  @keyframes audioRotate
+  {
+    0%   {transform:rotate(0deg);}
+    25%   {transform:rotate(-30deg);}
+    50%   {transform:rotate(0deg);}
+    75%   {transform:rotate(30deg);}
+    100% {transform:rotate(0deg);}
   }
 </style>

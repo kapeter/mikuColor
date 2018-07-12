@@ -1,7 +1,6 @@
 <template>
   <section>
     <!-- Recent Articles -->
-    <PageHeader title="寂" sub-title="永远相信美好的事情即将发生"></PageHeader>
     <div class="container" id="news">
       <div class="box">
         <div class="box-content">
@@ -32,14 +31,10 @@
 
 <script>
   import axios from '~/plugins/axios'
-  import PageHeader from '~/components/PageHeader'
   import scrollAnimate from '~/components/mixins/scrollAnimate'
 
   export default {
     mixins: [scrollAnimate],
-    components: {
-      PageHeader
-    },
     data () {
       return {
         apiUrl: {
@@ -61,6 +56,10 @@
     mounted () {
       window.addEventListener('scroll', () => {
         this.stopScroll()
+      })
+      this.$store.commit('setTitle', {
+        title: '寂',
+        subTitle: '永远相信美好的事情即将发生'
       })
     },
     methods: {

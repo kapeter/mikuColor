@@ -5,11 +5,33 @@ Vue.use(Vuex)
 
 const store = () => new Vuex.Store({
   state: {
-    catLists: []
+    catLists: [],
+    audioIsPlayed: false,
+    title: 'Kapeter',
+    subTitle: ''
+  },
+  getters: {
+    audioState: state => {
+      return state.audioIsPlayed
+    },
+    pageTitle: state => {
+      return state.title
+    },
+    pageSubTitle: state => {
+      return state.subTitle
+    }
   },
   mutations: {
     setCategory (state, data) {
       state.catLists = data
+    },
+    toggleAudio (state) {
+      state.audioIsPlayed = !state.audioIsPlayed
+    },
+
+    setTitle (state, data) {
+      state.title = data.title
+      state.subTitle = data.subTitle
     }
   }
 })

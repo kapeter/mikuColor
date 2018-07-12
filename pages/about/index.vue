@@ -1,42 +1,34 @@
 <template>
-	<section>
-    <PageHeader title="关于我" sub-title="about me"></PageHeader>
-		<div class="container">
-			<div class="about">
-				<div class="about-header">
-          <img src="~assets/img/logo-lg.png">
-					<h1>KaPeter</h1>
-          <p>想要学设计，会点PHP的前端工程师；热爱二次元与摄影。</p>
-          <ul class="clearfix">
-            <li>
-              <a href="https://github.com/kapeter" title="github" target="_blank">
-                <i class="iconfont">&#xe691;</i>
-              </a>
-            </li>
-            <li>
-              <a href="http://note.youdao.com/noteshare?id=c800efd52739529c54b5e3d86ddc47cd" title="有道云笔记" target="_blank">
-                <i class="iconfont">&#xe65a;</i>
-              </a>
-            </li>
-            <li>
-              <a href="https://tuchong.com/1669457/" title="图虫" target="_blank">
-                <i class="iconfont">&#xe665;</i>
-              </a>
-            </li>
-          </ul>
-				</div>
-			</div>
-		</div>
-	</section>
+  <div class="container">
+    <div class="about">
+      <div class="about-header">
+        <img src="~assets/img/logo-lg.png">
+        <h1>KaPeter</h1>
+        <p>想要学设计，会点PHP的前端工程师；热爱二次元与摄影。</p>
+        <ul class="clearfix">
+          <li>
+            <a href="https://github.com/kapeter" title="github" target="_blank">
+              <i class="iconfont">&#xe691;</i>
+            </a>
+          </li>
+          <li>
+            <a href="http://note.youdao.com/noteshare?id=c800efd52739529c54b5e3d86ddc47cd" title="有道云笔记" target="_blank">
+              <i class="iconfont">&#xe65a;</i>
+            </a>
+          </li>
+          <li>
+            <a href="https://tuchong.com/1669457/" title="图虫" target="_blank">
+              <i class="iconfont">&#xe665;</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-  import PageHeader from '~/components/PageHeader'
-
   export default {
-    components: {
-      PageHeader
-    },
     head () {
       return {
         title: '关于我 / Kapeter',
@@ -44,6 +36,12 @@
           { hid: 'description', name: 'description', content: 'I am Kapeter, a front-end engineer.' }
         ]
       }
+    },
+    mounted () {
+      this.$store.commit('setTitle', {
+        title: '关于我',
+        subTitle: 'about me'
+      })
     }
   }
 </script>
